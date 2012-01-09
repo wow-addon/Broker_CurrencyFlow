@@ -1,0 +1,8 @@
+package-as: LibQTip-1.0
+
+enable-nolib-creation: no
+
+externals:
+    LibStub:
+      url: svn://svn.wowace.com/wow/libstub/mainline/trunk
+      tag: latest

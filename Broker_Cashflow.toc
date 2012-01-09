@@ -1,0 +1,29 @@
+## Interface: 40100
+## Revision: $Rev: 137 $
+## Title: Broker_Cashflow
+## Notes: LDB data source for cash flow
+## Author: Aledara (wowi AT jocosoft DOT com)
+##
+## SavedVariables: Cashflow_DB
+##
+## OptionalDeps: Ace3, LibQTip-1.0, LibDataBroker-1.1
+
+# embeds
+#@no-lib-strip@
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibQTip-1.0\LibQTip-1.0.lua
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
+Libs\AceEvent-3.0\AceEvent-3.0.xml
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+Libs\AceGUI-3.0\AceGUI-3.0.xml
+Libs\AceConfig-3.0\AceConfig-3.0.xml
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+#@end-no-lib-strip@
+
+Locales\locales.xml
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+Broker_Cashflow.lua
