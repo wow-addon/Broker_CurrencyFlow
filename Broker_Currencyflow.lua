@@ -317,9 +317,20 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
 	-- Remember what it was
 	local oldVal = self.db.factionrealm.chars[self.meidx][currencyId] or 0
 
-	-- Get new value
+	-- Get new value and check if maximum is reached
 	if tracking[currencyId].type == TYPE_MONEY then amount = GetMoney()
-	elseif tracking[currencyId].type == TYPE_CURRENCY or tracking[currencyId].type == TYPE_FRAGMENT then amount = select(2,GetCurrencyInfo(currencyId)) or 0
+	elseif tracking[currencyId].type == TYPE_CURRENCY then
+    amount, texture, earnedThisWeek, weeklyMax, totalMax  = select(2,GetCurrencyInfo(currencyId)) 
+    if not amount then amount = 0 end
+    if weeklyMax and weeklyMax > 0 then 
+      self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = earnedThisWeek >= weeklyMax / 100  
+    elseif totalMax and totalMax > 0 then 
+      self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= totalMax / 100 
+    end
+  elseif tracking[currencyId].type == TYPE_FRAGMENT then 
+    amount = select(2,GetCurrencyInfo(currencyId))
+    if amount then self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= 200 
+    else amount = 0 end
 	elseif tracking[currencyId].type == TYPE_ITEM then amount = GetItemCount(currencyId,true) or 0 end
 
 	-- Bail if amount has not changed
