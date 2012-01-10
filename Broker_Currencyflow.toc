@@ -1,10 +1,10 @@
 ## Interface: 40100
 ## Revision: $Rev: 137 $
-## Title: Broker_Cashflow
-## Notes: LDB data source for cash flow
-## Author: Aledara (wowi AT jocosoft DOT com)
+## Title: Broker_Currencyflow
+## Notes: LDB data source for currency flow
+## Author: Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@gmail.com)
 ##
-## SavedVariables: Cashflow_DB
+## SavedVariables: Currencyflow_DB
 ##
 ## OptionalDeps: Ace3, LibQTip-1.0, LibDataBroker-1.1
 
@@ -26,4 +26,4 @@ Libs\AceLocale-3.0\AceLocale-3.0.xml
 Locales\locales.xml
 Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
 
-Broker_Cashflow.lua
+Broker_Currencyflow.lua

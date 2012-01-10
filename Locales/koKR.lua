@@ -1,12 +1,12 @@
 ﻿--[[ *******************************************************************
-Project                 : Broker_Cashflow
+Project                 : Broker_Currencyflow
 Description             : Korean translation file (koKR)
 Author                  : Aledara (wowi AT jocosoft DOT com)
 Translator              : Ohyung (ohyung AT ohyung DOT com)
 Revision                : $Rev: 36 $
 ********************************************************************* ]]
 
-local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale( "Cashflow", "koKR" )
+local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale( "Currencyflow", "koKR" )
 if not L then return end
 
 -- Name of currency

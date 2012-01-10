@@ -1,12 +1,12 @@
 --[[ *******************************************************************
-Project                 : Broker_Cashflow
+Project                 : Broker_Currencyflow
 Description             : English translation file (enUS)
 Author                  : Aledara (wowi AT jocosoft DOT com)
 Translator              : Aledara (wowi AT jocosoft DOT com)
 Revision                : $Rev: 36 $
 ********************************************************************* ]]
 
-local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale( "Cashflow", "enUS", true, true )
+local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale( "Currencyflow", "enUS", true, true )
 if not L then return end
 
 -- Name of currency

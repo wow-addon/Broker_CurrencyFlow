@@ -1,20 +1,20 @@
 --[[ *******************************************************************
-Project                 : Broker_Cashflow
-Author                  : Aledara (wowi AT jocosoft DOT com)
+Project                 : Broker_Currencyflow
+Author                  : Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@gmail.com)
 Revision                : $Rev: 138 $
 ********************************************************************* ]]
 
-local MODNAME = "Cashflow"
+local MODNAME = "Currencyflow"
 local FULLNAME = "Broker: "..MODNAME
 
-local Cashflow	= LibStub( "AceAddon-3.0" ):NewAddon( MODNAME, "AceEvent-3.0" )
+local Currencyflow	= LibStub( "AceAddon-3.0" ):NewAddon( MODNAME, "AceEvent-3.0" )
 local QT	= LibStub:GetLibrary( "LibQTip-1.0" )
 local L		= LibStub:GetLibrary( "AceLocale-3.0" ):GetLocale( MODNAME )
 local Config	= LibStub( "AceConfig-3.0" )
 local ConfigReg	= LibStub( "AceConfigRegistry-3.0" )
 local ConfigDlg	= LibStub( "AceConfigDialog-3.0" )
 
-_G["Cashflow"] = Cashflow
+_G["Currencyflow"] = Currencyflow
 
 local tooltip
 local RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
@@ -71,18 +71,18 @@ local function Notice( msg )
 end
 
 -- Returns character name, colored by class
-function Cashflow:ColorByClass( name, class )
+function Currencyflow:ColorByClass( name, class )
 	local classcol = RAID_CLASS_COLORS[class] or {["r"] = 1, ["g"] = 1, ["b"] = 0}
 	return format("|cff%02x%02x%02x%s|r", classcol["r"]*255, classcol["g"]*255, classcol["b"]*255, name)
 end
 
-function Cashflow:GetToday()
+function Currencyflow:GetToday()
 	-- Offset to UTC, in seconds
 	local offset = time(date("*t")) - time(date("!*t"))
 	return floor((time()+offset) / 86400)
 end
 
-function Cashflow:updateTime()
+function Currencyflow:updateTime()
 	local now = time()
 	self.session.time = self.session.time + now - self.savedTime
 
@@ -97,7 +97,7 @@ end
 	if colorize is true, it will color the text red if negative, green if positive (or 0)
 	if it's false, it wil color the text white, and with a "-" in front if it's negative
 ]]
-function Cashflow:FormatGold( amount, colorize )
+function Currencyflow:FormatGold( amount, colorize )
 	local ICON_GOLD = "|TInterface\\MoneyFrame\\UI-GoldIcon:0|t"
 	local ICON_SILVER = "|TInterface\\MoneyFrame\\UI-SilverIcon:0|t"
 	local ICON_COPPER = "|TInterface\\MoneyFrame\\UI-CopperIcon:0|t"
@@ -172,7 +172,7 @@ end
 	Formats (colors) the given amount of currency with either the given color, or
 	red/green if none given
 ]]
-function Cashflow:FormatCurrency( amount, color )
+function Currencyflow:FormatCurrency( amount, color )
 	if color == "" then
 		if amount < 0 then color = "ff0000" else color = "00ff00" end
 	end
@@ -185,7 +185,7 @@ end
 	day: Day #, or 0 for session, or negative for range
 	currency: Currency id
 ]]
-function Cashflow:db_GetHistory( char, day, currency )
+function Currencyflow:db_GetHistory( char, day, currency )
 
 	-- Basically the same thing, except no sums/ranges!
 	local getval = function( char, day, currency )
@@ -251,7 +251,7 @@ end
 	char: Character index, or 0 to sum all
 	currency: Currency id
 ]]
-function Cashflow:db_GetTotal( char, currency )
+function Currencyflow:db_GetTotal( char, currency )
 	local value = 0
 	if char == 0 then
 		for k,_ in pairs(self.db.factionrealm.chars) do
@@ -273,7 +273,7 @@ end
 	If ignore is set to true for this character, history is set to nil,
 	to reduce database size
 ]]
-function Cashflow:db_UpdateCurrency( currencyId, updateSession )
+function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
 	-- Bail if invalid id given
 	if tracking[currencyId] == nil then return end
 
@@ -332,7 +332,7 @@ function Cashflow:db_UpdateCurrency( currencyId, updateSession )
 end
 
 -- Add Other toons we know about and total to the tooltip, if so desired
-function Cashflow:addCharactersAndTotal()
+function Currencyflow:addCharactersAndTotal()
 	-- If neither charactares or totals are configured to be shown, get out of here
 	if not self.db.profile.showOtherChars and not self.db.profile.showTotals then return end
 
@@ -409,7 +409,7 @@ function Cashflow:addCharactersAndTotal()
 	end
 end
 
-function Cashflow:drawTooltip()
+function Currencyflow:drawTooltip()
 	tooltip:Hide()
 	tooltip:Clear()
 
@@ -462,7 +462,7 @@ function Cashflow:drawTooltip()
 	tooltip:SetCell( lineNum, 1, format(fmt_yellow, L["CFGNAME_TIPRESETSESSION"]), "LEFT", tooltip:GetColumnCount() )
 end
 
-function Cashflow:addNewCurrencySection(type, title)
+function Currencyflow:addNewCurrencySection(type, title)
 	local char,day,currency, column, t,g,s, l1,l2,l3
 
 	if type == "session" then char = self.meidx; day = 0
@@ -508,7 +508,7 @@ function Cashflow:addNewCurrencySection(type, title)
 	if self.db.profile.showCashDetail then tooltip:AddLine(" ") end
 end
 
-function Cashflow:setCurrencyColumn( startRow, startCol, t,g,s, doPerHour )
+function Currencyflow:setCurrencyColumn( startRow, startCol, t,g,s, doPerHour )
 	local color
 	if self.db.profile.showCashDetail then
 		if startCol == 2 then
@@ -562,7 +562,7 @@ local launcher = LDB:NewDataObject( MODNAME, {
 				button1 = L["NAME_YES"],
 				button2 = L["NAME_NO"],
 				OnAccept = function()
-					Cashflow.session = {time = 0, gold = {gained = 0, spent = 0}}
+					Currencyflow.session = {time = 0, gold = {gained = 0, spent = 0}}
 				end,
 				timeout = 0,
 				whileDead = true,
@@ -571,24 +571,24 @@ local launcher = LDB:NewDataObject( MODNAME, {
 			StaticPopup_Show ("RESET_SESSION")
 
 
-		elseif button == "RightButton" then Cashflow:LoadCurrencies(); InterfaceOptionsFrame_OpenToCategory(FULLNAME) end
+		elseif button == "RightButton" then Currencyflow:LoadCurrencies(); InterfaceOptionsFrame_OpenToCategory(FULLNAME) end
 	end,
 	OnEnter = function ( self )
 		-- We need to calculate how many columns we meed up front
 		local numcols = 2 -- title and gold
 
 		-- One for the cash per hour
-		if Cashflow.db.profile.showCashPerHour then numcols = numcols + 1 end
+		if Currencyflow.db.profile.showCashPerHour then numcols = numcols + 1 end
 
 		-- And one for each currency we want shown
 		for id,currency in pairs(tracking) do
-			if Cashflow.db.profile["showCurrency"..id] then numcols = numcols + 1 end
+			if Currencyflow.db.profile["showCurrency"..id] then numcols = numcols + 1 end
 		end
 
-		tooltip = QT:Acquire( "CashflowTT", numcols )
-		tooltip:SetScale( Cashflow.db.profile.tipscale )
+		tooltip = QT:Acquire( "CurrencyflowTT", numcols )
+		tooltip:SetScale( Currencyflow.db.profile.tipscale )
 
-		Cashflow:drawTooltip()
+		Currencyflow:drawTooltip()
 
 		tooltip:SetAutoHideDelay(0.1, self)
 		tooltip:EnableMouse()
@@ -598,7 +598,7 @@ local launcher = LDB:NewDataObject( MODNAME, {
 	end,
 } )
 
-function Cashflow:UpdateLabel()
+function Currencyflow:UpdateLabel()
 
 	function getLabelSegment(segment)
 		segment = tonumber(segment)
@@ -643,7 +643,7 @@ function Cashflow:UpdateLabel()
 	launcher.text = result
 end
 
-function Cashflow:SetupOptions()
+function Currencyflow:SetupOptions()
 	-- Create configuration panel
 	ConfigReg:RegisterOptionsTable( FULLNAME, self:OptionsMain() )
 	ConfigReg:RegisterOptionsTable( FULLNAME.." - "..L["CFGPAGE_SECTIONS"], self:OptionsSections() )
@@ -658,7 +658,7 @@ function Cashflow:SetupOptions()
 	ConfigDlg:AddToBlizOptions( FULLNAME.." - "..L["CFGPAGE_PROFILES"], L["CFGPAGE_PROFILES"], FULLNAME )
 end
 
-function Cashflow:OptionsMain()
+function Currencyflow:OptionsMain()
 	local buttonOptions = {
 		["1"] = L["CFGOPT_BTNNONE"],
 		["2"] = L["CFGOPT_BTNMONEY"],
@@ -677,7 +677,7 @@ function Cashflow:OptionsMain()
 		type = "group",
 		desc = "General",
 		get = function(key) return self.db.profile[key.arg] end,
-		set = function(key, value) self.db.profile[key.arg] = value; Cashflow:UpdateLabel() end,
+		set = function(key, value) self.db.profile[key.arg] = value; Currencyflow:UpdateLabel() end,
 		args = {
 			header1 = {order = 0, name = L["CFGHDR_TOOLTIP"], type = "header"},
 			cashFormat = {
@@ -727,7 +727,7 @@ function Cashflow:OptionsMain()
 	}
 end
 
-function Cashflow:OptionsSections()
+function Currencyflow:OptionsSections()
 	local order = 1
 	local options = {}
 	local addSectionCheckbox = function(id, name)
@@ -793,12 +793,12 @@ function Cashflow:OptionsSections()
 	return {
 		type = "group",
 		get = function(key) return self.db.profile[key.arg] end,
-		set = function(key, value) self.db.profile[key.arg] = value; Cashflow:UpdateLabel() end,
+		set = function(key, value) self.db.profile[key.arg] = value; Currencyflow:UpdateLabel() end,
 		args = options
 	}
 end
 
-function Cashflow:OptionsColumns()
+function Currencyflow:OptionsColumns()
 	local order = 1
 	local currencyColumns = {
 		header1 = {name = L["CFGHDR_GENERAL"], type = "header", order = 100},
@@ -858,12 +858,12 @@ function Cashflow:OptionsColumns()
 	return {
 		type = "group",
 		get = function(key) return self.db.profile[key.arg] end,
-		set = function(key, value) self.db.profile[key.arg] = value; Cashflow:UpdateLabel() end,
+		set = function(key, value) self.db.profile[key.arg] = value; Currencyflow:UpdateLabel() end,
 		args = currencyColumns,
 	}
 end
 
-function Cashflow:OptionsCharacters()
+function Currencyflow:OptionsCharacters()
 	return {
 		type = "group",
 		args = {
@@ -913,7 +913,7 @@ function Cashflow:OptionsCharacters()
 end
 
 -- This funtion tries to update the currencies list with client info
-function Cashflow:LoadCurrencies()
+function Currencyflow:LoadCurrencies()
 	for id,currency in pairs(tracking) do
 		if currency.type == TYPE_CURRENCY then
 			local name, _, icon = GetCurrencyInfo(id)
@@ -955,7 +955,7 @@ function Cashflow:LoadCurrencies()
 	end
 end
 
-function Cashflow:OnEnable()
+function Currencyflow:OnEnable()
 	self.savedTime = time()
 	self.today = self.GetToday()
 	self.session = {time = 0, gold = {gained = 0, spent = 0}}
@@ -963,7 +963,7 @@ function Cashflow:OnEnable()
 	self:LoadCurrencies()
 
 	-- Database, and initial layout
-	self.db = LibStub("AceDB-3.0"):New("Cashflow_DB", { profile = {
+	self.db = LibStub("AceDB-3.0"):New("Currencyflow_DB", { profile = {
 		cashFormat = 3,
 		tipscale = 1.0,
 		showCashDetail = true,
@@ -1038,7 +1038,7 @@ function Cashflow:OnEnable()
 	self:UpdateLabel()
 end
 
-function Cashflow:UnregisterEvents()
+function Currencyflow:UnregisterEvents()
 	self:UnregisterEvent("PLAYER_MONEY")
 	self:UnregisterEvent("PLAYER_TRADE_MONEY")
 	self:UnregisterEvent("TRADE_MONEY_CHANGED")
@@ -1048,7 +1048,7 @@ function Cashflow:UnregisterEvents()
 	self:UnregisterEvent("CURRENCY_DISPLAY_UPDATE")
 end
 
-function Cashflow:RegisterEvents()
+function Currencyflow:RegisterEvents()
 	self:RegisterEvent("PLAYER_MONEY", "UpdateGold")
 	self:RegisterEvent("PLAYER_TRADE_MONEY", "UpdateGold")
 	self:RegisterEvent("TRADE_MONEY_CHANGED", "UpdateGold")
@@ -1059,7 +1059,7 @@ function Cashflow:RegisterEvents()
 end
 
 -- This will update the database format to the current version
-function Cashflow:UpdateDatabase()
+function Currencyflow:UpdateDatabase()
 	-- If version is not set, we're "upgrading" to version 1
 	if not self.db.factionrealm.version then self.db.factionrealm.version = 1 end
 
@@ -1208,7 +1208,7 @@ function Cashflow:UpdateDatabase()
 	end
 end
 
-function Cashflow:RemoveOldData()
+function Currencyflow:RemoveOldData()
 	-- Remove history over a month old
 	local lastMonth = self.today - (HISTORY_DAYS - 1)
 
@@ -1219,12 +1219,12 @@ function Cashflow:RemoveOldData()
 	self.db.factionrealm.chars[self.meidx].history[self.today] = self.db.factionrealm.chars[self.meidx].history[self.today] or {time = 0, gold = {gained = 0, spent = 0}}
 end
 
-function Cashflow:UpdateGold()
+function Currencyflow:UpdateGold()
 	self:db_UpdateCurrency("gold", true)
 	self:UpdateLabel()
 end
 
-function Cashflow:UpdateCurrencies()
+function Currencyflow:UpdateCurrencies()
 	-- Update all currencies
 	for id,currency in pairs(tracking) do self:db_UpdateCurrency(id, true) end
 	self:UpdateLabel()

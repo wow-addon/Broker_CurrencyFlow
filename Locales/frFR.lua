@@ -1,12 +1,12 @@
 --[[ *******************************************************************
-Project                 : Broker_Cashflow
+Project                 : Broker_Currencyflow
 Description             : French translation file (frFR)
 Author                  : Aledara (wowi AT jocosoft DOT com)
 Translator              : Culhag @ Garona EU
 Revision                : $Rev: 36 $
 ********************************************************************* ]]
 
-local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale( "Cashflow", "frFR" )
+local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale( "Currencyflow", "frFR" )
 if not L then return end
 
 -- Name of currency
