@@ -1267,6 +1267,29 @@ function Currencyflow:UpdateDatabase()
 		self.db.factionrealm.version = 9
 		Notice( "Update complete" )
 	end
+
+	-- Version 9 -> 10:
+	--   Add boolean value indicating wether a currency's max is reached.
+	if self.db.factionrealm.version == 9 then 
+		Notice( "Updating database to version 10" )
+		for index, charinfo in pairs(self.db.factionrealm.chars) do
+      for id, currency in pairs(tracking) do
+        if charinfo[id] and currency.type == TYPE_CURRENCY then
+          weeklyMax, totalMax = select(5, GetCurrencyInfo(id))
+          -- Since we can't get other character's weekly earnings, set default to false
+          if weeklyMax > 0 then charinfo["maxReached" .. id] = false 
+          elseif totalMax > 0 then charinfo["maxReached" .. id] = totalMax == charinfo[id] 
+          end
+        elseif charinfo[id] and currency.type == TYPE_FRAGMENT then
+          -- Fragments can be collected up to 200
+          charinfo["maxReached" .. id] = charinfo[id] >= 200 
+        end
+      end
+		end
+		self.db.factionrealm.version = 10
+    -- TODO: Translate
+		Notice( "Update complete. For weekly maximums you need to log on each character." )
+	end
 end
 
 function Currencyflow:RemoveOldData()
