@@ -1129,7 +1129,7 @@ function Currencyflow:UpdateDatabase()
 	--   factionrealm.chars[#].charname for easier sorting.
 	--   Gotta love how "flexible" lua is!
 	if self.db.factionrealm.version == 1 then
-		Notice( "Updating database to verion 2" )
+		Notice( "Updating database to version 2" )
 		local a = {}
 		for k,v in pairs(self.db.factionrealm.chars) do table.insert(a, k) end
 		for _,k in pairs(a) do
@@ -1144,7 +1144,7 @@ function Currencyflow:UpdateDatabase()
 	-- Version 2 -> 3:
 	--   Move history to character level
 	if self.db.factionrealm.version == 2 then
-		Notice( "Updating database to verion 3" )
+		Notice( "Updating database to version 3" )
 		for k,v in pairs(self.db.factionrealm.chars) do
 			self.db.factionrealm.chars[k].history = {[self.today] = {["time"] = 0}}
 		end
@@ -1156,7 +1156,7 @@ function Currencyflow:UpdateDatabase()
 	-- Version 3 -> 4:
 	--   Add "ignore" option to characters
 	if self.db.factionrealm.version == 3 then
-		Notice( "Updating database to verion 4" )
+		Notice( "Updating database to version 4" )
 		for k,v in pairs(self.db.factionrealm.chars) do
 			self.db.factionrealm.chars[k].ignore = false;
 		end
@@ -1167,7 +1167,7 @@ function Currencyflow:UpdateDatabase()
 	-- Version 4 -> 5:
 	--   Cataclysm!
 	if self.db.factionrealm.version == 4 then
-		Notice( "Updating database to verion 5" )
+		Notice( "Updating database to version 5" )
 		for k,v in pairs(self.db.factionrealm.chars) do
 
 			-- Change ID of Champion's Seal (from item# 44990 to currency# 241)
@@ -1223,7 +1223,7 @@ function Currencyflow:UpdateDatabase()
 	-- Version 5 -> 6:
 	--   Dal JC token & cooking award item -> currency
 	if self.db.factionrealm.version == 5 then
-		Notice( "Updating database to verion 6" )
+		Notice( "Updating database to version 6" )
 		for k,v in pairs(self.db.factionrealm.chars) do
 			-- Change ID of Jewelcrafters token (from item# 41596 to currency# 61)
 			-- Change ID of Cooking award (from item# ... to currency# 81)
@@ -1242,7 +1242,7 @@ function Currencyflow:UpdateDatabase()
 	-- Version 6 -> 7:
 	--   Introduced buttonFirst and buttonSecond config options
 	if self.db.factionrealm.version == 6 then
-		Notice( "Updating database to verion 7" )
+		Notice( "Updating database to version 7" )
 		self.db.profile.buttonFirst = "2"
 		self.db.profile.buttonSecond = "1"
 		self.db.factionrealm.version = 7
@@ -1251,7 +1251,7 @@ function Currencyflow:UpdateDatabase()
 	-- Version 7 -> 8:
 	--   Introduced buttonThird and buttonFourth config options
 	if self.db.factionrealm.version == 7 then
-		Notice( "Updating database to verion 8" )
+		Notice( "Updating database to version 8" )
 		self.db.profile.buttonThird = "1"
 		self.db.profile.buttonFourth = "1"
 		self.db.factionrealm.version = 8
@@ -1260,7 +1260,7 @@ function Currencyflow:UpdateDatabase()
 	-- Version 8 -> 9:
 	--   History indexes changed (got rid of faulty offset calculation)
 	if self.db.factionrealm.version == 8 then
-		Notice( "Updating database to verion 9" )
+		Notice( "Updating database to version 9" )
 		for k,v in pairs(self.db.factionrealm.chars) do
 			self.db.factionrealm.chars[k].history = {[self.today] = {["time"] = 0}}
 		end
