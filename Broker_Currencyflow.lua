@@ -64,6 +64,24 @@ local tracking = {
 	[0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_OTHER"]},
 }
 
+function deepcopy(object)
+    local lookup_table = {}
+    local function _copy(object)
+        if type(object) ~= "table" then
+            return object
+        elseif lookup_table[object] then
+            return lookup_table[object]
+        end
+        local new_table = {}
+        lookup_table[object] = new_table
+        for index, value in pairs(object) do
+            new_table[_copy(index)] = _copy(value)
+        end
+        return new_table
+    end
+    return _copy(object)
+end
+
 local function Notice( msg )
 	if ( msg ~= nil and DEFAULT_CHAT_FRAME ) then
 		DEFAULT_CHAT_FRAME:AddMessage( MODNAME.." notice: "..msg, 0.6, 1.0, 1.0 )
@@ -993,9 +1011,52 @@ function Currencyflow:OnEnable()
 	if self.db.factionrealm.chars then
 		self:UpdateDatabase()
 	else
-		-- Create a skelleton structure
-		self.db.factionrealm.version = 8
-		self.db.factionrealm.chars = {}
+    -- If Broker_Cashflow db version 9 exists, import it.
+	  cashflow = { db = LibStub("AceDB-3.0"):New("Cashflow_DB", { profile = {
+        cashFormat = 3,
+        tipscale = 1.0,
+        showCashDetail = true,
+        buttonFirst = "2",
+        buttonSecond = "1",
+        buttonThird = "1",
+        buttonFourth = "1",
+
+        showThisSession = true,
+        showTodaySelf = true,
+        showTodayTotal = true,
+        showYesterdaySelf = true,
+        showYesterdayTotal = true,
+        showThisWeekTotal = true,
+        showThisMonthTotal = true,
+        showOtherChars = true,
+        sortChars = "charname",
+        sortDesc = false,
+        showTotals = true,
+
+        showCashPerHour = true,
+        showCurrency392 = true, -- Honor points
+        showCurrency395 = true, -- Justice points 
+      }}, "Default")}
+
+    if cashflow.db.factionrealm.version and cashflow.db.factionrealm.version <= 9 then
+      -- We can only copy the characters for the current faction/realm.
+      Notice("Import database from Broker_Cashflow...")
+      factionrealm_chars = deepcopy(cashflow.db.factionrealm.chars)
+      self.db.factionrealm.version = cashflow.db.factionrealm.version
+      self.db.factionrealm.chars = {}
+      for _,v in pairs(factionrealm_chars) do
+        if v then
+          table.insert(self.db.factionrealm.chars, deepcopy(v))
+        end
+      end
+      Notice("Import done.")
+
+      self:UpdateDatabase()
+    else
+      -- Create a skelleton structure
+      self.db.factionrealm.version = 9
+      self.db.factionrealm.chars = {}
+    end
 	end
 
 	-- Make sure I'm in the character list, and remember my position
