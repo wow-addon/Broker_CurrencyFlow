@@ -41,6 +41,7 @@ local tracking = {
 	[361] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ILLJCTOKEN"]},
 	[81] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DALCOOKINGAWARD"]},
 	[402] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHEFSAWARD"]},
+  [416] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MARKOFTHEWORLDTREE"]},
 
 	-- PvE
 	[241] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"]},
@@ -302,7 +303,6 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
   -- currencyId can be "gold"
   if type(currencyId) == "number" then
     lastWeekEarned = self.db.factionrealm.chars[self.meidx]["lastWeekEarned"..currencyId]
-    Notice( currencyId )
     earnedThisWeek, weeklyMax = select(4, GetCurrencyInfo(currencyId))
     -- Only for currencies, that have a weekly maximum
     if lastWeekEarned and weeklyMax > 0 and lastWeekEarned > earnedThisWeek then
