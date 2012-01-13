@@ -1308,7 +1308,10 @@ function Currencyflow:UpdateDatabase()
         if charinfo[id] and currency.type == TYPE_CURRENCY then
           weeklyMax, totalMax = select(5, GetCurrencyInfo(id))
           -- Since we can't get other character's weekly earnings, set default to false
-          if weeklyMax > 0 then charinfo["maxReached" .. id] = false 
+          -- Max values are 0 if unlimited
+          if weeklyMax > 0 then 
+            charinfo["maxReached" .. id] = false 
+            charinfo["lastWeekEarned" .. id] = nil -- Needed to get hold of weekly resets
           elseif totalMax > 0 then charinfo["maxReached" .. id] = totalMax == charinfo[id] 
           end
         elseif charinfo[id] and currency.type == TYPE_FRAGMENT then
@@ -1318,7 +1321,6 @@ function Currencyflow:UpdateDatabase()
       end
 		end
 		self.db.factionrealm.version = 10
-    -- TODO: Translate
 		Notice( "Update complete. For weekly maximums you need to log on each character." )
 	end
 end
