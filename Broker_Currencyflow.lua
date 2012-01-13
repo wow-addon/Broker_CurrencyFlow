@@ -22,6 +22,7 @@ local ICON_QM = "Interface\\Icons\\INV_Misc_QuestionMark"
 
 local fmt_yellow = "|cffffff00%s|r"
 local fmt_white = "|cffffffff%s|r"
+local COLOR_MAXREACHED = "ff8800"
 local HISTORY_DAYS = 30
 
 local TYPE_MONEY = 1
@@ -64,6 +65,8 @@ local tracking = {
 	[0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_OTHER"]},
 }
 
+-- Used to copy a table instead of just copying the reference to it.
+-- Does not copy metatable information
 function deepcopy(object)
     local lookup_table = {}
     local function _copy(object)
@@ -410,7 +413,13 @@ function Currencyflow:addCharactersAndTotal()
 
 				for id,currency in pairs(tracking) do
 					if self.db.profile["showCurrency"..id] then
-						if math.fmod(colNum,2) == 0 then color = "aaaaff" else color = "ddddff" end
+            if self.db.profile.colorMaxReached and v["maxReached"..id] then 
+              color = COLOR_MAXREACHED
+            elseif math.fmod(colNum,2) == 0 then 
+              color = "aaaaff" 
+            else 
+              color = "ddddff" 
+            end
 						tooltip:SetCell( newLineNum, colNum, self:FormatCurrency(self:db_GetTotal(k, id), color), "RIGHT" )
 						colNum = colNum + 1
 					end
@@ -652,9 +661,14 @@ function Currencyflow:UpdateLabel()
 			if segment == 9 then return self:FormatGold(g-s, false) else return self:FormatGold((g-s)/t*3600, false).."/Hr" end
 		elseif tracking[segment] then
 			-- Other currencies
-			if tracking[segment].type == TYPE_CURRENCY or tracking[segment].type == TYPE_FRAGMENT then amount = select(2,GetCurrencyInfo(segment)) or 0
+			if tracking[segment].type == TYPE_CURRENCY or tracking[segment].type == TYPE_FRAGMENT then 
+        if self.db.profile.colorMaxReached 
+          and self.db.factionrealm.chars[self.meidx]["maxReached"..segment] then
+          color = COLOR_MAXREACHED
+        end
+        amount = select(2,GetCurrencyInfo(segment)) or 0
 			elseif tracking[segment].type == TYPE_ITEM then amount = GetItemCount(segment,true) or 0 end
-			return self:FormatCurrency(amount, "").." |T"..tracking[segment].icon..":0|t"
+			return self:FormatCurrency(amount, (color or "")).." |T"..tracking[segment].icon..":0|t"
 		else
 			-- invalid
 			return "???"
@@ -708,7 +722,13 @@ function Currencyflow:OptionsMain()
 		get = function(key) return self.db.profile[key.arg] end,
 		set = function(key, value) self.db.profile[key.arg] = value; Currencyflow:UpdateLabel() end,
 		args = {
-			header1 = {order = 0, name = L["CFGHDR_TOOLTIP"], type = "header"},
+			header0 = {order = 0, name = L["CFGHDR_GENERAL"], type = "header"},
+      colorMaxReached = {
+        order = 1, name = L["CFG_COLORMAXREACHED"], 
+        type = "toggle", arg = "colorMaxReached",
+        desc = L["CFGDESC_COLORMAXREACHED"],
+      },
+			header1 = {order = 5, name = L["CFGHDR_TOOLTIP"], type = "header"},
 			cashFormat = {
 				order = 10, name = L["CFGNAME_CASHFORMAT"],
 				type = "select", arg = "cashFormat",

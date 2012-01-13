@@ -38,6 +38,9 @@ L["NAME_AF_VRYKULL"]		= "Vrykull"
 L["NAME_AF_OTHER"]		= "Other"
 
 -- Config panel - Main
+L["CFGHDR_GENERAL"] = "General"
+L["CFG_COLORMAXREACHED"] = "Color full currencies"
+L["CFGDESC_COLORMAXREACHED"] = "If a currency reached it's total or weekly maximum, it's colored orange."
 L["CFGHDR_TOOLTIP"]		= "Tooltip"
 L["CFGNAME_CASHFORMAT"]		= "Cash format"
 L["CFGDESC_CASHFORMAT"]		= "Choose how money will be displayed"
