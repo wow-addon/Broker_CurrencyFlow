@@ -298,6 +298,20 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
 	-- Bail if invalid id given
 	if tracking[currencyId] == nil then return end
 
+  -- Update all character's maximum reached values, if weekly earnings are reset.
+  -- currencyId can be "gold"
+  if type(currencyId) == "number" then
+    lastWeekEarned = self.db.factionrealm.chars[self.meidx]["lastWeekEarned"..currencyId]
+    Notice( currencyId )
+    earnedThisWeek, weeklyMax = select(4, GetCurrencyInfo(currencyId))
+    -- Only for currencies, that have a weekly maximum
+    if lastWeekEarned and weeklyMax > 0 and lastWeekEarned > earnedThisWeek then
+      for idx, charinfo in self.db.factionrealm.chars do
+        charinfo["maxReached"..currencyId] = false
+      end
+    end
+  end
+
 	-- If I'm being ignored, clear my history, and bail
 	if self.db.factionrealm.chars[self.meidx].ignore then
 		self.db.factionrealm.chars[self.meidx].history = nil
@@ -327,6 +341,8 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
     if not amount then amount = 0 end
     if weeklyMax and weeklyMax > 0 then 
       self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = earnedThisWeek >= weeklyMax / 100  
+      -- we can safely save the new earnedThisWeek value, since we checked for a reset before
+      self.db.factionrealm.chars[self.meidx]["lastWeekEarned" .. currencyId] = earnedThisWeek
     elseif totalMax and totalMax > 0 then 
       self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= totalMax / 100 
     end
