@@ -682,6 +682,8 @@ function Currencyflow:UpdateLabel()
         if self.db.profile.colorMaxReached 
           and self.db.factionrealm.chars[self.meidx]["maxReached"..segment] then
           color = COLOR_MAXREACHED
+        else
+          color = ""
         end
         amount = select(2,GetCurrencyInfo(segment)) or 0
 			elseif tracking[segment].type == TYPE_ITEM then amount = GetItemCount(segment,true) or 0 end
