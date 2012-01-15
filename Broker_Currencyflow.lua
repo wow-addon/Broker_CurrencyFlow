@@ -42,6 +42,7 @@ local tracking = {
 	[81] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DALCOOKINGAWARD"]},
 	[402] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHEFSAWARD"]},
   [416] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MARKOFTHEWORLDTREE"]},
+  [515] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DARKMOONPRIZETICKET"]},
 
 	-- PvE
 	[241] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"]},

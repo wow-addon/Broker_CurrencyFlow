@@ -18,6 +18,7 @@ L["NAME_ILLJCTOKEN"]		= "Illustrious Jewelcrafter's Token"
 L["NAME_DALCOOKINGAWARD"]	= "Dalaran Cooking Award"
 L["NAME_CHEFSAWARD"]		= "Chef's Award"
 L["NAME_MARKOFTHEWORLDTREE"]  = "Mark of the World Tree"
+L["NAME_DARKMOONPRIZETICKET"]  = "Darkmoon Prize Ticket"
 
 L["NAME_CHAMPIONSEAL"]		= "Champion's Seal"
 L["NAME_JUSTICEPOINTS"]		= "Justice Points"
