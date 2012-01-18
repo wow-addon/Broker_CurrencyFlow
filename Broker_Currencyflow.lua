@@ -307,7 +307,7 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
     earnedThisWeek, weeklyMax = select(4, GetCurrencyInfo(currencyId))
     -- Only for currencies, that have a weekly maximum
     if lastWeekEarned and weeklyMax > 0 and lastWeekEarned > earnedThisWeek then
-      for idx, charinfo in self.db.factionrealm.chars do
+      for idx, charinfo in pairs(self.db.factionrealm.chars) do
         charinfo["maxReached"..currencyId] = false
       end
     end
@@ -1024,6 +1024,7 @@ function Currencyflow:LoadCurrencies()
 end
 
 function Currencyflow:OnEnable()
+  Notice("Currencyflow enabled")
 	self.savedTime = time()
 	self.today = self.GetToday()
 	self.session = {time = 0, gold = {gained = 0, spent = 0}}
@@ -1111,6 +1112,7 @@ function Currencyflow:OnEnable()
 
 	-- Make sure I'm in the character list, and remember my position
 	self.meidx = -1
+  
 	for k,v in pairs(self.db.factionrealm.chars) do
 		if v.charname == UnitName("player") then self.meidx = k end
 	end
