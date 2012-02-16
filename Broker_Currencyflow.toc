@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 40302
 ## Revision: $Rev: 137 $
 ## Title: Broker_Currencyflow
 ## Notes: LDB data source for currency flow
