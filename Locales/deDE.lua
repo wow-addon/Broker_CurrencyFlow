@@ -9,7 +9,7 @@ Revision                : $Rev: 36 $
 local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale( "Currencyflow", "deDE" )
 if not L then return end
 
-L["CFG_COLORMAXREACHED"] = "F\195\164rbe max. Limit W\195\164hrungen" -- Needs review
+L["CFG_COLORMAXREACHED"] = "F\195\164rbe W\195\164hrungen am Limit" -- Needs review
 L["CFG_CONFIRMDELETE"] = "Bist Du Dir sicher, dass Du Charakter \"%s\" l\195\182schen m\195\182chtest?"
 L["CFG_CONFIRMRESETSESSION"] = "Bist Du Dir sicher, dass Du die aktuelle Sitzung zur\195\188cksetzen m\195\182chtest?"
 L["CFGDESC_BUTTONFIRST"] = "Erste W\195\164hrung die im LDB angezeigt werden soll"
@@ -105,12 +105,15 @@ L["NAME_CHEFSAWARD"] = "Kochauszeichnung"
 L["NAME_CONQUESTPOINTS"] = "Eroberungspunkte"
 L["NAME_DALCOOKINGAWARD"] = "Kochpreis von Dalaran"
 L["NAME_DALJCTOKEN"] = "Juwelierssymbol von Dalaran"
+L["NAME_ESSENCEDEATHWING"] = "Essenz des verderbten Todesschwinge"
 L["NAME_HONORPOINTS"] = "Ehrenpunkte"
 L["NAME_ILLJCTOKEN"] = "Symbol des erhabenen Juweliers"
 L["NAME_JUSTICEPOINTS"] = "Gerechtigkeitspunkte"
 L["NAME_MARKOFTHEWORLDTREE"] = "Abzeichen des Weltenbaums"
 L["NAME_MONEY"] = "Gold"
+L["NAME_MOTEDARKNESS"] = "Partikel der Dunkelheit"
 L["NAME_NO"] = "Nein"
 L["NAME_TOLBARADCOMMENDATION"] = "Belobigungsabzeichen von Tol Barad"
 L["NAME_VALORPOINTS"] = "Tapferkeitspunkte"
 L["NAME_YES"] = "Ja"
+
