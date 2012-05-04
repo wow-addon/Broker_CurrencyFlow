@@ -902,6 +902,8 @@ function Currencyflow:OptionsColumns()
 	addColumn(241) -- Champion's Seal
 	addColumn(395) -- Justice Point
 	addColumn(396) -- Valor Point
+	addColumn(614) -- Mote of Darkness
+	addColumn(615) -- Essence of Corrupted Deathwing
 
 	-- PVP --
 	currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
@@ -924,6 +926,8 @@ function Currencyflow:OptionsColumns()
 	addColumn(361) -- Illustrious Jewelcrafter's Token
 	addColumn(81) -- Cooking Award
 	addColumn(402) -- Chef's Award
+  addColumn(416) -- Mark of the World Tree
+  addColumn(515) -- Darkmoon Prize Ticket
 
 	return {
 		type = "group",
