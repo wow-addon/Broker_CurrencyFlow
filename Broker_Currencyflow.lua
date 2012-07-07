@@ -211,10 +211,10 @@ end
 	currency: Currency id
 ]]
 function Currencyflow:db_GetHistory( char, day, currency )
-
 	-- Basically the same thing, except no sums/ranges!
 	local getval = function( char, day, currency )
-		local time, gained, spent = 0, 0, 0
+    -- time is set to 1 to avoid division by zero later on
+		local time, gained, spent = 1, 0, 0
 		if day == 0 then
 			time = self.session.time or 0
 			if self.session[currency] then
@@ -232,7 +232,7 @@ function Currencyflow:db_GetHistory( char, day, currency )
 		return time, gained, spent
 	end
 
-	local i, time,gained,spent, t,g,s = 0, 0,0,0, 0,0,0
+	local i, time,gained,spent, t,g,s = 0, 0,0,0, 1,0,0
 
 	if char > 0 then
 		if day >= 0  then
@@ -268,6 +268,7 @@ function Currencyflow:db_GetHistory( char, day, currency )
 			end
 		end
 	end
+
 	return time, gained, spent
 end
 
