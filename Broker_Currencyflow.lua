@@ -40,9 +40,11 @@ local tracking = {
 	[61] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DALJCTOKEN"]},
 	[361] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ILLJCTOKEN"]},
 	[81] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DALCOOKINGAWARD"]},
-	[402] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHEFSAWARD"]},
+	[402] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_IRONPAWTOKEN"]},
   [416] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MARKOFTHEWORLDTREE"]},
   [515] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DARKMOONPRIZETICKET"]},
+  [698] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ZENJCTOKEN"]}, -- MoP jewelcrafting
+
 
 	-- PvE
 	[241] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"]},
@@ -66,7 +68,9 @@ local tracking = {
 	[401] = {["type"] = TYPE_FRAGMENT, ["index"] = 7, ["name"] = L["NAME_AF_TOLVIR"]},
 	[385] = {["type"] = TYPE_FRAGMENT, ["index"] = 8, ["name"] = L["NAME_AF_TROLL"]},
 	[399] = {["type"] = TYPE_FRAGMENT, ["index"] = 9, ["name"] = L["NAME_AF_VRYKULL"]},
-	[0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_OTHER"]},
+	[676] = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_PANDAREN"]},
+	[677] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_MOGU"]},
+	[0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_OTHER"]},
 }
 
 -- Used to copy a table instead of just copying the reference to it.
@@ -929,6 +933,7 @@ function Currencyflow:OptionsColumns()
 	addColumn(402) -- Chef's Award
   addColumn(416) -- Mark of the World Tree
   addColumn(515) -- Darkmoon Prize Ticket
+  addColumn(698) -- MoP JC Token
 
 	return {
 		type = "group",
