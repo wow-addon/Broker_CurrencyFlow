@@ -397,18 +397,24 @@ function Currencyflow:addCharactersAndTotal()
 
 	-- Sort the table according to settings
 	table.sort(self.db.factionrealm.chars, function(a,b)
+		if a == nil or b == nil then
+			return false 
+    end
+
+    -- Safety net for nil values.
+    a_value = nil == a[self.db.profile.sortChars] and 0 or a[self.db.profile.sortChars]
+    b_value = nil == b[self.db.profile.sortChars] and 0 or b[self.db.profile.sortChars]
+    
 		if self.db.profile.sortDesc then
-			if a[self.db.profile.sortChars] == b[self.db.profile.sortChars] then
+			if a[self.db.profile.sortChars] == b[self.db.profile.sortChars] then 
 				return a.charname > b.charname
 			else
-				return a[self.db.profile.sortChars] > b[self.db.profile.sortChars]
+				return a_value > b_value
 			end
-		elseif a == nil or b == nil then
-			return false
-		elseif (a[self.db.profile.sortChars] == b[self.db.profile.sortChars]) or a[self.db.profile.sortChars] == nil or b[self.db.profile.sortChars] == nil then
+		elseif (a[self.db.profile.sortChars] == b[self.db.profile.sortChars]) then 
 			return a.charname < b.charname
 		else
-			return a[self.db.profile.sortChars] < b[self.db.profile.sortChars]
+			return a_value < b_value
 		end
 	end)
 
