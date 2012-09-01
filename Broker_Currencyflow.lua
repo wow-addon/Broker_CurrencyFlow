@@ -1074,7 +1074,7 @@ function Currencyflow:OnEnable()
 	if self.db.factionrealm.chars then
 		self:UpdateDatabase()
 	else
-    -- If Broker_Cashflow db version 9 exists, import it.
+    -- If original Broker_Cashflow (not this addon!) db version 9 exists, import it.
 	  cashflow = { db = LibStub("AceDB-3.0"):New("Cashflow_DB", { profile = {
         cashFormat = 3,
         tipscale = 1.0,
@@ -1101,6 +1101,7 @@ function Currencyflow:OnEnable()
         showCurrency395 = true, -- Justice points 
       }}, "Default")}
 
+    -- Again, this is another addon, it's the original.
     if cashflow.db.factionrealm.version and cashflow.db.factionrealm.version <= 9 then
       -- We can only copy the characters for the current faction/realm.
       Notice("Import database from Broker_Cashflow...")
