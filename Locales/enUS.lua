@@ -21,6 +21,7 @@ L["NAME_MARKOFTHEWORLDTREE"]  = "Mark of the World Tree"
 L["NAME_DARKMOONPRIZETICKET"]  = "Darkmoon Prize Ticket"
 L["NAME_ESSENCEDEATHWING"]	= "Essence of Corrupted Deathwing"
 L["NAME_MOTEDARKNESS"]		= "Mote of Darkness"
+L["NAME_ZENJCTOKEN"] = "Zen Jewelcrafter's Token"
 
 L["NAME_CHAMPIONSEAL"]		= "Champion's Seal"
 L["NAME_JUSTICEPOINTS"]		= "Justice Points"
@@ -39,6 +40,8 @@ L["NAME_AF_ORC"]		= "Orc"
 L["NAME_AF_TOLVIR"]		= "Tol'vir"
 L["NAME_AF_TROLL"]		= "Troll"
 L["NAME_AF_VRYKULL"]		= "Vrykul"
+L["NAME_AF_PANDAREN"] = "Pandaren"
+L["NAME_AF_MOGU"] = "Mogu"
 L["NAME_AF_OTHER"]		= "Other"
 
 -- Config panel - Main
