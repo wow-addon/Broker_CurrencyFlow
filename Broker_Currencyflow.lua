@@ -138,12 +138,18 @@ function Currencyflow:FormatGold( amount, colorize )
   local COLOR_SILVER = "c7c7cf"
   local COLOR_GOLD = "ffd700"
 
-  -- This prevents some odd glitch I'm not sure what even causes it.
+  -- Make sure amount is a number
+  -- NaN values are not equal to themselfs, see http://snippets.luacode.org/snippets/Test_for_NaN_75
   if amount ~= amount then amount = 0 end
 
   local gold = abs(amount / 10000)
   local silver = abs(mod(amount / 100, 100))
   local copper = abs(mod(amount, 100))
+
+  -- Make sure the values are numbers too
+  if gold ~= gold then gold = 0 end
+  if silver ~= silver then silver = 0 end
+  if copper ~= copper then copper = 0 end
 
   -- Determine text color
   local color = COLOR_WHITE
