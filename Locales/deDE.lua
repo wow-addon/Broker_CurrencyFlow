@@ -9,7 +9,7 @@ Revision                : $Rev: 36 $
 local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale( "Currencyflow", "deDE" )
 if not L then return end
 
-L["CFG_COLORMAXREACHED"] = "F\195\164rbe W\195\164hrungen am Limit" -- Needs review
+L["CFG_COLORMAXREACHED"] = "F\195\164rbe W\195\164hrungen am Limit"
 L["CFG_CONFIRMDELETE"] = "Bist Du Dir sicher, dass Du Charakter \"%s\" l\195\182schen m\195\182chtest?"
 L["CFG_CONFIRMRESETSESSION"] = "Bist Du Dir sicher, dass Du die aktuelle Sitzung zur\195\188cksetzen m\195\182chtest?"
 L["CFGDESC_BUTTONFIRST"] = "Erste W\195\164hrung die im LDB angezeigt werden soll"
@@ -93,10 +93,12 @@ L["CFGTXT_IGNOREDCHARS"] = "Ignorierte Charaktere werden komplett ignoriert. D.h
 L["NAME_AF_DRAENEI"] = "Draeneiisch"
 L["NAME_AF_DWARF"] = "Zwergisch"
 L["NAME_AF_FOSSIL"] = "Fossil"
+L["NAME_AF_MOGU"] = "Mogu"
 L["NAME_AF_NERUBIAN"] = "Nerubisch"
 L["NAME_AF_NIGHTELF"] = "Nachtelfisch"
 L["NAME_AF_ORC"] = "Orcisch"
 L["NAME_AF_OTHER"] = "Andere"
+L["NAME_AF_PANDAREN"] = "Pandaren"
 L["NAME_AF_TOLVIR"] = "Tol'vir"
 L["NAME_AF_TROLL"] = "Trollisch"
 L["NAME_AF_VRYKULL"] = "Vrykul"
@@ -116,4 +118,4 @@ L["NAME_NO"] = "Nein"
 L["NAME_TOLBARADCOMMENDATION"] = "Belobigungsabzeichen von Tol Barad"
 L["NAME_VALORPOINTS"] = "Tapferkeitspunkte"
 L["NAME_YES"] = "Ja"
-
+L["NAME_ZENJCTOKEN"] = "Zenmarke des Juwelenschmieds"
