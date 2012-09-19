@@ -9,3 +9,5 @@ Revision                : $Rev: 36 $
 local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale( "Currencyflow", "esES" )
 if not L then return end
 
+--@localization(locale="esES", format="lua_additive_table")@
+
