@@ -2,7 +2,7 @@
 Project                 : Broker_Currencyflow
 Description             : Chinese (Traditional) translation file (zhTW)
 Author                  : Aledara (wowi AT jocosoft DOT com)
-Translator              : see http://www.wowace.com/addons/broker_currencyflow/localization
+Translator              : 倉庫番長@聖光之願 (Light`s Hope - TW)
 Revision                : $Rev: 36 $
 ********************************************************************* ]]
 
