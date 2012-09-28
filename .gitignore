@@ -8,5 +8,5 @@ Libs/AceLocale-3.0
 Libs/LibAbacus-3.0
 Libs/LibDataBroker-1.1
 Libs/LibQTip-1.0
-Libs/CallbackHandler-1.0/.svn
-Libs/LibStub/.svn
+Libs/CallbackHandler-1.0
+Libs/LibStub
