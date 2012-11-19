@@ -45,13 +45,13 @@ local tracking = {
   [515] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DARKMOONPRIZETICKET"]},
   [698] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ZENJCTOKEN"]}, -- MoP jewelcrafting
 
-
   -- PvE
   [241] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"]},
   [395] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_JUSTICEPOINTS"]}, -- Low tier
   [396] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALORPOINTS"]}, -- High tier
   [614] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTEDARKNESS"]}, -- T13 (Dragonsoul) currency
   [615] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"]}, -- T13 (Dragonsoul) currency
+  [697] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"]}, -- MoP  Elder Charm of Good Fortune
 
   -- PvP
   [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]}, -- Low tier
@@ -921,6 +921,7 @@ function Currencyflow:OptionsColumns()
   addColumn(396) -- Valor Point
   addColumn(614) -- Mote of Darkness
   addColumn(615) -- Essence of Corrupted Deathwing
+  addColumn(697) -- MoP Elder Charm of Good Fortune
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
