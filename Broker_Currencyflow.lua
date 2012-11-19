@@ -1024,7 +1024,7 @@ function Currencyflow:LoadCurrencies()
       if icon ~= nil and icon ~= "" then currency.icon = "Interface\\Icons\\"..icon
       else currency.icon = ICON_QM end
     elseif currency.type == TYPE_FRAGMENT then
-      local name, currencyid, icon, itemid = GetArchaeologyRaceInfo(currency.index)
+      local name, icon, currencyid, itemid = GetArchaeologyRaceInfo(currency.index)
 
       -- Another dumb marvel of blizz consistency. When info
       -- is not available, instead of returning nil or "",
