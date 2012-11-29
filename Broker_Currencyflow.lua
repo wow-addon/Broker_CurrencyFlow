@@ -69,9 +69,9 @@ local tracking = {
   [401] = {["type"] = TYPE_FRAGMENT, ["index"] = 7, ["name"] = L["NAME_AF_TOLVIR"]},
   [385] = {["type"] = TYPE_FRAGMENT, ["index"] = 8, ["name"] = L["NAME_AF_TROLL"]},
   [399] = {["type"] = TYPE_FRAGMENT, ["index"] = 9, ["name"] = L["NAME_AF_VRYKULL"]},
-  [676] = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_PANDAREN"]},
-  [677] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_MOGU"]},
-  [0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_OTHER"]},
+  [0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_OTHER"]},
+  [676] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_PANDAREN"]},
+  [677] = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_MOGU"]},
 }
 
 -- Used to copy a table instead of just copying the reference to it.
@@ -742,16 +742,16 @@ end
 
 function Currencyflow:OptionsMain()
   local buttonOptions = {
-    ["1"] = L["CFGOPT_BTNNONE"],
-    ["2"] = L["CFGOPT_BTNMONEY"],
-    ["3"] = L["CFGOPT_BTNSESSIONTOTAL"],
-    ["4"] = L["CFGOPT_BTNSESSIONPERHOUR"],
-    ["5"] = L["CFGOPT_BTNTODAYTOTAL"],
-    ["6"] = L["CFGOPT_BTNTODAYPERHOUR"],
-    ["7"] = L["CFGOPT_BTNWEEKTOTAL"],
-    ["8"] = L["CFGOPT_BTNWEEKPERHOUR"],
-    ["9"] = L["CFGOPT_BTNMONTHTOTAL"],
-    ["10"] = L["CFGOPT_BTNMONTHPERHOUR"],
+    ["001"] = L["CFGOPT_BTNNONE"],
+    ["002"] = L["CFGOPT_BTNMONEY"],
+    ["003"] = L["CFGOPT_BTNSESSIONTOTAL"],
+    ["004"] = L["CFGOPT_BTNSESSIONPERHOUR"],
+    ["005"] = L["CFGOPT_BTNTODAYTOTAL"],
+    ["006"] = L["CFGOPT_BTNTODAYPERHOUR"],
+    ["007"] = L["CFGOPT_BTNWEEKTOTAL"],
+    ["008"] = L["CFGOPT_BTNWEEKPERHOUR"],
+    ["009"] = L["CFGOPT_BTNMONTHTOTAL"],
+    ["010"] = L["CFGOPT_BTNMONTHPERHOUR"],
   }
   for id,currency in pairs(tracking) do buttonOptions[tostring(id)] = format(L["CFGOPT_BTNOTHER"], currency.name) end
 
