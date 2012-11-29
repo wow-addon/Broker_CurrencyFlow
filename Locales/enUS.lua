@@ -24,6 +24,7 @@ L["NAME_ESSENCEDEATHWING"]	= "Essence of Corrupted Deathwing"
 L["NAME_MOTEDARKNESS"]		= "Mote of Darkness"
 L["NAME_ZENJCTOKEN"] = "Zen Jewelcrafter's Token"
 L["NAME_ELDERCHARMOFGOODFORTUNE"] = "Elder Charm of Good Fortune"
+L["NAME_LESSERGOODFORTUNE"] = "Lesser Charm of Good Fortune"
 
 L["NAME_CHAMPIONSEAL"]		= "Champion's Seal"
 L["NAME_JUSTICEPOINTS"]		= "Justice Points"

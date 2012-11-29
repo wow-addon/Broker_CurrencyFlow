@@ -52,6 +52,7 @@ local tracking = {
   [614] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTEDARKNESS"]}, -- T13 (Dragonsoul) currency
   [615] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"]}, -- T13 (Dragonsoul) currency
   [697] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"]}, -- MoP  Elder Charm of Good Fortune
+  [738] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LESSERGOODFORTUNE"]}, -- MoP  Lesser Charm of Good Fortune
 
   -- PvP
   [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]}, -- Low tier
@@ -922,6 +923,7 @@ function Currencyflow:OptionsColumns()
   addColumn(614) -- Mote of Darkness
   addColumn(615) -- Essence of Corrupted Deathwing
   addColumn(697) -- MoP Elder Charm of Good Fortune
+  addColumn(738) -- MoP Lesser Charm of Good Fortune
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
