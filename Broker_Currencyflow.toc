@@ -1,8 +1,10 @@
 ## Interface: 50100
+## Version: 1.3
 ## Revision: $Rev: 137 $
 ## Title: Broker_Currencyflow
 ## Notes: LDB data source for currency flow
-## Author: Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@gmail.com)
+## Author: Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@gmail.com), @project-author@
+## X-Date: @project-date-iso@
 ##
 ## SavedVariables: Currencyflow_DB
 ##
