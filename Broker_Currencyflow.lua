@@ -1019,7 +1019,8 @@ function Currencyflow:LoadCurrencies()
       if name ~= nil and name ~= "" then currency.name = name
       else currency.name = "|cff999999"..currency.name.."|r" end
 
-      if icon ~= nil and icon ~= "" then currency.icon = "Interface\\Icons\\"..icon
+      --if icon ~= nil and icon ~= "" then currency.icon = "Interface\\Icons\\"..icon
+	  if icon ~= nil and icon ~= "" then currency.icon = icon
       else currency.icon = ICON_QM end
     elseif currency.type == TYPE_ITEM then
       local name, link, rarity, level, minlevel, type, subtype, stackcount, equiploc, icon, sellprice = GetItemInfo(id)
@@ -1027,7 +1028,8 @@ function Currencyflow:LoadCurrencies()
       if name ~= nil and name ~= "" then currency.name = name
       else currency.name = "|cff999999"..currency.name.."|r" end
 
-      if icon ~= nil and icon ~= "" then currency.icon = "Interface\\Icons\\"..icon
+      --if icon ~= nil and icon ~= "" then currency.icon = "Interface\\Icons\\"..icon
+	  if icon ~= nil and icon ~= "" then currency.icon = icon
       else currency.icon = ICON_QM end
     elseif currency.type == TYPE_FRAGMENT then
       local name, icon, currencyid, itemid = GetArchaeologyRaceInfo(currency.index)
