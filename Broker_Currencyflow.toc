@@ -1,4 +1,4 @@
-## Interface: 50100
+## Interface: 50200
 ## Version: 1.3
 ## Revision: $Rev: 137 $
 ## Title: Broker_Currencyflow

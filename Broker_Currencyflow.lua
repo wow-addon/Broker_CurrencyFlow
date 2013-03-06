@@ -53,7 +53,8 @@ local tracking = {
   [615] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"]}, -- T13 (Dragonsoul) currency
   [697] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"]}, -- MoP  Elder Charm of Good Fortune
   [738] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LESSERGOODFORTUNE"]}, -- MoP  Lesser Charm of Good Fortune
-
+  [752] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOGORUNEOFFATE"]}, -- MoP 5.2 Mogu Rune of Fate
+  
   -- PvP
   [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]}, -- Low tier
   [390] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUESTPOINTS"]}, -- High tier
@@ -72,6 +73,7 @@ local tracking = {
   [0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_OTHER"]},
   [676] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_PANDAREN"]},
   [677] = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_MOGU"]},
+  [754] = {["type"] = TYPE_FRAGMENT, ["index"] = 13, ["name"] = L["NAME_AF_MANTID"]}, -- MoP 5.2 Mantid Archaeology Fragment
 }
 
 -- Used to copy a table instead of just copying the reference to it.
@@ -924,6 +926,7 @@ function Currencyflow:OptionsColumns()
   addColumn(615) -- Essence of Corrupted Deathwing
   addColumn(697) -- MoP Elder Charm of Good Fortune
   addColumn(738) -- MoP Lesser Charm of Good Fortune
+  addColumn(752) -- MoP 5.2 Mogu Rune of Fate
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}

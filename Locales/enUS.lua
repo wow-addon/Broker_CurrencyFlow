@@ -25,6 +25,7 @@ L["NAME_MOTEDARKNESS"]		= "Mote of Darkness"
 L["NAME_ZENJCTOKEN"] = "Zen Jewelcrafter's Token"
 L["NAME_ELDERCHARMOFGOODFORTUNE"] = "Elder Charm of Good Fortune"
 L["NAME_LESSERGOODFORTUNE"] = "Lesser Charm of Good Fortune"
+L["NAME_MOGORUNEOFFATE"] = "Mogu Rune of Fate"
 
 L["NAME_CHAMPIONSEAL"]		= "Champion's Seal"
 L["NAME_JUSTICEPOINTS"]		= "Justice Points"
@@ -46,6 +47,7 @@ L["NAME_AF_VRYKULL"]		= "Vrykul"
 L["NAME_AF_PANDAREN"] = "Pandaren"
 L["NAME_AF_MOGU"] = "Mogu"
 L["NAME_AF_OTHER"]		= "Other"
+L["NAME_AF_MANTID"]		= "Mantid"
 
 -- Config panel - Main
 L["CFGHDR_GENERAL"] = "General"
