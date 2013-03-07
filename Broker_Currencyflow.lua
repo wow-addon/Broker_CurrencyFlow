@@ -70,10 +70,10 @@ local tracking = {
   [401] = {["type"] = TYPE_FRAGMENT, ["index"] = 7, ["name"] = L["NAME_AF_TOLVIR"]},
   [385] = {["type"] = TYPE_FRAGMENT, ["index"] = 8, ["name"] = L["NAME_AF_TROLL"]},
   [399] = {["type"] = TYPE_FRAGMENT, ["index"] = 9, ["name"] = L["NAME_AF_VRYKULL"]},
-  [0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_OTHER"]},
+  [754] = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_MANTID"]}, -- MoP 5.2 Mantid Archaeology Fragment
   [676] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_PANDAREN"]},
   [677] = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_MOGU"]},
-  [754] = {["type"] = TYPE_FRAGMENT, ["index"] = 13, ["name"] = L["NAME_AF_MANTID"]}, -- MoP 5.2 Mantid Archaeology Fragment
+  [0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 13, ["name"] = L["NAME_AF_OTHER"]},
 }
 
 -- Used to copy a table instead of just copying the reference to it.
@@ -1019,7 +1019,6 @@ function Currencyflow:LoadCurrencies()
       if name ~= nil and name ~= "" then currency.name = name
       else currency.name = "|cff999999"..currency.name.."|r" end
 
-      --if icon ~= nil and icon ~= "" then currency.icon = "Interface\\Icons\\"..icon
 	  if icon ~= nil and icon ~= "" then currency.icon = icon
       else currency.icon = ICON_QM end
     elseif currency.type == TYPE_ITEM then
@@ -1028,7 +1027,6 @@ function Currencyflow:LoadCurrencies()
       if name ~= nil and name ~= "" then currency.name = name
       else currency.name = "|cff999999"..currency.name.."|r" end
 
-      --if icon ~= nil and icon ~= "" then currency.icon = "Interface\\Icons\\"..icon
 	  if icon ~= nil and icon ~= "" then currency.icon = icon
       else currency.icon = ICON_QM end
     elseif currency.type == TYPE_FRAGMENT then
