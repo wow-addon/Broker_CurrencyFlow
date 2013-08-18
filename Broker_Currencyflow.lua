@@ -54,11 +54,14 @@ local tracking = {
   [697] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"]}, -- MoP  Elder Charm of Good Fortune
   [738] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LESSERGOODFORTUNE"]}, -- MoP  Lesser Charm of Good Fortune
   [752] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOGORUNEOFFATE"]}, -- MoP 5.2 Mogu Rune of Fate
+  [776] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WARFORGEDSEAL"]}, -- MoP 5.4 Warforged Seal
+  [777] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMELESSCOIN"]}, -- MoP 5.4 Timeless Coin
   
   -- PvP
   [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]}, -- Low tier
   [390] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUESTPOINTS"]}, -- High tier
   [391] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOLBARADCOMMENDATION"]}, -- Tol Barad
+  [789] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODYCOIN"]}, -- MoP 5.4 Bloody Coin
 
   -- Archaeology Fragments
   [384] = {["type"] = TYPE_FRAGMENT, ["index"] = 1, ["name"] = L["NAME_AF_DWARF"]},
@@ -352,7 +355,8 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
   local oldVal = self.db.factionrealm.chars[self.meidx][currencyId] or 0
 
   -- Get new value and check if maximum is reached
-  if tracking[currencyId].type == TYPE_MONEY then amount = GetMoney()
+  if tracking[currencyId].type == TYPE_MONEY then 
+    amount = GetMoney()
   elseif tracking[currencyId].type == TYPE_CURRENCY then
     amount, texture, earnedThisWeek, weeklyMax, totalMax  = select(2,GetCurrencyInfo(currencyId)) 
     if not amount then amount = 0 end
@@ -924,9 +928,11 @@ function Currencyflow:OptionsColumns()
   addColumn(396) -- Valor Point
   addColumn(614) -- Mote of Darkness
   addColumn(615) -- Essence of Corrupted Deathwing
-  addColumn(697) -- MoP Elder Charm of Good Fortune
   addColumn(738) -- MoP Lesser Charm of Good Fortune
+  addColumn(697) -- MoP Elder Charm of Good Fortune
   addColumn(752) -- MoP 5.2 Mogu Rune of Fate
+  addColumn(776) -- MoP 5.4 Warforged Seal
+  addColumn(777) -- MoP 5.4 Timeless Coin
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
@@ -934,6 +940,7 @@ function Currencyflow:OptionsColumns()
   addColumn(392) -- Honor Point
   addColumn(390) -- Conquest Point
   addColumn(391) -- Tol Barad Commendation
+  addColumn(789) -- MoP 5.4 Bloody Coin
 
   -- Archeology Fragment --
   currencyColumns["header4"] = {name = L["CFGHDR_ARCHFRAGMENTS"], type = "header", order = 400}
@@ -1016,11 +1023,17 @@ function Currencyflow:LoadCurrencies()
     if currency.type == TYPE_CURRENCY then
       local name, _, icon = GetCurrencyInfo(id)
 
-      if name ~= nil and name ~= "" then currency.name = name
-      else currency.name = "|cff999999"..currency.name.."|r" end
-
-	  if icon ~= nil and icon ~= "" then currency.icon = icon
-      else currency.icon = ICON_QM end
+      if name ~= nil and name ~= "" then 
+         currency.name = name
+      else
+         currency.name = "|cff999999"..currency.name.."|r" 
+      end
+      
+      if icon ~= nil and icon ~= "" then 
+         currency.icon = icon
+      else
+         currency.icon = ICON_QM
+      end
     elseif currency.type == TYPE_ITEM then
       local name, link, rarity, level, minlevel, type, subtype, stackcount, equiploc, icon, sellprice = GetItemInfo(id)
 
