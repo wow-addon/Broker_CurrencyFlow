@@ -146,7 +146,7 @@ function Currencyflow:FormatGold( amount, colorize )
 
   -- Make sure amount is a number
   -- NaN values are not equal to themselfs, see http://snippets.luacode.org/snippets/Test_for_NaN_75
-  if amount ~= amount then amount = 0 end
+  if amount ~= amount or tostring(amount) == "-1.#IND" then amount = 0 end
 
   local gold = abs(amount / 10000)
   local silver = abs(mod(amount / 100, 100))
