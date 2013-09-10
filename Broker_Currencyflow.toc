@@ -1,14 +1,15 @@
-## Interface: 54000
-## Version: 1.4
-## Revision: $Rev: 141 $
 ## Title: Broker_Currencyflow
 ## Notes: LDB data source for currency flow
+## Version: @project-version@
+## Revision: @project-abbreviated-hash@
+## Interface: 54000
 ## Author: Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@gmail.com), @project-author@
 ## X-Date: @project-date-iso@
 ##
 ## SavedVariables: Currencyflow_DB
 ##
 ## OptionalDeps: Ace3, LibQTip-1.0, LibDataBroker-1.1
+## DefaultState: Enabled
 
 # embeds
 #@no-lib-strip@

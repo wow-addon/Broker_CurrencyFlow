@@ -1,7 +1,6 @@
 --[[ *******************************************************************
 Project                 : Broker_Currencyflow
 Author                  : Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@gmail.com)
-Revision                : $Rev: 138 $
 ********************************************************************* ]]
 
 local MODNAME = "Currencyflow"
@@ -47,21 +46,21 @@ local tracking = {
 
   -- PvE
   [241] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"]},
-  [395] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_JUSTICEPOINTS"]}, -- Low tier
-  [396] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALORPOINTS"]}, -- High tier
-  [614] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTEDARKNESS"]}, -- T13 (Dragonsoul) currency
-  [615] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"]}, -- T13 (Dragonsoul) currency
+  [395] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_JUSTICEPOINTS"]},           -- Low tier
+  [396] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALORPOINTS"]},             -- High tier
+  [614] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTEDARKNESS"]},            -- T13 (Dragonsoul) currency
+  [615] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"]},        -- T13 (Dragonsoul) currency
   [697] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"]}, -- MoP  Elder Charm of Good Fortune
-  [738] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LESSERGOODFORTUNE"]}, -- MoP  Lesser Charm of Good Fortune
-  [752] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOGORUNEOFFATE"]}, -- MoP 5.2 Mogu Rune of Fate
-  [776] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WARFORGEDSEAL"]}, -- MoP 5.4 Warforged Seal
-  [777] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMELESSCOIN"]}, -- MoP 5.4 Timeless Coin
+  [738] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LESSERGOODFORTUNE"]},       -- MoP  Lesser Charm of Good Fortune
+  [752] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOGORUNEOFFATE"]},          -- MoP 5.2 Mogu Rune of Fate
+  [776] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WARFORGEDSEAL"]},           -- MoP 5.4 Warforged Seal
+  [777] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMELESSCOIN"]},            -- MoP 5.4 Timeless Coin
   
   -- PvP
-  [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]}, -- Low tier
-  [390] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUESTPOINTS"]}, -- High tier
+  [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]},          -- Low tier
+  [390] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUESTPOINTS"]},       -- High tier
   [391] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOLBARADCOMMENDATION"]}, -- Tol Barad
-  [789] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODYCOIN"]}, -- MoP 5.4 Bloody Coin
+  [789] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODYCOIN"]},           -- MoP 5.4 Bloody Coin
 
   -- Archaeology Fragments
   [384] = {["type"] = TYPE_FRAGMENT, ["index"] = 1, ["name"] = L["NAME_AF_DWARF"]},
