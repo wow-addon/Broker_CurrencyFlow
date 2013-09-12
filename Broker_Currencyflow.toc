@@ -2,20 +2,25 @@
 ## Notes: LDB data source for currency flow
 ## Version: @project-version@
 ## Revision: @project-abbreviated-hash@
-## Interface: 54000
+## Interface: 50400
 ## Author: Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@gmail.com), @project-author@
 ## X-Date: @project-date-iso@
 ##
 ## SavedVariables: Currencyflow_DB
 ##
+## X-Category: Auction-Economy
+## X-Localizations: enUS, frFR, deDE, ruRU, zhCN, zhTW, koKR
+## X-Website: http://www.curse.com/addons/wow/broker_currencyflow
+## X-Feedback: http://www.wowace.com/addons/broker_currencyflow/tickets/
+##
 ## OptionalDeps: Ace3, LibQTip-1.0, LibDataBroker-1.1
 ## DefaultState: Enabled
+##
 
 # embeds
 #@no-lib-strip@
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
-Libs\LibQTip-1.0\LibQTip-1.0.lua
 Libs\AceAddon-3.0\AceAddon-3.0.xml
 Libs\AceDB-3.0\AceDB-3.0.xml
 Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
@@ -24,9 +29,11 @@ Libs\AceLocale-3.0\AceLocale-3.0.xml
 Libs\AceGUI-3.0\AceGUI-3.0.xml
 Libs\AceConfig-3.0\AceConfig-3.0.xml
 Libs\AceLocale-3.0\AceLocale-3.0.xml
+Libs\LibQTip-1.0\LibQTip-1.0.lua
 #@end-no-lib-strip@
 
-Locales\locales.xml
 Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+Locales\locales.xml
 
 Broker_Currencyflow.lua

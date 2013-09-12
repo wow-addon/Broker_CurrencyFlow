@@ -111,8 +111,7 @@ function Currencyflow:ColorByClass( name, class )
 end
 
 function Currencyflow:GetToday()
-  -- Offset to UTC, in seconds
-  local offset = time(date("*t")) - time(date("!*t"))
+  local offset = time(date("*t")) - time(date("!*t")) -- Offset to UTC, in seconds
   return floor((time()+offset) / 86400)
 end
 
@@ -226,6 +225,7 @@ end
   currency: Currency id
 ]]
 function Currencyflow:db_GetHistory( char, day, currency )
+  
   -- Basically the same thing, except no sums/ranges!
   local getval = function( char, day, currency )
     -- time is set to 1 to avoid division by zero later on
@@ -315,6 +315,7 @@ end
   to reduce database size
 ]]
 function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
+  
   -- Bail if invalid id given
   if tracking[currencyId] == nil then return end
 
@@ -401,6 +402,7 @@ end
 
 -- Add Other toons we know about and total to the tooltip, if so desired
 function Currencyflow:addCharactersAndTotal()
+  
   -- If neither charactares or totals are configured to be shown, get out of here
   if not self.db.profile.showOtherChars and not self.db.profile.showTotals then return end
 
@@ -634,6 +636,7 @@ local launcher = LDB:NewDataObject( MODNAME, {
   text = " ",
   label = FULLNAME,
   icon = "Interface\\Minimap\\Tracking\\Auctioneer",
+  
   OnClick = function(clickedframe, button)
     if button == "LeftButton" and IsShiftKeyDown() then
       -- Reset current session
@@ -649,17 +652,17 @@ local launcher = LDB:NewDataObject( MODNAME, {
         hideOnEscape = true,
       }
       StaticPopup_Show ("RESET_SESSION")
-
-
-    elseif button == "RightButton" then Currencyflow:LoadCurrencies(); InterfaceOptionsFrame_OpenToCategory(FULLNAME) end
+      
+    elseif button == "RightButton" then 
+      Currencyflow:LoadCurrencies(); InterfaceOptionsFrame_OpenToCategory(FULLNAME)
+    end
   end,
+  
   OnEnter = function ( self )
     -- We need to calculate how many columns we meed up front
     local numcols = 2 -- title and gold
-
     -- One for the cash per hour
     if Currencyflow.db.profile.showCashPerHour then numcols = numcols + 1 end
-
     -- And one for each currency we want shown
     for id,currency in pairs(tracking) do
       if Currencyflow.db.profile["showCurrency"..id] then numcols = numcols + 1 end
@@ -731,6 +734,7 @@ function Currencyflow:UpdateLabel()
 end
 
 function Currencyflow:SetupOptions()
+
   -- Create configuration panel
   ConfigReg:RegisterOptionsTable( FULLNAME, self:OptionsMain() )
   ConfigReg:RegisterOptionsTable( FULLNAME.." - "..L["CFGPAGE_SECTIONS"], self:OptionsSections() )
@@ -1216,6 +1220,7 @@ end
 
 -- This will update the database format to the current version
 function Currencyflow:UpdateDatabase()
+  
   -- If version is not set, we're "upgrading" to version 1
   if not self.db.factionrealm.version then self.db.factionrealm.version = 1 end
 
@@ -1390,9 +1395,9 @@ function Currencyflow:UpdateDatabase()
 end
 
 function Currencyflow:RemoveOldData()
-  -- Remove history over a month old
-  local lastMonth = self.today - (HISTORY_DAYS - 1)
-
+  
+  local lastMonth = self.today - (HISTORY_DAYS - 1) -- Remove history over a month old
+  
   for day in pairs(self.db.factionrealm.chars[self.meidx].history) do
     if day < lastMonth then self.db.factionrealm.chars[self.meidx].history[day] = nil end
   end
@@ -1405,8 +1410,7 @@ function Currencyflow:UpdateGold()
   self:UpdateLabel()
 end
 
-function Currencyflow:UpdateCurrencies()
-  -- Update all currencies
+function Currencyflow:UpdateCurrencies() -- Update all currencies
   for id,currency in pairs(tracking) do self:db_UpdateCurrency(id, true) end
   self:UpdateLabel()
 end
