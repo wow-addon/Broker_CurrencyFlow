@@ -36,18 +36,25 @@ local tracking = {
   ["gold"] = {["type"] = TYPE_MONEY, ["name"] = L["NAME_MONEY"], ["icon"] = "Interface\\Minimap\\Tracking\\Auctioneer"},
 
   -- Misc
+  [416] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MARKOFTHEWORLDTREE"]},
+  [515] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DARKMOONPRIZETICKET"]},
+
+  -- Profession
   [61]  = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DALJCTOKEN"]},
   [361] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ILLJCTOKEN"]},
   [81]  = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_EPICUREANAWARD"]},
   [402] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_IRONPAWTOKEN"]},
-  [416] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MARKOFTHEWORLDTREE"]},
-  [515] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DARKMOONPRIZETICKET"]},
   [698] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ZENJCTOKEN"]}, -- MoP jewelcrafting
-
+  [910] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORALCHEMY"]}, -- WoD alchemy
+  [999] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORTAILORING"]}, -- WoD tailoring
+  [1008] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORJEWELCRAFTING"]}, -- WoD jewelcrafting
+  [1017] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORLEATHERWORKING"]}, -- WoD leatherworking
+  [1020] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORBLACKSMITHING"]}, -- WoD blacksmithing
+  
   -- PvE
   [241] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"]},
-  [395] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_JUSTICEPOINTS"]},           -- Low tier
-  [396] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALORPOINTS"]},             -- High tier
+--  [395] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_JUSTICEPOINTS"]},           -- Low tier (WoD removed)
+--  [396] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALORPOINTS"]},             -- High tier (WoD removed)
   [614] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTEDARKNESS"]},            -- T13 (Dragonsoul) currency
   [615] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"]},        -- T13 (Dragonsoul) currency
   [697] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"]}, -- MoP  Elder Charm of Good Fortune
@@ -55,6 +62,12 @@ local tracking = {
   [752] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOGORUNEOFFATE"]},          -- MoP 5.2 Mogu Rune of Fate
   [776] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WARFORGEDSEAL"]},           -- MoP 5.4 Warforged Seal
   [777] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMELESSCOIN"]},            -- MoP 5.4 Timeless Coin
+  [810] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLACK_IRON_FRAGMENT"]},            -- WoD Black Iron Fragment
+  [823] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_APEXIS_CRYSTAL"]},            -- WoD Apexis Crystal
+  [824] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_GARRISON_RESOURCES"]},            -- WoD Garrison Resources
+  [944] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ARTIFACT_FRAGMENT"]},            -- WoD Artifact Fragment
+  [980] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DINGY_IRON_COINS"]},            -- WoD Dingy Iron Coins
+  [994] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_TEMPERED_FATE"]},            -- WoD Seal of Tempered Fate
   
   -- PvP
   [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]},          -- Low tier
@@ -75,7 +88,11 @@ local tracking = {
   [754] = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_MANTID"]}, -- MoP 5.2 Mantid Archaeology Fragment
   [676] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_PANDAREN"]},
   [677] = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_MOGU"]},
-  [0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 13, ["name"] = L["NAME_AF_OTHER"]},
+  [821] = {["type"] = TYPE_FRAGMENT, ["index"] = 13, ["name"] = L["NAME_AF_DRAENOR_CLANS"]}, -- WoD Draenor Clans Archaeology Fragment
+  [828] = {["type"] = TYPE_FRAGMENT, ["index"] = 14, ["name"] = L["NAME_AF_OGRE"]}, -- WoD Ogre Archaeology Fragment
+  [829] = {["type"] = TYPE_FRAGMENT, ["index"] = 15, ["name"] = L["NAME_AF_ARAKKOA"]}, -- WoD Arakkoa Archaeology Fragment
+
+  [0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 16, ["name"] = L["NAME_AF_OTHER"]},
 }
 
 -- Used to copy a table instead of just copying the reference to it.
@@ -927,8 +944,8 @@ function Currencyflow:OptionsColumns()
   currencyColumns["header2"] = {name = L["CFGHDR_PVE"], type = "header", order = 200}
   order = 201
   addColumn(241) -- Champion's Seal
-  addColumn(395) -- Justice Point
-  addColumn(396) -- Valor Point
+  --addColumn(395) -- Justice Point
+  --addColumn(396) -- Valor Point
   addColumn(614) -- Mote of Darkness
   addColumn(615) -- Essence of Corrupted Deathwing
   addColumn(738) -- MoP Lesser Charm of Good Fortune
@@ -936,6 +953,12 @@ function Currencyflow:OptionsColumns()
   addColumn(752) -- MoP 5.2 Mogu Rune of Fate
   addColumn(776) -- MoP 5.4 Warforged Seal
   addColumn(777) -- MoP 5.4 Timeless Coin
+  addColumn(810) -- WoD Black Iron Fragment
+  addColumn(823) -- WoD Apexis Crystal
+  addColumn(824) -- WoD Garrison Resources
+  addColumn(944) -- WoD Artifact Fragment
+  addColumn(980) -- WoD Dingy Iron Coins
+  addColumn(994) -- WoD Seal of Tempered Fate
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
@@ -957,6 +980,11 @@ function Currencyflow:OptionsColumns()
   order = 501
   addColumn(61) -- Jewelcrafter's Token
   addColumn(361) -- Illustrious Jewelcrafter's Token
+  addColumn(910) -- WoD alchemy
+  addColumn(999) -- WoD tailoring
+  addColumn(1008) -- WoD jewelcrafting
+  addColumn(1017) -- WoD leatherworking
+  addColumn(1020) -- WoD blacksmithing
   addColumn(81) -- Cooking Award
   addColumn(402) -- Chef's Award
   addColumn(416) -- Mark of the World Tree
