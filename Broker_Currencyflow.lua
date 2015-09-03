@@ -68,6 +68,9 @@ local tracking = {
   [944] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ARTIFACT_FRAGMENT"]},            -- WoD Artifact Fragment
   [980] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DINGY_IRON_COINS"]},            -- WoD Dingy Iron Coins
   [994] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_TEMPERED_FATE"]},            -- WoD Seal of Tempered Fate
+  [1101] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_OIL"]},            -- WoD Oil
+  [1129] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_INEVITABLE_FATE"]},            -- WoD Seal of Inevitable Fate
+  [1166] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWARPED_BADGE"]},            -- WoD Timewarped Badge
   
   -- PvP
   [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]},          -- Low tier
@@ -959,6 +962,9 @@ function Currencyflow:OptionsColumns()
   addColumn(944) -- WoD Artifact Fragment
   addColumn(980) -- WoD Dingy Iron Coins
   addColumn(994) -- WoD Seal of Tempered Fate
+  addColumn(1101) -- WoD Oil
+  addColumn(1129) -- WoD Seal of Inevitable Fate
+  addColumn(1166) -- WoD Timewarped Badge
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
