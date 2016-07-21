@@ -43,6 +43,8 @@ L["NAME_SEAL_OF_TEMPERED_FATE"] = "Seal of Tempered Fate"
 L["NAME_OIL"] = "Oil"
 L["NAME_SEAL_OF_INEVITABLE_FATE"] = "Seal of Inevitable Fate"
 L["NAME_TIMEWARPED_BADGE"] = "Timewarped Badge"
+L["NAME_ANCIENT_MANA"] = "Ancient Mana"
+L["NAME_ORDER_RESOURCES"] = "Order Resources"
 
 L["NAME_CHAMPIONSEAL"]		= "Champion's Seal"
 L["NAME_JUSTICEPOINTS"]		= "Justice Points"

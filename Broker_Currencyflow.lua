@@ -71,6 +71,9 @@ local tracking = {
   [1101] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_OIL"]},            -- WoD Oil
   [1129] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_INEVITABLE_FATE"]},            -- WoD Seal of Inevitable Fate
   [1166] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWARPED_BADGE"]},            -- WoD Timewarped Badge
+  [1155] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ANCIENT_MANA"]},            -- Legion Ancient Mana
+  [1166] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWARPED_BADGE"]},            -- WoD Timewarped Badge
+  [1220] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ORDER_RESOURCES"]},            -- Legion Order Resources
   
   -- PvP
   [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]},          -- Low tier
@@ -965,6 +968,9 @@ function Currencyflow:OptionsColumns()
   addColumn(1101) -- WoD Oil
   addColumn(1129) -- WoD Seal of Inevitable Fate
   addColumn(1166) -- WoD Timewarped Badge
+  addColumn(1155) -- Legion Ancient Mana
+  addColumn(1166) -- WoD Timewarped Badge
+  addColumn(1220) -- Legion Order Resources
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
