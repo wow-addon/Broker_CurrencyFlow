@@ -70,9 +70,15 @@ local tracking = {
   [994] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_TEMPERED_FATE"]},            -- WoD Seal of Tempered Fate
   [1101] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_OIL"]},            -- WoD Oil
   [1129] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_INEVITABLE_FATE"]},            -- WoD Seal of Inevitable Fate
+  [1149] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SIGHTLESS_EYE"]},            -- Legion Sightless Eye
+  [1154] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SHADOWY_COINS"]},            -- Legion Shadowy Coins
   [1155] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ANCIENT_MANA"]},            -- Legion Ancient Mana
   [1166] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWARPED_BADGE"]},            -- WoD Timewarped Badge
   [1220] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ORDER_RESOURCES"]},            -- Legion Order Resources
+  [1226] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_NETHERSHARD"]},            -- Legion Nethershard
+  [1268] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWORN_ARTIFACT"]},            -- Legion Timeworn Artifact
+  [1273] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_BROKEN_FATE"]},            -- Legion Seal of Broken Fate
+  [1275] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CURIOUS_COINS"]},            -- Legion Curious Coins
   
   -- PvP
   [390] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUESTPOINTS"]},       -- High tier
@@ -967,9 +973,15 @@ function Currencyflow:OptionsColumns()
   addColumn(994) -- WoD Seal of Tempered Fate
   addColumn(1101) -- WoD Oil
   addColumn(1129) -- WoD Seal of Inevitable Fate
+  addColumn(1149) -- Legion Sightless Eye
+  addColumn(1154) -- Legion Shadowy Coins
   addColumn(1155) -- Legion Ancient Mana
   addColumn(1166) -- WoD Timewarped Badge
   addColumn(1220) -- Legion Order Resources
+  addColumn(1226) -- Legion Nethershard
+  addColumn(1268) -- Legion Timeworn Artifact
+  addColumn(1273) -- Legion Seal of Broken Fate
+  addColumn(1275) -- Legion Curious Coin
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
