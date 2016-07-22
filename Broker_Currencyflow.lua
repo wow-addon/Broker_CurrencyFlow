@@ -41,8 +41,8 @@ local tracking = {
 
   -- Profession
   [61]  = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DALJCTOKEN"]},
-  [361] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ILLJCTOKEN"]},
   [81]  = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_EPICUREANAWARD"]},
+  [361] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ILLJCTOKEN"]},
   [402] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_IRONPAWTOKEN"]},
   [698] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ZENJCTOKEN"]}, -- MoP jewelcrafting
   [910] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORALCHEMY"]}, -- WoD alchemy
@@ -75,24 +75,25 @@ local tracking = {
   [1220] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ORDER_RESOURCES"]},            -- Legion Order Resources
   
   -- PvP
-  [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]},          -- Low tier
   [390] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUESTPOINTS"]},       -- High tier
   [391] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOLBARADCOMMENDATION"]}, -- Tol Barad
+  [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]},          -- Low tier
   [789] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODYCOIN"]},           -- MoP 5.4 Bloody Coin
+  [1191] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"]},           -- WoD Valor
 
   -- Archaeology Fragments
   [384] = {["type"] = TYPE_FRAGMENT, ["index"] = 1, ["name"] = L["NAME_AF_DWARF"]},
-  [398] = {["type"] = TYPE_FRAGMENT, ["index"] = 2, ["name"] = L["NAME_AF_DRAENEI"]},
+  [385] = {["type"] = TYPE_FRAGMENT, ["index"] = 8, ["name"] = L["NAME_AF_TROLL"]},
   [393] = {["type"] = TYPE_FRAGMENT, ["index"] = 3, ["name"] = L["NAME_AF_FOSSIL"]},
   [394] = {["type"] = TYPE_FRAGMENT, ["index"] = 4, ["name"] = L["NAME_AF_NIGHTELF"]},
-  [400] = {["type"] = TYPE_FRAGMENT, ["index"] = 5, ["name"] = L["NAME_AF_NERUBIAN"]},
   [397] = {["type"] = TYPE_FRAGMENT, ["index"] = 6, ["name"] = L["NAME_AF_ORC"]},
-  [401] = {["type"] = TYPE_FRAGMENT, ["index"] = 7, ["name"] = L["NAME_AF_TOLVIR"]},
-  [385] = {["type"] = TYPE_FRAGMENT, ["index"] = 8, ["name"] = L["NAME_AF_TROLL"]},
+  [398] = {["type"] = TYPE_FRAGMENT, ["index"] = 2, ["name"] = L["NAME_AF_DRAENEI"]},
   [399] = {["type"] = TYPE_FRAGMENT, ["index"] = 9, ["name"] = L["NAME_AF_VRYKULL"]},
-  [754] = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_MANTID"]}, -- MoP 5.2 Mantid Archaeology Fragment
+  [400] = {["type"] = TYPE_FRAGMENT, ["index"] = 5, ["name"] = L["NAME_AF_NERUBIAN"]},
+  [401] = {["type"] = TYPE_FRAGMENT, ["index"] = 7, ["name"] = L["NAME_AF_TOLVIR"]},
   [676] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_PANDAREN"]},
   [677] = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_MOGU"]},
+  [754] = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_MANTID"]}, -- MoP 5.2 Mantid Archaeology Fragment
   [821] = {["type"] = TYPE_FRAGMENT, ["index"] = 13, ["name"] = L["NAME_AF_DRAENOR_CLANS"]}, -- WoD Draenor Clans Archaeology Fragment
   [828] = {["type"] = TYPE_FRAGMENT, ["index"] = 14, ["name"] = L["NAME_AF_OGRE"]}, -- WoD Ogre Archaeology Fragment
   [829] = {["type"] = TYPE_FRAGMENT, ["index"] = 15, ["name"] = L["NAME_AF_ARAKKOA"]}, -- WoD Arakkoa Archaeology Fragment
@@ -977,6 +978,7 @@ function Currencyflow:OptionsColumns()
   addColumn(390) -- Conquest Point
   addColumn(391) -- Tol Barad Commendation
   addColumn(789) -- MoP 5.4 Bloody Coin
+  addColumn(1191) -- WoD Valor
 
   -- Archeology Fragment --
   currencyColumns["header4"] = {name = L["CFGHDR_ARCHFRAGMENTS"], type = "header", order = 400}
