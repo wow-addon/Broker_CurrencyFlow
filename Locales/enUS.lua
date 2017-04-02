@@ -51,6 +51,7 @@ L["NAME_NETHERSHARD"] = "Nethershard"
 L["NAME_TIMEWORN_ARTIFACT"] = "Timeworn Artifact"
 L["NAME_SEAL_OF_BROKEN_FATE"] = "Seal of Broken Fate"
 L["NAME_CURIOUS_COINS"] = "Curious Coins"
+L["NAME_LEGIONFALL_WAR_SUPPLIES"] = "Legionfall War Supplies"
 
 L["NAME_CHAMPIONSEAL"]		= "Champion's Seal"
 L["NAME_JUSTICEPOINTS"]		= "Justice Points"

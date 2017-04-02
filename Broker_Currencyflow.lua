@@ -79,6 +79,7 @@ local tracking = {
   [1268] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWORN_ARTIFACT"]},            -- Legion Timeworn Artifact
   [1273] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_BROKEN_FATE"]},            -- Legion Seal of Broken Fate
   [1275] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CURIOUS_COINS"]},            -- Legion Curious Coins
+  [1342] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LEGIONFALL_WAR_SUPPLIES"]},            -- Legion Legionfall War Supplies
   
   -- PvP
   [390] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUESTPOINTS"]},       -- High tier
