@@ -86,7 +86,9 @@ local tracking = {
   [391] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOLBARADCOMMENDATION"]}, -- Tol Barad
   [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]},          -- Low tier
   [789] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODYCOIN"]},           -- MoP 5.4 Bloody Coin
-  [1191] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"]},           -- WoD Valor
+  [1191] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"]},               -- WoD Valor
+  [1356] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_BATTLE"]},    -- Legion Echoes of Battle
+  [1357] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_DOMINATION"]},  -- Legion Echoes of Domination
 
   -- Archaeology Fragments
   [384] = {["type"] = TYPE_FRAGMENT, ["index"] = 1, ["name"] = L["NAME_AF_DWARF"]},

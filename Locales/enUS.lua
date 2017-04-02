@@ -61,6 +61,8 @@ L["NAME_CONQUESTPOINTS"]	= "Conquest Points"
 L["NAME_TOLBARADCOMMENDATION"]	= "Tol Barad Commendation"
 L["NAME_BLOODYCOIN"]		= "Bloody Coin"
 L["NAME_VALOR"]		= "Valor"
+L["NAME_ECHOES_OF_BATTLE"]     = "Echoes of Battle"
+L["NAME_ECHOES_OF_DOMINATION"] = "Echoes of Domination"
 
 -- Name of archaeology fragments
 L["NAME_AF_DWARF"]		= "Dwarf"
