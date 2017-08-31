@@ -81,7 +81,8 @@ local tracking = {
   [1275] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CURIOUS_COINS"]},            -- Legion Curious Coins
   [1342] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LEGIONFALL_WAR_SUPPLIES"]},            -- Legion Legionfall War Supplies
   [1501] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WRITHING_ESSENCE"]},            -- Legion Writhing Essence
-  
+  [1508] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VEILED_ARGUNITE"]},            -- Legion Veiled Argunite
+
   -- PvP
   [390] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUESTPOINTS"]},       -- High tier
   [391] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOLBARADCOMMENDATION"]}, -- Tol Barad
@@ -988,6 +989,7 @@ function Currencyflow:OptionsColumns()
   addColumn(1275) -- Legion Curious Coin
   addColumn(1342) -- Legion Legionfall War Supplies
   addColumn(1501) -- Legion Curious Coin
+  addColumn(1508) -- Veiled Argunite
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
