@@ -53,8 +53,6 @@ local tracking = {
   
   -- PvE
   [241] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"]},
---  [395] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_JUSTICEPOINTS"]},           -- Low tier (WoD removed)
---  [396] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALORPOINTS"]},             -- High tier (WoD removed)
   [614] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTEDARKNESS"]},            -- T13 (Dragonsoul) currency
   [615] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"]},        -- T13 (Dragonsoul) currency
   [697] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"]}, -- MoP  Elder Charm of Good Fortune
@@ -961,8 +959,6 @@ function Currencyflow:OptionsColumns()
   currencyColumns["header2"] = {name = L["CFGHDR_PVE"], type = "header", order = 200}
   order = 201
   addColumn(241) -- Champion's Seal
-  --addColumn(395) -- Justice Point
-  --addColumn(396) -- Valor Point
   addColumn(614) -- Mote of Darkness
   addColumn(615) -- Essence of Corrupted Deathwing
   addColumn(738) -- MoP Lesser Charm of Good Fortune
