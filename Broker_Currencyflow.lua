@@ -60,7 +60,6 @@ local tracking = {
   [752] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOGORUNEOFFATE"]},          -- MoP 5.2 Mogu Rune of Fate
   [776] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WARFORGEDSEAL"]},           -- MoP 5.4 Warforged Seal
   [777] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMELESSCOIN"]},            -- MoP 5.4 Timeless Coin
-  [810] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLACK_IRON_FRAGMENT"]},            -- WoD Black Iron Fragment
   [823] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_APEXIS_CRYSTAL"]},            -- WoD Apexis Crystal
   [824] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_GARRISON_RESOURCES"]},            -- WoD Garrison Resources
   [944] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ARTIFACT_FRAGMENT"]},            -- WoD Artifact Fragment
@@ -82,11 +81,8 @@ local tracking = {
   [1508] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VEILED_ARGUNITE"]},            -- Legion Veiled Argunite
 
   -- PvP
-  [390] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUESTPOINTS"]},       -- High tier
   [391] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOLBARADCOMMENDATION"]}, -- Tol Barad
-  [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]},          -- Low tier
   [789] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODYCOIN"]},           -- MoP 5.4 Bloody Coin
-  [1191] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"]},               -- WoD Valor
   [1356] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_BATTLE"]},    -- Legion Echoes of Battle
   [1357] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_DOMINATION"]},  -- Legion Echoes of Domination
 
@@ -966,7 +962,6 @@ function Currencyflow:OptionsColumns()
   addColumn(752) -- MoP 5.2 Mogu Rune of Fate
   addColumn(776) -- MoP 5.4 Warforged Seal
   addColumn(777) -- MoP 5.4 Timeless Coin
-  addColumn(810) -- WoD Black Iron Fragment
   addColumn(823) -- WoD Apexis Crystal
   addColumn(824) -- WoD Garrison Resources
   addColumn(944) -- WoD Artifact Fragment
@@ -990,11 +985,8 @@ function Currencyflow:OptionsColumns()
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
   order = 301
-  addColumn(392) -- Honor Point
-  addColumn(390) -- Conquest Point
   addColumn(391) -- Tol Barad Commendation
   addColumn(789) -- MoP 5.4 Bloody Coin
-  addColumn(1191) -- WoD Valor
 
   -- Archeology Fragment --
   currencyColumns["header4"] = {name = L["CFGHDR_ARCHFRAGMENTS"], type = "header", order = 400}
@@ -1156,8 +1148,8 @@ function Currencyflow:OnEnable()
     showTotals = true,
 
     showCashPerHour = true,
-    showCurrency392 = true, -- Honor points
-    showCurrency395 = true, -- Justice points
+    showCurrency392 = false, -- Honor points
+    showCurrency395 = false, -- Justice points
   }}, "Default")
 
   -- If there is a database, make sure it's up to date
