@@ -2,7 +2,7 @@
 ## Notes: LDB data source for currency flow
 ## Version: @project-version@
 ## Revision: @project-abbreviated-hash@
-## Interface: 70300
+## Interface: 80000
 ## Author: Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@gmail.com), @project-author@
 ## X-Date: @project-date-iso@
 ##
