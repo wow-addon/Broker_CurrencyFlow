@@ -54,6 +54,7 @@ L["NAME_LEGIONFALL_WAR_SUPPLIES"] = "Legionfall War Supplies"
 L["NAME_WRITHING_ESSENCE"]        = "Writhing Essence"
 L["NAME_VEILED_ARGUNITE"]         = "Veiled Argunite"
 L["NAME_WAKENING_ESSENCE"]        = "Wakening Essence"
+L["NAME_WAR_RESOURCES"] = "War Resources"
 
 L["NAME_CHAMPIONSEAL"]         = "Champion's Seal"
 L["NAME_JUSTICEPOINTS"]        = "Justice Points"

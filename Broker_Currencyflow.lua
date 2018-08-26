@@ -80,6 +80,7 @@ local tracking = {
   [1501] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WRITHING_ESSENCE"]},       -- Legion Writhing Essence
   [1508] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VEILED_ARGUNITE"]},        -- Legion Veiled Argunite
   [1533] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAKENING_ESSENCE"]},       -- Legion Wakening Essence
+  [1560] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAR_RESOURCES"]},          -- BfA War Resources
 
 
   -- PvP
@@ -984,6 +985,7 @@ function Currencyflow:OptionsColumns()
   addColumn(1501) -- Legion Curious Coin
   addColumn(1508) -- Legion Veiled Argunite
   addColumn(1533) -- Legion Wakening Essence
+  addColumn(1560) -- BfA War Resources
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
