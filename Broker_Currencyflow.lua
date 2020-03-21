@@ -84,6 +84,7 @@ local tracking = {
   [1580] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_WARTORN_FATE"]},     -- BfA Seal of Wartorn Fate
   [1716] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORBOUND_SERVICE_MEDAL"]}, -- BfA Honorbound Service Medal
   [1717] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_7TH_LEGION_SERVICE_MEDAL"]}, -- BfA 7th Legion Service Medal
+  [1718] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TITAN_RESIDUUM"]},           -- BfA Titan Residuum
 
   -- PvP
   [391] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOLBARADCOMMENDATION"]},      -- Tol Barad
@@ -991,6 +992,7 @@ function Currencyflow:OptionsColumns()
   addColumn(1580) -- BfA Seal of Wartorn Fate
   addColumn(1716) -- BfA Honorbound Service Medal
   addColumn(1717) -- BfA 7th Legion Service Medal
+  addColumn(1718) -- BfA Titan Residuum
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
