@@ -56,6 +56,8 @@ L["NAME_VEILED_ARGUNITE"]         = "Veiled Argunite"
 L["NAME_WAKENING_ESSENCE"]        = "Wakening Essence"
 L["NAME_WAR_RESOURCES"]           = "War Resources"
 L["NAME_SEAL_OF_WARTORN_FATE"]    = "Seal of Wartorn Fate"
+L["NAME_HONORBOUND_SERVICE_MEDAL"]}, = "Honorbound Service Medal"
+L["NAME_7TH_LEGION_SERVICE_MEDAL"]}, = "7th Legion Service Medal"
 
 L["NAME_CHAMPIONSEAL"]         = "Champion's Seal"
 L["NAME_JUSTICEPOINTS"]        = "Justice Points"
