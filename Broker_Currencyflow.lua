@@ -85,6 +85,9 @@ local tracking = {
   [1716] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORBOUND_SERVICE_MEDAL"]}, -- BfA Honorbound Service Medal
   [1717] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_7TH_LEGION_SERVICE_MEDAL"]}, -- BfA 7th Legion Service Medal
   [1718] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TITAN_RESIDUUM"]},           -- BfA Titan Residuum
+  [1721] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PRISMATIC_MANAPEARL"]},      -- BfA Prismatic Manapearl
+  [1755] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_COALESCING_VISIONS"]},       -- BfA Coalescing Visions
+  [1719] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CORRUPTED_MEMENTOS"]},       -- BfA Corrupted Mementos
 
   -- PvP
   [391] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOLBARADCOMMENDATION"]},      -- Tol Barad
@@ -993,6 +996,9 @@ function Currencyflow:OptionsColumns()
   addColumn(1716) -- BfA Honorbound Service Medal
   addColumn(1717) -- BfA 7th Legion Service Medal
   addColumn(1718) -- BfA Titan Residuum
+  addColumn(1721) -- BfA Prismatic Manapearl
+  addColumn(1755) -- BfA Coalescing Visions
+  addColumn(1719) -- BfA Corrupted Mementos
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
