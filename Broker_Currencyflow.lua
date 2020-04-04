@@ -82,6 +82,7 @@ local tracking = {
   [1533] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAKENING_ESSENCE"]},         -- Legion Wakening Essence
   [1560] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAR_RESOURCES"]},            -- BfA War Resources
   [1580] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_WARTORN_FATE"]},     -- BfA Seal of Wartorn Fate
+  [1710] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAFARERS_DUBLOON"]},        -- BfA Seafarer's Dubloon
   [1716] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORBOUND_SERVICE_MEDAL"]}, -- BfA Honorbound Service Medal
   [1717] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_7TH_LEGION_SERVICE_MEDAL"]}, -- BfA 7th Legion Service Medal
   [1718] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TITAN_RESIDUUM"]},           -- BfA Titan Residuum
@@ -993,6 +994,7 @@ function Currencyflow:OptionsColumns()
   addColumn(1533) -- Legion Wakening Essence
   addColumn(1560) -- BfA War Resources
   addColumn(1580) -- BfA Seal of Wartorn Fate
+  addColumn(1710) -- BfA Seafarer's Dubloon
   addColumn(1716) -- BfA Honorbound Service Medal
   addColumn(1717) -- BfA 7th Legion Service Medal
   addColumn(1718) -- BfA Titan Residuum
