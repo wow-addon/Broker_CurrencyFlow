@@ -27,6 +27,7 @@ externals:
     tag: latest
 
 ignore:
+ - .github
  - Libs/LibStub/tests
  - Libs/LibStub/LibStub.toc
  - Libs/LibQTip-1.0/LibStub
