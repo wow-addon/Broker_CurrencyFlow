@@ -6,12 +6,18 @@ Author                  : Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@
 local MODNAME = "Currencyflow"
 local FULLNAME = "Broker: "..MODNAME
 
-local Currencyflow  = LibStub( "AceAddon-3.0" ):NewAddon( MODNAME, "AceEvent-3.0" )
-local QT  = LibStub:GetLibrary( "LibQTip-1.0" )
-local L   = LibStub:GetLibrary( "AceLocale-3.0" ):GetLocale( MODNAME )
+local Currencyflow = LibStub( "AceAddon-3.0" ):NewAddon( MODNAME, "AceEvent-3.0" )
+local QT = LibStub:GetLibrary( "LibQTip-1.0" )
+local L = LibStub:GetLibrary( "AceLocale-3.0" ):GetLocale( MODNAME )
 local Config  = LibStub( "AceConfig-3.0" )
 local ConfigReg = LibStub( "AceConfigRegistry-3.0" )
 local ConfigDlg = LibStub( "AceConfigDialog-3.0" )
+
+function Currencyflow:Debug(obj, desc)
+  if ViragDevTool_AddData then
+    ViragDevTool_AddData(obj, desc)
+  end
+end
 
 _G["Currencyflow"] = Currencyflow
 
@@ -172,6 +178,7 @@ function Currencyflow:FormatGold( amount, colorize )
   local ICON_GOLD = "|TInterface\\MoneyFrame\\UI-GoldIcon:0|t"
   local ICON_SILVER = "|TInterface\\MoneyFrame\\UI-SilverIcon:0|t"
   local ICON_COPPER = "|TInterface\\MoneyFrame\\UI-CopperIcon:0|t"
+  local has_gold = false
 
   local COLOR_WHITE = "ffffff"
   local COLOR_GREEN = "00ff00"
@@ -204,10 +211,16 @@ function Currencyflow:FormatGold( amount, colorize )
     sign = "-"
   end
 
+  if gold > 0 then
+    has_gold = true
+  end
+
+  gold = tostring(FormatLargeNumber(math.floor(gold)))
+
   -- Determine unit display
   if self.db.profile.cashFormat == 1 then
     -- Abacus "Condensed"
-    if gold > 0 then
+    if has_gold then
       return sign..format("|cff%s%d|r |cff%s%02d|r |cff%s%02d|r", COLOR_GOLD, gold, COLOR_SILVER, silver, COLOR_COPPER, copper)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r |cff%s%02d|r", COLOR_SILVER, silver, COLOR_COPPER, copper)
@@ -216,7 +229,7 @@ function Currencyflow:FormatGold( amount, colorize )
     end
   elseif self.db.profile.cashFormat == 2 then
     -- Abacus "Short"
-    if gold > 0 then
+    if has_gold then
       return sign..format("|cff%s%.1f|r|cff%sg|r ", color, gold, COLOR_GOLD)
     elseif silver > 0 then
       return sign..format("|cff%s%.1f|r|cff%ss|r", color, silver, COLOR_SILVER)
@@ -225,8 +238,8 @@ function Currencyflow:FormatGold( amount, colorize )
     end
   elseif self.db.profile.cashFormat == 3 then
     -- Abacus "Full"
-    if gold > 0 then
-      return sign..format("|cff%s%d|r|cff%sg|r |cff%s%02d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, gold, COLOR_GOLD, color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
+    if has_gold then
+      return sign..format("|cff%s%s|r|cff%sg|r |cff%s%02d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, gold, COLOR_GOLD, color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
     else
@@ -234,7 +247,7 @@ function Currencyflow:FormatGold( amount, colorize )
     end
   elseif self.db.profile.cashFormat == 4 then
     -- With coin icons
-    if gold > 0 then
+    if has_gold then
       return sign..format("|cff%s%d|r%s |cff%s%02d|r%s |cff%s%02d|r%s", color, gold, ICON_GOLD, color, silver, ICON_SILVER, color, copper, ICON_COPPER)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r%s |cff%s%02d|r%s", color, silver, ICON_SILVER, color, copper, ICON_COPPER)
