@@ -221,7 +221,7 @@ function Currencyflow:FormatGold( amount, colorize )
   if self.db.profile.cashFormat == 1 then
     -- Abacus "Condensed"
     if has_gold then
-      return sign..format("|cff%s%d|r |cff%s%02d|r |cff%s%02d|r", COLOR_GOLD, gold, COLOR_SILVER, silver, COLOR_COPPER, copper)
+      return sign..format("|cff%s%s|r |cff%s%02d|r |cff%s%02d|r", COLOR_GOLD, gold, COLOR_SILVER, silver, COLOR_COPPER, copper)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r |cff%s%02d|r", COLOR_SILVER, silver, COLOR_COPPER, copper)
     else
@@ -230,7 +230,7 @@ function Currencyflow:FormatGold( amount, colorize )
   elseif self.db.profile.cashFormat == 2 then
     -- Abacus "Short"
     if has_gold then
-      return sign..format("|cff%s%.1f|r|cff%sg|r ", color, gold, COLOR_GOLD)
+      return sign..format("|cff%s%s|r|cff%sg|r ", color, gold, COLOR_GOLD)
     elseif silver > 0 then
       return sign..format("|cff%s%.1f|r|cff%ss|r", color, silver, COLOR_SILVER)
     else
@@ -248,7 +248,7 @@ function Currencyflow:FormatGold( amount, colorize )
   elseif self.db.profile.cashFormat == 4 then
     -- With coin icons
     if has_gold then
-      return sign..format("|cff%s%d|r%s |cff%s%02d|r%s |cff%s%02d|r%s", color, gold, ICON_GOLD, color, silver, ICON_SILVER, color, copper, ICON_COPPER)
+      return sign..format("|cff%s%s|r%s |cff%s%02d|r%s |cff%s%02d|r%s", color, gold, ICON_GOLD, color, silver, ICON_SILVER, color, copper, ICON_COPPER)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r%s |cff%s%02d|r%s", color, silver, ICON_SILVER, color, copper, ICON_COPPER)
     else
