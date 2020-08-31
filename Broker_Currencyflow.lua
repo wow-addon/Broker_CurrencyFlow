@@ -6,18 +6,12 @@ Author                  : Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@
 local MODNAME = "Currencyflow"
 local FULLNAME = "Broker: "..MODNAME
 
-local Currencyflow = LibStub( "AceAddon-3.0" ):NewAddon( MODNAME, "AceEvent-3.0" )
-local QT = LibStub:GetLibrary( "LibQTip-1.0" )
-local L = LibStub:GetLibrary( "AceLocale-3.0" ):GetLocale( MODNAME )
+local Currencyflow  = LibStub( "AceAddon-3.0" ):NewAddon( MODNAME, "AceEvent-3.0" )
+local QT  = LibStub:GetLibrary( "LibQTip-1.0" )
+local L   = LibStub:GetLibrary( "AceLocale-3.0" ):GetLocale( MODNAME )
 local Config  = LibStub( "AceConfig-3.0" )
 local ConfigReg = LibStub( "AceConfigRegistry-3.0" )
 local ConfigDlg = LibStub( "AceConfigDialog-3.0" )
-
-function Currencyflow:Debug(obj, desc)
-  if ViragDevTool_AddData then
-    ViragDevTool_AddData(obj, desc)
-  end
-end
 
 _G["Currencyflow"] = Currencyflow
 
@@ -178,7 +172,6 @@ function Currencyflow:FormatGold( amount, colorize )
   local ICON_GOLD = "|TInterface\\MoneyFrame\\UI-GoldIcon:0|t"
   local ICON_SILVER = "|TInterface\\MoneyFrame\\UI-SilverIcon:0|t"
   local ICON_COPPER = "|TInterface\\MoneyFrame\\UI-CopperIcon:0|t"
-  local has_gold = false
 
   local COLOR_WHITE = "ffffff"
   local COLOR_GREEN = "00ff00"
@@ -211,17 +204,11 @@ function Currencyflow:FormatGold( amount, colorize )
     sign = "-"
   end
 
-  if gold > 0 then
-    has_gold = true
-  end
-
-  gold = tostring(FormatLargeNumber(math.floor(gold)))
-
   -- Determine unit display
   if self.db.profile.cashFormat == 1 then
     -- Abacus "Condensed"
-    if has_gold then
-      return sign..format("|cff%s%s|r |cff%s%02d|r |cff%s%02d|r", COLOR_GOLD, gold, COLOR_SILVER, silver, COLOR_COPPER, copper)
+    if gold > 0 then
+      return sign..format("|cff%s%d|r |cff%s%02d|r |cff%s%02d|r", COLOR_GOLD, gold, COLOR_SILVER, silver, COLOR_COPPER, copper)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r |cff%s%02d|r", COLOR_SILVER, silver, COLOR_COPPER, copper)
     else
@@ -229,8 +216,8 @@ function Currencyflow:FormatGold( amount, colorize )
     end
   elseif self.db.profile.cashFormat == 2 then
     -- Abacus "Short"
-    if has_gold then
-      return sign..format("|cff%s%s|r|cff%sg|r ", color, gold, COLOR_GOLD)
+    if gold > 0 then
+      return sign..format("|cff%s%.1f|r|cff%sg|r ", color, gold, COLOR_GOLD)
     elseif silver > 0 then
       return sign..format("|cff%s%.1f|r|cff%ss|r", color, silver, COLOR_SILVER)
     else
@@ -238,8 +225,8 @@ function Currencyflow:FormatGold( amount, colorize )
     end
   elseif self.db.profile.cashFormat == 3 then
     -- Abacus "Full"
-    if has_gold then
-      return sign..format("|cff%s%s|r|cff%sg|r |cff%s%02d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, gold, COLOR_GOLD, color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
+    if gold > 0 then
+      return sign..format("|cff%s%d|r|cff%sg|r |cff%s%02d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, gold, COLOR_GOLD, color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
     else
@@ -247,8 +234,8 @@ function Currencyflow:FormatGold( amount, colorize )
     end
   elseif self.db.profile.cashFormat == 4 then
     -- With coin icons
-    if has_gold then
-      return sign..format("|cff%s%s|r%s |cff%s%02d|r%s |cff%s%02d|r%s", color, gold, ICON_GOLD, color, silver, ICON_SILVER, color, copper, ICON_COPPER)
+    if gold > 0 then
+      return sign..format("|cff%s%d|r%s |cff%s%02d|r%s |cff%s%02d|r%s", color, gold, ICON_GOLD, color, silver, ICON_SILVER, color, copper, ICON_COPPER)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r%s |cff%s%02d|r%s", color, silver, ICON_SILVER, color, copper, ICON_COPPER)
     else
@@ -374,7 +361,15 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
   -- currencyId can be "gold"
   if type(currencyId) == "number" then
     lastWeekEarned = self.db.factionrealm.chars[self.meidx]["lastWeekEarned"..currencyId]
-    earnedThisWeek, weeklyMax = select(4, GetCurrencyInfo(currencyId))
+    local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
+
+    if currencyInfo ~= nil then
+      amount = currencyInfo.quantity
+      earnedThisWeek = currencyInfo.quantityEarnedThisWeek
+      weeklyMax = currencyInfo.maxWeeklyQuantity
+      totalMax = currencyInfo.maxQuantity
+    end
+
     -- Only for currencies, that have a weekly maximum
     if lastWeekEarned and weeklyMax > 0 and lastWeekEarned > earnedThisWeek then
       for idx, charinfo in pairs(self.db.factionrealm.chars) do
@@ -409,7 +404,12 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
   if tracking[currencyId].type == TYPE_MONEY then 
     amount = GetMoney()
   elseif tracking[currencyId].type == TYPE_CURRENCY then
-    amount, texture, earnedThisWeek, weeklyMax, totalMax  = select(2,GetCurrencyInfo(currencyId)) 
+    local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
+    amount = currencyInfo.quantity
+    earnedThisWeek = currencyInfo.quantityEarnedThisWeek
+    weeklyMax = currencyInfo.maxWeeklyQuantity
+    totalMax = currencyInfo.maxQuantity
+    texture = currencyInfo.iconFileID
     if not amount then amount = 0 end
     if weeklyMax and weeklyMax > 0 then 
       self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = earnedThisWeek >= weeklyMax / 100  
@@ -418,8 +418,11 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
     elseif totalMax and totalMax > 0 then 
       self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= totalMax / 100 
     end
-  elseif tracking[currencyId].type == TYPE_FRAGMENT then 
-    amount = select(2,GetCurrencyInfo(currencyId))
+  elseif tracking[currencyId].type == TYPE_FRAGMENT then
+    local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
+    if currencyInfo ~= nil then
+      amount = currencyInfo.quantity
+    end
     if amount then self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= 200 
     else amount = 0 end
   elseif tracking[currencyId].type == TYPE_ITEM then amount = GetItemCount(currencyId,true) or 0 end
@@ -764,7 +767,10 @@ function Currencyflow:UpdateLabel()
         else
           color = ""
         end
-        amount = select(2,GetCurrencyInfo(segment)) or 0
+        local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
+        if currencyInfo ~= nil then
+          amount = currencyInfo.quantity
+        end
       elseif tracking[segment].type == TYPE_ITEM then amount = GetItemCount(segment,true) or 0 end
       return self:FormatCurrency(amount, (color or "")).." |T"..tracking[segment].icon..":0|t"
     else
@@ -1105,7 +1111,14 @@ end
 function Currencyflow:LoadCurrencies()
   for id,currency in pairs(tracking) do
     if currency.type == TYPE_CURRENCY then
-      local name, _, icon = GetCurrencyInfo(id)
+
+      local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(id)
+      if currencyInfo ~= nil then
+        amount = currencyInfo.quantity
+        earnedThisWeek = currencyInfo.quantityEarnedThisWeek
+        weeklyMax = currencyInfo.maxWeeklyQuantity
+        totalMax = currencyInfo.maxQuantity
+      end
 
       if name ~= nil and name ~= "" then 
          currency.name = name
@@ -1456,7 +1469,11 @@ function Currencyflow:UpdateDatabase()
     for index, charinfo in pairs(self.db.factionrealm.chars) do
       for id, currency in pairs(tracking) do
         if charinfo[id] and currency.type == TYPE_CURRENCY then
-          weeklyMax, totalMax = select(5, GetCurrencyInfo(id))
+          local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(id)
+          if currencyInfo ~= nil then
+            weeklyMax = currencyInfo.maxWeeklyQuantity
+            totalMax = currencyInfo.maxQuantity
+          end
           -- Since we can't get other character's weekly earnings, set default to false
           -- Max values are 0 if unlimited
           if weeklyMax > 0 then 
