@@ -50,6 +50,7 @@ local currencies = {
       [1721] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PRISMATIC_MANAPEARL"]},      -- BfA Prismatic Manapearl
       [1755] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_COALESCING_VISIONS"]},       -- BfA Coalescing Visions
       [1719] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CORRUPTED_MEMENTOS"]},       -- BfA Corrupted Mementos
+      [1803] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_NYALOTHA"]},       -- BfA Echoes of Ny'alotha
       -- Legion
       [1220] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ORDER_RESOURCES"]},          -- Legion Order Resources
       [1226] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_NETHERSHARD"]},              -- Legion Nethershard

@@ -63,6 +63,7 @@ L["NAME_TITAN_RESIDUUM"]              = "Titan Residuum"
 L["NAME_PRISMATIC_MANAPEARL"]         = "Prismatic Manapearl"
 L["NAME_COALESCING_VISIONS"]          = "Coalescing Visions"
 L["NAME_CORRUPTED_MEMENTOS"]          = "Corrupted Mementos"
+L["NAME_ECHOES_OF_NYALOTHA"]          = "Echoes of Ny'alotha"
 
 L["NAME_CHAMPIONSEAL"]                = "Champion's Seal"
 L["NAME_JUSTICEPOINTS"]               = "Justice Points"
