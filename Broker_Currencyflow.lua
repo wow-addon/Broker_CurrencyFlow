@@ -35,8 +35,28 @@ local charToDelete = nil
 local currencies = {
   ["current"] = {
     -- Shadowlands
-    ["pve"] = {},
-    ["pvp"] = {}
+    ["pve"] = {
+      [1751] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_FREED_SOUL"]},                -- Shadowlands Freed Soul
+      [1767] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_STYGIA"]},                    -- Shadowlands Stygia
+      [1810] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WILLING_SOUL"]},              -- Shadowlands Willing Soul
+      [1813] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA"]},           -- Shadowlands Reservoir Anima
+      [1816] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SINSTONE_FRAGMENTS"]},        -- Shadowlands Sinstone Fragments
+      [1819] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MEDALLION_OF_SERVICE"]},      -- Shadowlands Medallion of Service
+      [1820] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_INFUSED_RUBY"]},              -- Shadowlands Infused Ruby
+      [1822] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RENOWN"]},                    -- Shadowlands Renown
+      [1828] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SOUL_ASH"]},                  -- Shadowlands Soul Ash
+      [1829] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RENOWN_KYRIAN"]},             -- Shadowlands Renown: Kyrian
+      [1830] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RENOWN_VENTHYR"]},            -- Shadowlands Renown: Venthyr
+      [1831] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RENOWN_NIGHT_FAE"]},          -- Shadowlands Renown: Night Fae
+      [1832] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RENOWN_NECROLORD"]},          -- Shadowlands Renown: Necrolord
+      [1859] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_KYRIAN"]},    -- Shadowlands Reservoir Anima: Kyrian
+      [1860] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_VENTHYR"]},   -- Shadowlands Reservoir Anima: Venthyr
+      [1861] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_NIGHT_FAE"]}, -- Shadowlands Reservoir Anima: Night Fae
+      [1862] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_NECROLORD"]}, -- Shadowlands Reservoir Anima: Necrolord
+    },
+    ["pvp"] = {
+      [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]}, -- Shadowlands Honor
+    }
   },
   ["legacy"] = {
     ["pve"] = {
@@ -1018,21 +1038,21 @@ function Currencyflow:OptionsColumns()
   -- into sections (PvE, PvP, Fragments, etc.). So we do this the hacky way.
 
   -- Current Expansion PVE --
-  currencyColumns["header2"] = {name = "Shadowlands", type = "header", order = 300}
-  order = 301
+  currencyColumns["header2"] = {name = "Shadowlands PvE", type = "header", order = 200}
+  order = 201
   for k,v in pairs(currencies["current"]["pve"]) do
     addColumn(k)
   end
 
   -- Current Expansion PVP
-  currencyColumns["header2"] = {name = "Shadowlands", type = "header", order = 300}
+  currencyColumns["header3"] = {name = "Shadowlands PvP", type = "header", order = 300}
   order = 301
   for k,v in pairs(currencies["current"]["pvp"]) do
     addColumn(k)
   end
 
   -- Legacy --
-  currencyColumns["header3"] = {name = "Legacy", type = "header", order = 400}
+  currencyColumns["header4"] = {name = "Legacy", type = "header", order = 400}
   order = 401
   for k,v in pairs(currencies["legacy"]["pve"]) do
     addColumn(k)
@@ -1042,14 +1062,14 @@ function Currencyflow:OptionsColumns()
   end
 
   -- Archeology Fragment --
-  currencyColumns["header4"] = {name = L["CFGHDR_ARCHFRAGMENTS"], type = "header", order = 600}
+  currencyColumns["header5"] = {name = L["CFGHDR_ARCHFRAGMENTS"], type = "header", order = 600}
   order = 601
   for k,v in pairs(currencies["archaeology"]) do
     addColumn(k)
   end
 
   -- Profession --
-  currencyColumns["header5"] = {name = "Profession", type = "header", order = 700}
+  currencyColumns["header6"] = {name = "Profession", type = "header", order = 700}
   order = 701
   for k,v in pairs(currencies["profession"]) do
     addColumn(k)
@@ -1108,7 +1128,6 @@ function Currencyflow:OptionsCharacters()
         disabled = function() return charToDelete == nil end,
       }
     }
-
   }
 end
 
