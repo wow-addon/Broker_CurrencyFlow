@@ -40,6 +40,7 @@ L["NAME_RESERVOIR_ANIMA_KYRIAN"]      = "Reservoir Anima (Kyrian)"
 L["NAME_SINSTONE_FRAGMENTS"]          = "Sinstone Fragments"
 L["NAME_MEDALLION_OF_SERVICE"]        = "Medallion of Service"
 L["NAME_HONOR"]                       = "Honor"
+L["NAME_PHANTASMA"]                   = "Phantasma"
 
 L["NAME_EPICUREANAWARD"]              = "Epicurean's Award"
 L["NAME_IRONPAWTOKEN"]                = "Ironpaw Token"

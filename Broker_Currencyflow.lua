@@ -36,6 +36,7 @@ local currencies = {
   ["current"] = {
     -- Shadowlands
     ["pve"] = {
+      [1728] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PHANTASMA"]},                 -- Shadowlands Phantasma
       [1751] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_FREED_SOUL"]},                -- Shadowlands Freed Soul
       [1767] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_STYGIA"]},                    -- Shadowlands Stygia
       [1810] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WILLING_SOUL"]},              -- Shadowlands Willing Soul
