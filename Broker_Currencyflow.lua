@@ -6,18 +6,12 @@ Author                  : Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@
 local MODNAME = "Currencyflow"
 local FULLNAME = "Broker: "..MODNAME
 
-local Currencyflow = LibStub( "AceAddon-3.0" ):NewAddon( MODNAME, "AceEvent-3.0" )
-local QT = LibStub:GetLibrary( "LibQTip-1.0" )
-local L = LibStub:GetLibrary( "AceLocale-3.0" ):GetLocale( MODNAME )
+local Currencyflow  = LibStub( "AceAddon-3.0" ):NewAddon( MODNAME, "AceEvent-3.0" )
+local QT  = LibStub:GetLibrary( "LibQTip-1.0" )
+local L   = LibStub:GetLibrary( "AceLocale-3.0" ):GetLocale( MODNAME )
 local Config  = LibStub( "AceConfig-3.0" )
 local ConfigReg = LibStub( "AceConfigRegistry-3.0" )
 local ConfigDlg = LibStub( "AceConfigDialog-3.0" )
-
-function Currencyflow:Debug(obj, desc)
-  if ViragDevTool_AddData then
-    ViragDevTool_AddData(obj, desc)
-  end
-end
 
 _G["Currencyflow"] = Currencyflow
 
@@ -38,89 +32,147 @@ local TYPE_ITEM = 4
 local charToDelete = nil
 
 -- These are the currencies we can keep track of
+local currencies = {
+  ["current"] = {
+    -- Shadowlands
+    ["pve"] = {
+      [1728] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PHANTASMA"]},                 -- Shadowlands Phantasma
+      [1751] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_FREED_SOUL"]},                -- Shadowlands Freed Soul
+      [1767] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_STYGIA"]},                    -- Shadowlands Stygia
+      [1810] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WILLING_SOUL"]},              -- Shadowlands Willing Soul
+      [1813] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA"]},           -- Shadowlands Reservoir Anima
+      [1816] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SINSTONE_FRAGMENTS"]},        -- Shadowlands Sinstone Fragments
+      [1819] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MEDALLION_OF_SERVICE"]},      -- Shadowlands Medallion of Service
+      [1820] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_INFUSED_RUBY"]},              -- Shadowlands Infused Ruby
+      [1822] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RENOWN"]},                    -- Shadowlands Renown
+      [1828] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SOUL_ASH"]},                  -- Shadowlands Soul Ash
+      [1829] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RENOWN_KYRIAN"]},             -- Shadowlands Renown: Kyrian
+      [1830] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RENOWN_VENTHYR"]},            -- Shadowlands Renown: Venthyr
+      [1831] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RENOWN_NIGHT_FAE"]},          -- Shadowlands Renown: Night Fae
+      [1832] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RENOWN_NECROLORD"]},          -- Shadowlands Renown: Necrolord
+      [1859] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_KYRIAN"]},    -- Shadowlands Reservoir Anima: Kyrian
+      [1860] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_VENTHYR"]},   -- Shadowlands Reservoir Anima: Venthyr
+      [1861] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_NIGHT_FAE"]}, -- Shadowlands Reservoir Anima: Night Fae
+      [1862] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_NECROLORD"]}, -- Shadowlands Reservoir Anima: Necrolord
+    },
+    ["pvp"] = {
+      [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]}, -- Shadowlands Honor
+    }
+  },
+  ["legacy"] = {
+    ["pve"] = {
+        -- BfA
+      [1560] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAR_RESOURCES"]},            -- BfA War Resources
+      [1580] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_WARTORN_FATE"]},     -- BfA Seal of Wartorn Fate
+      [1710] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAFARERS_DUBLOON"]},        -- BfA Seafarer's Dubloon
+      [1716] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORBOUND_SERVICE_MEDAL"]}, -- BfA Honorbound Service Medal
+      [1717] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_7TH_LEGION_SERVICE_MEDAL"]}, -- BfA 7th Legion Service Medal
+      [1718] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TITAN_RESIDUUM"]},           -- BfA Titan Residuum
+      [1721] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PRISMATIC_MANAPEARL"]},      -- BfA Prismatic Manapearl
+      [1755] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_COALESCING_VISIONS"]},       -- BfA Coalescing Visions
+      [1719] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CORRUPTED_MEMENTOS"]},       -- BfA Corrupted Mementos
+      [1803] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_NYALOTHA"]},       -- BfA Echoes of Ny'alotha
+      -- Legion
+      [1220] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ORDER_RESOURCES"]},          -- Legion Order Resources
+      [1226] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_NETHERSHARD"]},              -- Legion Nethershard
+      [1268] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWORN_ARTIFACT"]},        -- Legion Timeworn Artifact
+      [1273] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_BROKEN_FATE"]},      -- Legion Seal of Broken Fate
+      [1275] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CURIOUS_COINS"]},            -- Legion Curious Coins
+      [1342] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LEGIONFALL_WAR_SUPPLIES"]},  -- Legion Legionfall War Supplies
+      [1501] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WRITHING_ESSENCE"]},         -- Legion Writhing Essence
+      [1508] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VEILED_ARGUNITE"]},          -- Legion Veiled Argunite
+      [1533] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAKENING_ESSENCE"]},         -- Legion Wakening Essence
+      [1149] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SIGHTLESS_EYE"]},            -- Legion Sightless Eye
+      [1154] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SHADOWY_COINS"]},            -- Legion Shadowy Coins
+      [1155] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ANCIENT_MANA"]},             -- Legion Ancient Mana
+      [1356] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_BATTLE"]},         -- Legion Echoes of Battle
+      [1357] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_DOMINATION"]},     -- Legion Echoes of Domination
+      -- WoD
+      [823] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_APEXIS_CRYSTAL"]},            -- WoD Apexis Crystal
+      [824] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_GARRISON_RESOURCES"]},        -- WoD Garrison Resources
+      [944] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ARTIFACT_FRAGMENT"]},         -- WoD Artifact Fragment
+      [980] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DINGY_IRON_COINS"]},          -- WoD Dingy Iron Coins
+      [994] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_TEMPERED_FATE"]},     -- WoD Seal of Tempered Fate
+      [1101] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_OIL"]},                      -- WoD Oil
+      [1129] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_INEVITABLE_FATE"]},  -- WoD Seal of Inevitable Fate
+      [1166] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWARPED_BADGE"]},         -- WoD Timewarped Badge
+      -- MoP
+      [697] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"]},   -- MoP  Elder Charm of Good Fortune
+      [738] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LESSERGOODFORTUNE"]},         -- MoP  Lesser Charm of Good Fortune
+      [752] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOGORUNEOFFATE"]},            -- MoP 5.2 Mogu Rune of Fate
+      [776] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WARFORGEDSEAL"]},             -- MoP 5.4 Warforged Seal
+      [777] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMELESSCOIN"]},              -- MoP 5.4 Timeless Coin
+      -- Cata
+      [416] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MARKOFTHEWORLDTREE"]},
+      [614] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTEDARKNESS"]},              -- T13 (Dragonsoul) currency
+      [615] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"]},          -- T13 (Dragonsoul) currency
+      -- Wrath
+      [241] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"]},
+      -- TBC
+      -- WoW
+    },
+    ["pvp"] = {
+      -- MoP
+      [789] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODYCOIN"]}, -- MoP 5.4 Bloody Coin
+      -- Cata
+      [391] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOLBARADCOMMENDATION"]}, -- Tol Barad
+    }
+  },
+  ["archaeology"] = {
+    -- Archaeology Fragments
+    [384] = {["type"] = TYPE_FRAGMENT, ["index"] = 1, ["name"] = L["NAME_AF_DWARF"]},
+    [385] = {["type"] = TYPE_FRAGMENT, ["index"] = 8, ["name"] = L["NAME_AF_TROLL"]},
+    [393] = {["type"] = TYPE_FRAGMENT, ["index"] = 3, ["name"] = L["NAME_AF_FOSSIL"]},
+    [394] = {["type"] = TYPE_FRAGMENT, ["index"] = 4, ["name"] = L["NAME_AF_NIGHTELF"]},
+    [397] = {["type"] = TYPE_FRAGMENT, ["index"] = 6, ["name"] = L["NAME_AF_ORC"]},
+    [398] = {["type"] = TYPE_FRAGMENT, ["index"] = 2, ["name"] = L["NAME_AF_DRAENEI"]},
+    [399] = {["type"] = TYPE_FRAGMENT, ["index"] = 9, ["name"] = L["NAME_AF_VRYKULL"]},
+    [400] = {["type"] = TYPE_FRAGMENT, ["index"] = 5, ["name"] = L["NAME_AF_NERUBIAN"]},
+    [401] = {["type"] = TYPE_FRAGMENT, ["index"] = 7, ["name"] = L["NAME_AF_TOLVIR"]},
+    [676] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_PANDAREN"]},
+    [677] = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_MOGU"]},
+    [754] = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_MANTID"]}, -- MoP 5.2 Mantid Archaeology Fragment
+    [821] = {["type"] = TYPE_FRAGMENT, ["index"] = 13, ["name"] = L["NAME_AF_DRAENOR_CLANS"]}, -- WoD Draenor Clans Archaeology Fragment
+    [828] = {["type"] = TYPE_FRAGMENT, ["index"] = 14, ["name"] = L["NAME_AF_OGRE"]}, -- WoD Ogre Archaeology Fragment
+    [829] = {["type"] = TYPE_FRAGMENT, ["index"] = 15, ["name"] = L["NAME_AF_ARAKKOA"]}, -- WoD Arakkoa Archaeology Fragment
+  },
+  ["profession"] = {
+    [61]  = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DALJCTOKEN"]},
+    [81]  = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_EPICUREANAWARD"]},
+    [361] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ILLJCTOKEN"]},
+    [402] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_IRONPAWTOKEN"]},
+    [698] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ZENJCTOKEN"]},                   -- MoP jewelcrafting
+    [910] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORALCHEMY"]},         -- WoD alchemy
+    [999] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORTAILORING"]},       -- WoD tailoring
+    [1008] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORJEWELCRAFTING"]},  -- WoD jewelcrafting
+    [1017] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORLEATHERWORKING"]}, -- WoD leatherworking
+    [1020] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORBLACKSMITHING"]},  -- WoD blacksmithing
+  },
+  ["events"] = {
+    [515] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DARKMOONPRIZETICKET"]},
+  },
+  ["misc"] = {
+    
+  }
+}
+
+local build = select(4, GetBuildInfo)
+
 local tracking = {
   ["gold"] = {["type"] = TYPE_MONEY, ["name"] = L["NAME_MONEY"], ["icon"] = "Interface\\Minimap\\Tracking\\Auctioneer"},
 
-  -- Misc
-  [416] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MARKOFTHEWORLDTREE"]},
-  [515] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DARKMOONPRIZETICKET"]},
-
-  -- Profession
-  [61]  = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DALJCTOKEN"]},
-  [81]  = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_EPICUREANAWARD"]},
-  [361] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ILLJCTOKEN"]},
-  [402] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_IRONPAWTOKEN"]},
-  [698] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ZENJCTOKEN"]},                   -- MoP jewelcrafting
-  [910] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORALCHEMY"]},         -- WoD alchemy
-  [999] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORTAILORING"]},       -- WoD tailoring
-  [1008] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORJEWELCRAFTING"]},  -- WoD jewelcrafting
-  [1017] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORLEATHERWORKING"]}, -- WoD leatherworking
-  [1020] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SECRETDRAENORBLACKSMITHING"]},  -- WoD blacksmithing
-
-  -- PvE
-  [241] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"]},
-  [614] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTEDARKNESS"]},              -- T13 (Dragonsoul) currency
-  [615] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"]},          -- T13 (Dragonsoul) currency
-  [697] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"]},   -- MoP  Elder Charm of Good Fortune
-  [738] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LESSERGOODFORTUNE"]},         -- MoP  Lesser Charm of Good Fortune
-  [752] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOGORUNEOFFATE"]},            -- MoP 5.2 Mogu Rune of Fate
-  [776] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WARFORGEDSEAL"]},             -- MoP 5.4 Warforged Seal
-  [777] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMELESSCOIN"]},              -- MoP 5.4 Timeless Coin
-  [823] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_APEXIS_CRYSTAL"]},            -- WoD Apexis Crystal
-  [824] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_GARRISON_RESOURCES"]},        -- WoD Garrison Resources
-  [944] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ARTIFACT_FRAGMENT"]},         -- WoD Artifact Fragment
-  [980] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DINGY_IRON_COINS"]},          -- WoD Dingy Iron Coins
-  [994] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_TEMPERED_FATE"]},     -- WoD Seal of Tempered Fate
-  [1101] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_OIL"]},                      -- WoD Oil
-  [1129] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_INEVITABLE_FATE"]},  -- WoD Seal of Inevitable Fate
-  [1149] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SIGHTLESS_EYE"]},            -- Legion Sightless Eye
-  [1154] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SHADOWY_COINS"]},            -- Legion Shadowy Coins
-  [1155] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ANCIENT_MANA"]},             -- Legion Ancient Mana
-  [1166] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWARPED_BADGE"]},         -- WoD Timewarped Badge
-  [1220] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ORDER_RESOURCES"]},          -- Legion Order Resources
-  [1226] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_NETHERSHARD"]},              -- Legion Nethershard
-  [1268] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWORN_ARTIFACT"]},        -- Legion Timeworn Artifact
-  [1273] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_BROKEN_FATE"]},      -- Legion Seal of Broken Fate
-  [1275] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CURIOUS_COINS"]},            -- Legion Curious Coins
-  [1342] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LEGIONFALL_WAR_SUPPLIES"]},  -- Legion Legionfall War Supplies
-  [1501] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WRITHING_ESSENCE"]},         -- Legion Writhing Essence
-  [1508] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VEILED_ARGUNITE"]},          -- Legion Veiled Argunite
-  [1533] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAKENING_ESSENCE"]},         -- Legion Wakening Essence
-  [1560] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAR_RESOURCES"]},            -- BfA War Resources
-  [1580] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_WARTORN_FATE"]},     -- BfA Seal of Wartorn Fate
-  [1710] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAFARERS_DUBLOON"]},        -- BfA Seafarer's Dubloon
-  [1716] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORBOUND_SERVICE_MEDAL"]}, -- BfA Honorbound Service Medal
-  [1717] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_7TH_LEGION_SERVICE_MEDAL"]}, -- BfA 7th Legion Service Medal
-  [1718] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TITAN_RESIDUUM"]},           -- BfA Titan Residuum
-  [1721] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PRISMATIC_MANAPEARL"]},      -- BfA Prismatic Manapearl
-  [1755] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_COALESCING_VISIONS"]},       -- BfA Coalescing Visions
-  [1719] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CORRUPTED_MEMENTOS"]},       -- BfA Corrupted Mementos
-
-  -- PvP
-  [391] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOLBARADCOMMENDATION"]},      -- Tol Barad
-  [789] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODYCOIN"]},                -- MoP 5.4 Bloody Coin
-  [1356] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_BATTLE"]},         -- Legion Echoes of Battle
-  [1357] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_DOMINATION"]},     -- Legion Echoes of Domination
-
-  -- Archaeology Fragments
-  [384] = {["type"] = TYPE_FRAGMENT, ["index"] = 1, ["name"] = L["NAME_AF_DWARF"]},
-  [385] = {["type"] = TYPE_FRAGMENT, ["index"] = 8, ["name"] = L["NAME_AF_TROLL"]},
-  [393] = {["type"] = TYPE_FRAGMENT, ["index"] = 3, ["name"] = L["NAME_AF_FOSSIL"]},
-  [394] = {["type"] = TYPE_FRAGMENT, ["index"] = 4, ["name"] = L["NAME_AF_NIGHTELF"]},
-  [397] = {["type"] = TYPE_FRAGMENT, ["index"] = 6, ["name"] = L["NAME_AF_ORC"]},
-  [398] = {["type"] = TYPE_FRAGMENT, ["index"] = 2, ["name"] = L["NAME_AF_DRAENEI"]},
-  [399] = {["type"] = TYPE_FRAGMENT, ["index"] = 9, ["name"] = L["NAME_AF_VRYKULL"]},
-  [400] = {["type"] = TYPE_FRAGMENT, ["index"] = 5, ["name"] = L["NAME_AF_NERUBIAN"]},
-  [401] = {["type"] = TYPE_FRAGMENT, ["index"] = 7, ["name"] = L["NAME_AF_TOLVIR"]},
-  [676] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_PANDAREN"]},
-  [677] = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_MOGU"]},
-  [754] = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_MANTID"]}, -- MoP 5.2 Mantid Archaeology Fragment
-  [821] = {["type"] = TYPE_FRAGMENT, ["index"] = 13, ["name"] = L["NAME_AF_DRAENOR_CLANS"]}, -- WoD Draenor Clans Archaeology Fragment
-  [828] = {["type"] = TYPE_FRAGMENT, ["index"] = 14, ["name"] = L["NAME_AF_OGRE"]}, -- WoD Ogre Archaeology Fragment
-  [829] = {["type"] = TYPE_FRAGMENT, ["index"] = 15, ["name"] = L["NAME_AF_ARAKKOA"]}, -- WoD Arakkoa Archaeology Fragment
-
   [0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 16, ["name"] = L["NAME_AF_OTHER"]},
 }
+
+-- Add currencies back into the tracking table (this is easier than re-writing all occurences of tracking)
+for k,v in pairs(currencies["current"]["pve"]) do tracking[k] = v end
+for k,v in pairs(currencies["current"]["pvp"]) do tracking[k] = v end
+for k,v in pairs(currencies["legacy"]["pve"]) do tracking[k] = v end
+for k,v in pairs(currencies["legacy"]["pvp"]) do tracking[k] = v end
+for k,v in pairs(currencies["events"]) do tracking[k] = v end
+for k,v in pairs(currencies["profession"]) do tracking[k] = v end
+for k,v in pairs(currencies["archaeology"]) do tracking[k] = v end
+for k,v in pairs(currencies["misc"]) do tracking[k] = v end
 
 -- Used to copy a table instead of just copying the reference to it.
 -- Does not copy metatable information
@@ -178,7 +230,6 @@ function Currencyflow:FormatGold( amount, colorize )
   local ICON_GOLD = "|TInterface\\MoneyFrame\\UI-GoldIcon:0|t"
   local ICON_SILVER = "|TInterface\\MoneyFrame\\UI-SilverIcon:0|t"
   local ICON_COPPER = "|TInterface\\MoneyFrame\\UI-CopperIcon:0|t"
-  local has_gold = false
 
   local COLOR_WHITE = "ffffff"
   local COLOR_GREEN = "00ff00"
@@ -211,17 +262,11 @@ function Currencyflow:FormatGold( amount, colorize )
     sign = "-"
   end
 
-  if gold > 0 then
-    has_gold = true
-  end
-
-  gold = tostring(FormatLargeNumber(math.floor(gold)))
-
   -- Determine unit display
   if self.db.profile.cashFormat == 1 then
     -- Abacus "Condensed"
-    if has_gold then
-      return sign..format("|cff%s%s|r |cff%s%02d|r |cff%s%02d|r", COLOR_GOLD, gold, COLOR_SILVER, silver, COLOR_COPPER, copper)
+    if gold > 0 then
+      return sign..format("|cff%s%d|r |cff%s%02d|r |cff%s%02d|r", COLOR_GOLD, gold, COLOR_SILVER, silver, COLOR_COPPER, copper)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r |cff%s%02d|r", COLOR_SILVER, silver, COLOR_COPPER, copper)
     else
@@ -229,8 +274,8 @@ function Currencyflow:FormatGold( amount, colorize )
     end
   elseif self.db.profile.cashFormat == 2 then
     -- Abacus "Short"
-    if has_gold then
-      return sign..format("|cff%s%s|r|cff%sg|r ", color, gold, COLOR_GOLD)
+    if gold > 0 then
+      return sign..format("|cff%s%.1f|r|cff%sg|r ", color, gold, COLOR_GOLD)
     elseif silver > 0 then
       return sign..format("|cff%s%.1f|r|cff%ss|r", color, silver, COLOR_SILVER)
     else
@@ -238,8 +283,8 @@ function Currencyflow:FormatGold( amount, colorize )
     end
   elseif self.db.profile.cashFormat == 3 then
     -- Abacus "Full"
-    if has_gold then
-      return sign..format("|cff%s%s|r|cff%sg|r |cff%s%02d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, gold, COLOR_GOLD, color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
+    if gold > 0 then
+      return sign..format("|cff%s%d|r|cff%sg|r |cff%s%02d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, gold, COLOR_GOLD, color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
     else
@@ -247,8 +292,8 @@ function Currencyflow:FormatGold( amount, colorize )
     end
   elseif self.db.profile.cashFormat == 4 then
     -- With coin icons
-    if has_gold then
-      return sign..format("|cff%s%s|r%s |cff%s%02d|r%s |cff%s%02d|r%s", color, gold, ICON_GOLD, color, silver, ICON_SILVER, color, copper, ICON_COPPER)
+    if gold > 0 then
+      return sign..format("|cff%s%d|r%s |cff%s%02d|r%s |cff%s%02d|r%s", color, gold, ICON_GOLD, color, silver, ICON_SILVER, color, copper, ICON_COPPER)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r%s |cff%s%02d|r%s", color, silver, ICON_SILVER, color, copper, ICON_COPPER)
     else
@@ -374,7 +419,15 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
   -- currencyId can be "gold"
   if type(currencyId) == "number" then
     lastWeekEarned = self.db.factionrealm.chars[self.meidx]["lastWeekEarned"..currencyId]
-    earnedThisWeek, weeklyMax = select(4, GetCurrencyInfo(currencyId))
+    local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
+
+    if currencyInfo ~= nil then
+      amount = currencyInfo.quantity
+      earnedThisWeek = currencyInfo.quantityEarnedThisWeek
+      weeklyMax = currencyInfo.maxWeeklyQuantity
+      totalMax = currencyInfo.maxQuantity
+    end
+
     -- Only for currencies, that have a weekly maximum
     if lastWeekEarned and weeklyMax > 0 and lastWeekEarned > earnedThisWeek then
       for idx, charinfo in pairs(self.db.factionrealm.chars) do
@@ -409,7 +462,12 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
   if tracking[currencyId].type == TYPE_MONEY then 
     amount = GetMoney()
   elseif tracking[currencyId].type == TYPE_CURRENCY then
-    amount, texture, earnedThisWeek, weeklyMax, totalMax  = select(2,GetCurrencyInfo(currencyId)) 
+    local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
+    amount = currencyInfo.quantity
+    earnedThisWeek = currencyInfo.quantityEarnedThisWeek
+    weeklyMax = currencyInfo.maxWeeklyQuantity
+    totalMax = currencyInfo.maxQuantity
+    texture = currencyInfo.iconFileID
     if not amount then amount = 0 end
     if weeklyMax and weeklyMax > 0 then 
       self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = earnedThisWeek >= weeklyMax / 100  
@@ -418,8 +476,11 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
     elseif totalMax and totalMax > 0 then 
       self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= totalMax / 100 
     end
-  elseif tracking[currencyId].type == TYPE_FRAGMENT then 
-    amount = select(2,GetCurrencyInfo(currencyId))
+  elseif tracking[currencyId].type == TYPE_FRAGMENT then
+    local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
+    if currencyInfo ~= nil then
+      amount = currencyInfo.quantity
+    end
     if amount then self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= 200 
     else amount = 0 end
   elseif tracking[currencyId].type == TYPE_ITEM then amount = GetItemCount(currencyId,true) or 0 end
@@ -764,7 +825,10 @@ function Currencyflow:UpdateLabel()
         else
           color = ""
         end
-        amount = select(2,GetCurrencyInfo(segment)) or 0
+        local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
+        if currencyInfo ~= nil then
+          amount = currencyInfo.quantity
+        end
       elseif tracking[segment].type == TYPE_ITEM then amount = GetItemCount(segment,true) or 0 end
       return self:FormatCurrency(amount, (color or "")).." |T"..tracking[segment].icon..":0|t"
     else
@@ -974,75 +1038,43 @@ function Currencyflow:OptionsColumns()
   -- We have only one table with currencies, and we want to split them
   -- into sections (PvE, PvP, Fragments, etc.). So we do this the hacky way.
 
-  -- PVE --
-  currencyColumns["header2"] = {name = L["CFGHDR_PVE"], type = "header", order = 200}
+  -- Current Expansion PVE --
+  currencyColumns["header2"] = {name = "Shadowlands PvE", type = "header", order = 200}
   order = 201
-  addColumn(241)  -- Champion's Seal
-  addColumn(614)  -- Mote of Darkness
-  addColumn(615)  -- Essence of Corrupted Deathwing
-  addColumn(738)  -- MoP Lesser Charm of Good Fortune
-  addColumn(697)  -- MoP Elder Charm of Good Fortune
-  addColumn(752)  -- MoP 5.2 Mogu Rune of Fate
-  addColumn(776)  -- MoP 5.4 Warforged Seal
-  addColumn(777)  -- MoP 5.4 Timeless Coin
-  addColumn(823)  -- WoD Apexis Crystal
-  addColumn(824)  -- WoD Garrison Resources
-  addColumn(944)  -- WoD Artifact Fragment
-  addColumn(980)  -- WoD Dingy Iron Coins
-  addColumn(994)  -- WoD Seal of Tempered Fate
-  addColumn(1101) -- WoD Oil
-  addColumn(1129) -- WoD Seal of Inevitable Fate
-  addColumn(1149) -- Legion Sightless Eye
-  addColumn(1154) -- Legion Shadowy Coins
-  addColumn(1155) -- Legion Ancient Mana
-  addColumn(1166) -- WoD Timewarped Badge
-  addColumn(1220) -- Legion Order Resources
-  addColumn(1226) -- Legion Nethershard
-  addColumn(1268) -- Legion Timeworn Artifact
-  addColumn(1273) -- Legion Seal of Broken Fate
-  addColumn(1275) -- Legion Curious Coin
-  addColumn(1342) -- Legion Legionfall War Supplies
-  addColumn(1501) -- Legion Curious Coin
-  addColumn(1508) -- Legion Veiled Argunite
-  addColumn(1533) -- Legion Wakening Essence
-  addColumn(1560) -- BfA War Resources
-  addColumn(1580) -- BfA Seal of Wartorn Fate
-  addColumn(1710) -- BfA Seafarer's Dubloon
-  addColumn(1716) -- BfA Honorbound Service Medal
-  addColumn(1717) -- BfA 7th Legion Service Medal
-  addColumn(1718) -- BfA Titan Residuum
-  addColumn(1721) -- BfA Prismatic Manapearl
-  addColumn(1755) -- BfA Coalescing Visions
-  addColumn(1719) -- BfA Corrupted Mementos
-
-  -- PVP --
-  currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
-  order = 301
-  addColumn(391) -- Tol Barad Commendation
-  addColumn(789) -- MoP 5.4 Bloody Coin
-
-  -- Archeology Fragment --
-  currencyColumns["header4"] = {name = L["CFGHDR_ARCHFRAGMENTS"], type = "header", order = 400}
-  order = 401
-  for id,currency in pairs(tracking) do
-    if currency.type == TYPE_FRAGMENT then addColumn(id) end
+  for k,v in pairs(currencies["current"]["pve"]) do
+    addColumn(k)
   end
 
-  -- OTHER --
-  currencyColumns["header5"] = {name = L["CFGHDR_OTHERCURRENCY"], type = "header", order = 500}
-  order = 501
-  addColumn(61) -- Jewelcrafter's Token
-  addColumn(361) -- Illustrious Jewelcrafter's Token
-  addColumn(910) -- WoD alchemy
-  addColumn(999) -- WoD tailoring
-  addColumn(1008) -- WoD jewelcrafting
-  addColumn(1017) -- WoD leatherworking
-  addColumn(1020) -- WoD blacksmithing
-  addColumn(81) -- Cooking Award
-  addColumn(402) -- Chef's Award
-  addColumn(416) -- Mark of the World Tree
-  addColumn(515) -- Darkmoon Prize Ticket
-  addColumn(698) -- MoP JC Token
+  -- Current Expansion PVP
+  currencyColumns["header3"] = {name = "Shadowlands PvP", type = "header", order = 300}
+  order = 301
+  for k,v in pairs(currencies["current"]["pvp"]) do
+    addColumn(k)
+  end
+
+  -- Legacy --
+  currencyColumns["header4"] = {name = "Legacy", type = "header", order = 400}
+  order = 401
+  for k,v in pairs(currencies["legacy"]["pve"]) do
+    addColumn(k)
+  end
+  for k,v in pairs(currencies["legacy"]["pvp"]) do
+    addColumn(k)
+  end
+
+  -- Archeology Fragment --
+  currencyColumns["header5"] = {name = L["CFGHDR_ARCHFRAGMENTS"], type = "header", order = 600}
+  order = 601
+  for k,v in pairs(currencies["archaeology"]) do
+    addColumn(k)
+  end
+
+  -- Profession --
+  currencyColumns["header6"] = {name = "Profession", type = "header", order = 700}
+  order = 701
+  for k,v in pairs(currencies["profession"]) do
+    addColumn(k)
+  end
 
   return {
     type = "group",
@@ -1097,7 +1129,6 @@ function Currencyflow:OptionsCharacters()
         disabled = function() return charToDelete == nil end,
       }
     }
-
   }
 end
 
@@ -1105,7 +1136,15 @@ end
 function Currencyflow:LoadCurrencies()
   for id,currency in pairs(tracking) do
     if currency.type == TYPE_CURRENCY then
-      local name, _, icon = GetCurrencyInfo(id)
+
+      local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(id)
+      if currencyInfo ~= nil then
+        icon = currencyInfo.iconFileID
+        amount = currencyInfo.quantity
+        earnedThisWeek = currencyInfo.quantityEarnedThisWeek
+        weeklyMax = currencyInfo.maxWeeklyQuantity
+        totalMax = currencyInfo.maxQuantity
+      end
 
       if name ~= nil and name ~= "" then 
          currency.name = name
@@ -1128,7 +1167,6 @@ function Currencyflow:LoadCurrencies()
       else currency.icon = ICON_QM end
     elseif currency.type == TYPE_FRAGMENT then
       local name, icon, currencyid, itemid = GetArchaeologyRaceInfo(currency.index)
-
       -- Another dumb marvel of blizz consistency. When info
       -- is not available, instead of returning nil or "",
       -- this one puts "UNKNOWN" in the name.... sigh...
@@ -1139,13 +1177,6 @@ function Currencyflow:LoadCurrencies()
         currency.name = "|cff999999"..currency.name.."|r"
         currency.icon = ICON_QM
       end
-
-      -- Related, but seemingly useless API calls:
-      -- GetArchaeologyInfo()
-      -- Always returns "Archaeology" (maybe localized???), tried with and without params
-
-      -- ArchaeologyGetIconInfo(index)
-      -- Always returns nil.
     end
   end
 end
@@ -1456,7 +1487,11 @@ function Currencyflow:UpdateDatabase()
     for index, charinfo in pairs(self.db.factionrealm.chars) do
       for id, currency in pairs(tracking) do
         if charinfo[id] and currency.type == TYPE_CURRENCY then
-          weeklyMax, totalMax = select(5, GetCurrencyInfo(id))
+          local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(id)
+          if currencyInfo ~= nil then
+            weeklyMax = currencyInfo.maxWeeklyQuantity
+            totalMax = currencyInfo.maxQuantity
+          end
           -- Since we can't get other character's weekly earnings, set default to false
           -- Max values are 0 if unlimited
           if weeklyMax > 0 then 
