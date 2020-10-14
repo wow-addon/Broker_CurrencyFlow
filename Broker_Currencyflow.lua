@@ -825,9 +825,11 @@ function Currencyflow:UpdateLabel()
         else
           color = ""
         end
-        local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
+        local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(segment)
         if currencyInfo ~= nil then
           amount = currencyInfo.quantity
+        else
+          amount = 0
         end
       elseif tracking[segment].type == TYPE_ITEM then amount = GetItemCount(segment,true) or 0 end
       return self:FormatCurrency(amount, (color or "")).." |T"..tracking[segment].icon..":0|t"
