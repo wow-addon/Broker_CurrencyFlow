@@ -284,7 +284,7 @@ function Currencyflow:FormatGold( amount, colorize )
   elseif self.db.profile.cashFormat == 3 then
     -- Abacus "Full"
     if gold > 0 then
-      return sign..format("|cff%s%d|r|cff%sg|r |cff%s%02d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, gold, COLOR_GOLD, color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
+      return sign..format("|cff%s%s|r|cff%sg|r |cff%s%02d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, BreakUpLargeNumbers(math.floor(gold)), COLOR_GOLD, color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r|cff%ss|r |cff%s%02d|r|cff%sc|r", color, silver, COLOR_SILVER, color, copper, COLOR_COPPER)
     else
@@ -293,7 +293,7 @@ function Currencyflow:FormatGold( amount, colorize )
   elseif self.db.profile.cashFormat == 4 then
     -- With coin icons
     if gold > 0 then
-      return sign..format("|cff%s%d|r%s |cff%s%02d|r%s |cff%s%02d|r%s", color, gold, ICON_GOLD, color, silver, ICON_SILVER, color, copper, ICON_COPPER)
+      return sign..format("|cff%s%s|r%s |cff%s%02d|r%s |cff%s%02d|r%s", color, BreakUpLargeNumbers(math.floor(gold)), ICON_GOLD, color, silver, ICON_SILVER, color, copper, ICON_COPPER)
     elseif silver > 0 then
       return sign..format("|cff%s%d|r%s |cff%s%02d|r%s", color, silver, ICON_SILVER, color, copper, ICON_COPPER)
     else
