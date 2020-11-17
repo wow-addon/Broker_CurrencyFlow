@@ -22,7 +22,6 @@ L["NAME_SECRETDRAENORLEATHERWORKING"] = "Secret of Draenor Leatherworking"
 L["NAME_SECRETDRAENORBLACKSMITHING"]  = "Secret of Draenor Blacksmithing"
 
 -- Shadowlands
-L["NAME_FREED_SOUL"]                  = "Freed Soul"
 L["NAME_WILLING_SOUL"]                = "Willing Soul"
 L["NAME_RENOWN"]                      = "Renown"
 L["NAME_RENOWN_VENTHYR"]              = "Renown (Venthyr)"
