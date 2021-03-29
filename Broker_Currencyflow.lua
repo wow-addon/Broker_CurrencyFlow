@@ -628,6 +628,16 @@ function Currencyflow:drawTooltip()
   for id,currency in pairs(tracking) do
     if self.db.profile["showCurrency"..id] then
       tooltip:SetCell( lineNum, colNum, "|T"..currency.icon..":16|t", "CENTER" )
+      tooltip:SetCellScript( lineNum, colNum, "OnEnter", function()
+        if not CurrencyHeaderTooltip then CurrencyHeaderTooltip = CreateFrame("GameTooltip", "CurrencyHeaderTooltip", UIParent, "GameTooltipTemplate") end
+        CurrencyHeaderTooltip:SetOwner(tooltip, "ANCHOR_CURSOR")
+        CurrencyHeaderTooltip:SetText(currency.name)
+        CurrencyHeaderTooltip:SetFrameLevel(999)
+        CurrencyHeaderTooltip:Show()
+      end )
+      tooltip:SetCellScript( lineNum, colNum, "OnLeave", function()
+        CurrencyHeaderTooltip:Hide()
+      end )
       colNum = colNum + 1
     end
   end
@@ -1133,51 +1143,38 @@ function Currencyflow:OptionsCharacters()
   }
 end
 
--- This funtion tries to update the currencies list with client info
+-- This function tries to update the currencies list with client info
 function Currencyflow:LoadCurrencies()
   for id,currency in pairs(tracking) do
+    local name, icon
     if currency.type == TYPE_CURRENCY then
-
       local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(id)
       if currencyInfo ~= nil then
+        name = currencyInfo.name
         icon = currencyInfo.iconFileID
-        amount = currencyInfo.quantity
-        earnedThisWeek = currencyInfo.quantityEarnedThisWeek
-        weeklyMax = currencyInfo.maxWeeklyQuantity
-        totalMax = currencyInfo.maxQuantity
-      end
-
-      if name ~= nil and name ~= "" then 
-         currency.name = name
-      else
-         currency.name = "|cff999999"..currency.name.."|r" 
-      end
-      
-      if icon ~= nil and icon ~= "" then 
-         currency.icon = icon
-      else
-         currency.icon = ICON_QM
       end
     elseif currency.type == TYPE_ITEM then
-      local name, link, rarity, level, minlevel, type, subtype, stackcount, equiploc, icon, sellprice = GetItemInfo(id)
-
-      if name ~= nil and name ~= "" then currency.name = name
-      else currency.name = "|cff999999"..currency.name.."|r" end
-
-	  if icon ~= nil and icon ~= "" then currency.icon = icon
-      else currency.icon = ICON_QM end
+      name, _, _, _, _, _, _, _, _, icon, _ = GetItemInfo(id)
     elseif currency.type == TYPE_FRAGMENT then
-      local name, icon, currencyid, itemid = GetArchaeologyRaceInfo(currency.index)
+      local name, icon, _, _ = GetArchaeologyRaceInfo(currency.index)
       -- Another dumb marvel of blizz consistency. When info
       -- is not available, instead of returning nil or "",
       -- this one puts "UNKNOWN" in the name.... sigh...
-      if icon ~= nil and icon ~= "" then
-        currency.name = name
-        currency.icon = icon
-      else
-        currency.name = "|cff999999"..currency.name.."|r"
-        currency.icon = ICON_QM
+      if icon == nil or icon == "" then
+         name = nil
       end
+    end
+
+    if name ~= nil and name ~= "" then
+       currency.name = name
+    else
+       currency.name = "|cff999999"..currency.name.."|r"
+    end
+
+    if icon ~= nil and icon ~= "" then
+       currency.icon = icon
+    else
+       currency.icon = ICON_QM
     end
   end
 end
