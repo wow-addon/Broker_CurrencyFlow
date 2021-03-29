@@ -628,6 +628,16 @@ function Currencyflow:drawTooltip()
   for id,currency in pairs(tracking) do
     if self.db.profile["showCurrency"..id] then
       tooltip:SetCell( lineNum, colNum, "|T"..currency.icon..":16|t", "CENTER" )
+      tooltip:SetCellScript( lineNum, colNum, "OnEnter", function()
+        if not CurrencyHeaderTooltip then CurrencyHeaderTooltip = CreateFrame("GameTooltip", "CurrencyHeaderTooltip", UIParent, "GameTooltipTemplate") end
+        CurrencyHeaderTooltip:SetOwner(tooltip, "ANCHOR_CURSOR")
+        CurrencyHeaderTooltip:SetText(currency.name)
+        CurrencyHeaderTooltip:SetFrameLevel(999)
+        CurrencyHeaderTooltip:Show()
+      end )
+      tooltip:SetCellScript( lineNum, colNum, "OnLeave", function()
+        CurrencyHeaderTooltip:Hide()
+      end )
       colNum = colNum + 1
     end
   end
