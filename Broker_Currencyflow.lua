@@ -36,6 +36,7 @@ local currencies = {
   ["current"] = {
     -- Shadowlands
     ["pve"] = {
+      [1191] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"]},
       [1728] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PHANTASMA"]},                 -- Shadowlands Phantasma
       [1767] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_STYGIA"]},                    -- Shadowlands Stygia
       [1810] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WILLING_SOUL"]},              -- Shadowlands Willing Soul
@@ -53,6 +54,15 @@ local currencies = {
       [1860] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_VENTHYR"]},   -- Shadowlands Reservoir Anima: Venthyr
       [1861] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_NIGHT_FAE"]}, -- Shadowlands Reservoir Anima: Night Fae
       [1862] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_RESERVOIR_ANIMA_NECROLORD"]}, -- Shadowlands Reservoir Anima: Necrolord
+      [1863] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_REDEEMED_SOUL_KYRIAN"]},      -- Shadowlands Redeemed Soul - Kyrian
+      [1864] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_REDEEMED_SOUL_VENTHYR"]},     -- Shadowlands Redeemed Soul - Venthyr
+      [1865] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_REDEEMED_SOUL_NIGHT_FAE"]},   -- Shadowlands Redeemed Soul - Night Fae
+      [1866] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_REDEEMED_SOUL_NECROLORD"]},   -- Shadowlands Redeemed Soul - Necrolord
+      [1885] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_GRATEFUL_OFFERING"]},         -- Shadowlands Grateful Offering
+      [1904] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOWER_KNOWLEDGE"]},           -- Shadowlands Tower Knowledge
+      [1906] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SOUL_CINDERS"]},              -- Shadowlands Soul Cinders
+      [1931] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CATALOGED_RESEARCH"]},        -- Shadowlands Cataloged Research
+      [1977] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_STYGIAN_EMBER"]},             -- Shadowlands Stygian Ember
     },
     ["pvp"] = {
       [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]}, -- Shadowlands Honor
