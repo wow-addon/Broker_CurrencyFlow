@@ -2,7 +2,7 @@
 ## Notes: LDB data source for currency flow
 ## Version: @project-version@
 ## Revision: @project-abbreviated-hash@
-## Interface: 90005
+## Interface: 90200
 ## Author: Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@gmail.com), @project-author@
 ## X-Date: @project-date-iso@
 ##
@@ -12,6 +12,7 @@
 ## X-Localizations: enUS, frFR, deDE, ruRU, zhCN, zhTW, koKR
 ## X-Website: http://www.curse.com/addons/wow/broker_currencyflow
 ## X-Feedback: http://www.wowace.com/addons/broker_currencyflow/tickets/
+## X-Wago-ID: xZKxByNk
 ##
 ## OptionalDeps: Ace3, LibQTip-1.0, LibDataBroker-1.1
 ## DefaultState: Enabled
