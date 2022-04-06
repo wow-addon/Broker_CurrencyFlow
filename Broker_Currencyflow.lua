@@ -37,6 +37,14 @@ local currencies = {
     -- Shadowlands
     ["pve"] = {
       [1191] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"]},
+      [2009] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_COSMIC_FLUX"]},               -- Shadowlands Cosmic Flux
+      [2000] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTES_OF_FATE"]},             -- Shadowlands Motes of Fate
+      [1979] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CYPHERS_FIRST_ONES"]},        -- Shadowlands Cyphers of the First Ones
+      [1977] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_STYGIAN_EMBER"]},             -- Shadowlands Stygian Ember
+      [1931] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CATALOGED_RESEARCH"]},        -- Shadowlands Cataloged Research
+      [1906] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SOUL_CINDERS"]},              -- Shadowlands Soul Cinders
+      [1904] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TOWER_KNOWLEDGE"]},           -- Shadowlands Tower Knowledge
+      [1754] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ARGENT_COMMENDATION"]},       -- Shadowlands Argent Commendation
       [1728] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PHANTASMA"]},                 -- Shadowlands Phantasma
       [1767] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_STYGIA"]},                    -- Shadowlands Stygia
       [1810] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WILLING_SOUL"]},              -- Shadowlands Willing Soul
@@ -63,9 +71,12 @@ local currencies = {
       [1906] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SOUL_CINDERS"]},              -- Shadowlands Soul Cinders
       [1931] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CATALOGED_RESEARCH"]},        -- Shadowlands Cataloged Research
       [1977] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_STYGIAN_EMBER"]},             -- Shadowlands Stygian Ember
+      [1885] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_GRATEFUL_OFFERING"]},         -- Shadowlands Grateful Offering
+      [1191] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"]},                     -- Shadowlands Valor
     },
     ["pvp"] = {
-      [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]}, -- Shadowlands Honor
+      [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]},    -- Shadowlands Honor
+      [1602] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUEST"]}, -- Shadowlands Conquest
     }
   },
   ["legacy"] = {
