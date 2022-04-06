@@ -2,28 +2,28 @@ package-as: Broker_Currencyflow
 
 externals:
   Libs/LibStub:
-    url: svn://svn.wowace.com/wow/libstub/mainline/trunk
+    url: svn://repos.wowace.com/wow/libstub/mainline/trunk
     tag: latest
   Libs/CallbackHandler-1.0:
-    url: svn://svn.wowace.com/wow/callbackhandler/mainline/trunk/CallbackHandler-1.0
+    url: svn://repos.wowace.com/wow/callbackhandler/mainline/trunk/CallbackHandler-1.0
   Libs/AceAddon-3.0:
-    url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceAddon-3.0
+    url: svn://repos.wowace.com/wow/ace3/mainline/trunk/AceAddon-3.0
   Libs/AceConfig-3.0:
-    url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfig-3.0
+    url: svn://repos.wowace.com/wow/ace3/mainline/trunk/AceConfig-3.0
   Libs/AceDB-3.0:
-    url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDB-3.0
+    url: svn://repos.wowace.com/wow/ace3/mainline/trunk/AceDB-3.0
   Libs/AceDBOptions-3.0:
-    url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDBOptions-3.0
+    url: svn://repos.wowace.com/wow/ace3/mainline/trunk/AceDBOptions-3.0
   Libs/AceEvent-3.0:
-    url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
+    url: svn://repos.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
   Libs/AceGUI-3.0:
-    url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceGUI-3.0
+    url: svn://repos.wowace.com/wow/ace3/mainline/trunk/AceGUI-3.0
   Libs/AceLocale-3.0:
-    url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceLocale-3.0
+    url: svn://repos.wowace.com/wow/ace3/mainline/trunk/AceLocale-3.0
   Libs/LibDataBroker-1.1:
     url: git://github.com/tekkub/libdatabroker-1-1.git
   Libs/LibQTip-1.0:
-    url: https://repos.curseforge.com/wow/libqtip-1-0
+    url: https://repos.wowace.com/wow/libqtip-1-0
     tag: latest
 
 ignore:
