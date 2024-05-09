@@ -28,7 +28,6 @@ Libs\AceEvent-3.0\AceEvent-3.0.xml
 Libs\AceLocale-3.0\AceLocale-3.0.xml
 Libs\AceGUI-3.0\AceGUI-3.0.xml
 Libs\AceConfig-3.0\AceConfig-3.0.xml
-Libs\AceLocale-3.0\AceLocale-3.0.xml
 Libs\LibQTip-1.0\LibQTip-1.0.lua
 
 Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
