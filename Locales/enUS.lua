@@ -21,6 +21,10 @@ L["NAME_SECRETDRAENORJEWELCRAFTING"]  = "Secret of Draenor Jewelcrafting"
 L["NAME_SECRETDRAENORLEATHERWORKING"] = "Secret of Draenor Leatherworking"
 L["NAME_SECRETDRAENORBLACKSMITHING"]  = "Secret of Draenor Blacksmithing"
 
+
+-- Dragonflight
+L["NAME_DRAGON_ISLE_SUPPLIES"] = "Dragon Isles Supplies"
+
 -- Shadowlands
 L["NAME_STYGIAN_EMBER"]               = "Stygian Ember"
 L["NAME_COSMIC_FLUX"]                 = "Cosmic Flux"

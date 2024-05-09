@@ -36,6 +36,7 @@ local currencies = {
   ["current"] = {
     ["pve"] = {
       -- Dragonflight
+      [2003] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DRAGON_ISLE_SUPPLIES"]}, -- Dragonflight: Dragon Isles Supplies
     },
     ["pvp"] = {
       [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]},    -- Honor
@@ -1072,14 +1073,14 @@ function Currencyflow:OptionsColumns()
   -- into sections (PvE, PvP, Fragments, etc.). So we do this the hacky way.
 
   -- Current Expansion PVE --
-  currencyColumns["header2"] = {name = "Shadowlands PvE", type = "header", order = 200}
+  currencyColumns["header2"] = {name = "Current Expansion PvE", type = "header", order = 200}
   order = 201
   for k,v in pairs(currencies["current"]["pve"]) do
     addColumn(k)
   end
 
   -- Current Expansion PVP
-  currencyColumns["header3"] = {name = "Shadowlands PvP", type = "header", order = 300}
+  currencyColumns["header3"] = {name = "PvP", type = "header", order = 300}
   order = 301
   for k,v in pairs(currencies["current"]["pvp"]) do
     addColumn(k)
