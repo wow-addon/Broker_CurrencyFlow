@@ -24,6 +24,12 @@ L["NAME_SECRETDRAENORBLACKSMITHING"]  = "Secret of Draenor Blacksmithing"
 
 -- Dragonflight
 L["NAME_DRAGON_ISLE_SUPPLIES"] = "Dragon Isles Supplies"
+L["NAME_FLIGHTSTONE"] = "Flightstones"
+--- Season 4
+L["NAME_DRAKE_AWAKE_CREST"] = "Drake's Awakened Crest"
+L["NAME_WHELP_AWAKE_CREST"] = "Whelpling's Awakened Crest"
+L["NAME_WYRM_AWAKE_CREST"] = "Wyrm's Awakened Crest"
+
 
 -- Shadowlands
 L["NAME_STYGIAN_EMBER"]               = "Stygian Ember"

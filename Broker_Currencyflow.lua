@@ -37,6 +37,10 @@ local currencies = {
     ["pve"] = {
       -- Dragonflight
       [2003] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DRAGON_ISLE_SUPPLIES"]}, -- Dragonflight: Dragon Isles Supplies
+      [2245] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_FLIGHTSTONE"]}, -- Dragonflight: Flightstones
+      [2807] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DRAKE_AWAKE_CREST"]}, -- Dragonflight: Drake's Awakened Crest
+      [2806] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WHELP_AWAKE_CREST"]}, -- Dragonflight: Whelpling's Awakened Crest
+      [2809] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WYRM_AWAKE_CREST"]}, -- Dragonflight: Wyrm's Awakened Crest
     },
     ["pvp"] = {
       [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]},    -- Honor
