@@ -75,8 +75,8 @@ local currencies = {
       [1191] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"]},                     -- Shadowlands Valor
     },
     ["pvp"] = {
-      [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]},    -- Shadowlands Honor
-      [1602] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUEST"]}, -- Shadowlands Conquest
+      [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]},    -- Honor
+      [1602] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUEST"]}, -- Conquest
     }
   },
   ["legacy"] = {
