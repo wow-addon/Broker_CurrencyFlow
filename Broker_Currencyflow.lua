@@ -34,8 +34,17 @@ local charToDelete = nil
 -- These are the currencies we can keep track of
 local currencies = {
   ["current"] = {
-    -- Shadowlands
     ["pve"] = {
+      -- Dragonflight
+    },
+    ["pvp"] = {
+      [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]},    -- Honor
+      [1602] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUEST"]}, -- Conquest
+    }
+  },
+  ["legacy"] = {
+    ["pve"] = {
+      -- Shadowlands
       [1191] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"]},
       [2009] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_COSMIC_FLUX"]},               -- Shadowlands Cosmic Flux
       [2000] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTES_OF_FATE"]},             -- Shadowlands Motes of Fate
@@ -73,14 +82,6 @@ local currencies = {
       [1977] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_STYGIAN_EMBER"]},             -- Shadowlands Stygian Ember
       [1885] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_GRATEFUL_OFFERING"]},         -- Shadowlands Grateful Offering
       [1191] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"]},                     -- Shadowlands Valor
-    },
-    ["pvp"] = {
-      [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]},    -- Honor
-      [1602] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUEST"]}, -- Conquest
-    }
-  },
-  ["legacy"] = {
-    ["pve"] = {
         -- BfA
       [1560] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAR_RESOURCES"]},            -- BfA War Resources
       [1580] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_WARTORN_FATE"]},     -- BfA Seal of Wartorn Fate
