@@ -37,14 +37,20 @@ local currencies = {
     ["pve"] = {
       -- Dragonflight
       [2003] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DRAGON_ISLE_SUPPLIES"]}, -- Dragonflight: Dragon Isles Supplies
+      [2118] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELEMENTAL_OVERFLOW"]}, -- Dragonflight: Elemental Overflow
+      [2122] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_STORM_SIGIL"]}, -- Dragonflight: Storm Sigil
       [2245] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_FLIGHTSTONE"]}, -- Dragonflight: Flightstones
-      [2807] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DRAKE_AWAKE_CREST"]}, -- Dragonflight: Drake's Awakened Crest
+      [2594] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PARACAUSAL_FLAKES"]}, -- Dragonflight: Paracausal Flakes
+      [2650] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_EMERALD_DEWDROP"]}, -- Dragonflight: Emerald Dewdrop
+      [2777] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DREAM_INFUSION"]}, -- Dragonflight: Dream Infusion
       [2806] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WHELP_AWAKE_CREST"]}, -- Dragonflight: Whelpling's Awakened Crest
+      [2807] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DRAKE_AWAKE_CREST"]}, -- Dragonflight: Drake's Awakened Crest
       [2809] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WYRM_AWAKE_CREST"]}, -- Dragonflight: Wyrm's Awakened Crest
     },
     ["pvp"] = {
       [1792] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"]},    -- Honor
       [1602] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUEST"]}, -- Conquest
+      [2123] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODY_TOKENS"]},    -- Bloody Tokens (DF)
     }
   },
   ["legacy"] = {

@@ -25,6 +25,12 @@ L["NAME_SECRETDRAENORBLACKSMITHING"]  = "Secret of Draenor Blacksmithing"
 -- Dragonflight
 L["NAME_DRAGON_ISLE_SUPPLIES"] = "Dragon Isles Supplies"
 L["NAME_FLIGHTSTONE"] = "Flightstones"
+L["NAME_DREAM_INFUSION"] = "Dream Infusion"
+L["NAME_ELEMENTAL_OVERFLOW"] = "Elemental Overflow"
+L["NAME_PARACAUSAL_FLAKES"] = "Paracausal Flakes"
+L["NAME_EMERALD_DEWDROP"] = "Emerald Dewdrop"
+L["NAME_STORM_SIGIL"] = "Storm Sigil"
+L["NAME_BLOODY_TOKENS"] = "Bloody Tokens"
 --- Season 4
 L["NAME_DRAKE_AWAKE_CREST"] = "Drake's Awakened Crest"
 L["NAME_WHELP_AWAKE_CREST"] = "Whelpling's Awakened Crest"
