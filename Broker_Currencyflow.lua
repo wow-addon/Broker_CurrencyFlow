@@ -808,7 +808,7 @@ local launcher = LDB:NewDataObject( MODNAME, {
       StaticPopup_Show ("RESET_SESSION")
       
     elseif button == "RightButton" then 
-      Currencyflow:LoadCurrencies(); InterfaceOptionsFrame_OpenToCategory(FULLNAME)
+      Currencyflow:LoadCurrencies(); Settings.OpenToCategory(FULLNAME)
     end
   end,
   
@@ -1330,7 +1330,7 @@ function Currencyflow:OnEnable()
   self:SetupOptions()
 
   -- Create some slashcommands
-  _G.SlashCmdList["CASHFLOW"] = function() InterfaceOptionsFrame_OpenToCategory(FULLNAME) end
+  _G.SlashCmdList["CASHFLOW"] = function() Settings.OpenToCategory(FULLNAME) end
   _G["SLASH_CASHFLOW1"] = "/cashflow"
   _G["SLASH_CASHFLOW2"] = "/cf"
 
