@@ -184,7 +184,7 @@ local currencies = {
     [515] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DARKMOONPRIZETICKET"]},
   },
   ["misc"] = {
-    
+
   }
 }
 
@@ -353,7 +353,7 @@ end
   currency: Currency id
 ]]
 function Currencyflow:db_GetHistory( char, day, currency )
-  
+
   -- Basically the same thing, except no sums/ranges!
   local getval = function( char, day, currency )
     -- time is set to 1 to avoid division by zero later on
@@ -443,7 +443,7 @@ end
   to reduce database size
 ]]
 function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
-  
+
   -- Bail if invalid id given
   if tracking[currencyId] == nil then return end
 
@@ -491,7 +491,7 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
   local oldVal = self.db.factionrealm.chars[self.meidx][currencyId] or 0
 
   -- Get new value and check if maximum is reached
-  if tracking[currencyId].type == TYPE_MONEY then 
+  if tracking[currencyId].type == TYPE_MONEY then
     amount = GetMoney()
   elseif tracking[currencyId].type == TYPE_CURRENCY then
     local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
@@ -501,19 +501,19 @@ function Currencyflow:db_UpdateCurrency( currencyId, updateSession )
     totalMax = currencyInfo.maxQuantity
     texture = currencyInfo.iconFileID
     if not amount then amount = 0 end
-    if weeklyMax and weeklyMax > 0 then 
-      self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = earnedThisWeek >= weeklyMax / 100  
+    if weeklyMax and weeklyMax > 0 then
+      self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = earnedThisWeek >= weeklyMax / 100
       -- we can safely save the new earnedThisWeek value, since we checked for a reset before
       self.db.factionrealm.chars[self.meidx]["lastWeekEarned" .. currencyId] = earnedThisWeek
-    elseif totalMax and totalMax > 0 then 
-      self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= totalMax / 100 
+    elseif totalMax and totalMax > 0 then
+      self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= totalMax / 100
     end
   elseif tracking[currencyId].type == TYPE_FRAGMENT then
     local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyId)
     if currencyInfo ~= nil then
       amount = currencyInfo.quantity
     end
-    if amount then self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= 200 
+    if amount then self.db.factionrealm.chars[self.meidx]["maxReached" .. currencyId] = amount >= 200
     else amount = 0 end
   elseif tracking[currencyId].type == TYPE_ITEM then amount = GetItemCount(currencyId,true) or 0 end
 
@@ -546,7 +546,7 @@ end
 
 -- Add Other toons we know about and total to the tooltip, if so desired
 function Currencyflow:addCharactersAndTotal()
-  
+
   -- If neither charactares or totals are configured to be shown, get out of here
   if not self.db.profile.showOtherChars and not self.db.profile.showTotals then return end
 
@@ -556,20 +556,20 @@ function Currencyflow:addCharactersAndTotal()
   -- Sort the table according to settings
   table.sort(self.db.factionrealm.chars, function(a,b)
     if a == nil or b == nil then
-      return false 
+      return false
     end
 
     -- Safety net for nil values.
     a_value = nil == a[self.db.profile.sortChars] and 0 or a[self.db.profile.sortChars]
     b_value = nil == b[self.db.profile.sortChars] and 0 or b[self.db.profile.sortChars]
-    
+
     if self.db.profile.sortDesc then
-      if a[self.db.profile.sortChars] == b[self.db.profile.sortChars] then 
+      if a[self.db.profile.sortChars] == b[self.db.profile.sortChars] then
         return a.charname > b.charname
       else
         return a_value > b_value
       end
-    elseif (a[self.db.profile.sortChars] == b[self.db.profile.sortChars]) then 
+    elseif (a[self.db.profile.sortChars] == b[self.db.profile.sortChars]) then
       return a.charname < b.charname
     else
       return a_value < b_value
@@ -585,7 +585,7 @@ function Currencyflow:addCharactersAndTotal()
     end
   end
 
-  -- Add other characters 
+  -- Add other characters
   if self.db.profile.showOtherChars then
     tooltip:AddSeparator()
     lineNum = tooltip:AddLine(" ")
@@ -601,12 +601,12 @@ function Currencyflow:addCharactersAndTotal()
 
         for id,currency in pairs(tracking) do
           if self.db.profile["showCurrency"..id] then
-            if self.db.profile.colorMaxReached and v["maxReached"..id] then 
+            if self.db.profile.colorMaxReached and v["maxReached"..id] then
               color = COLOR_MAXREACHED
-            elseif math.fmod(colNum,2) == 0 then 
-              color = "aaaaff" 
-            else 
-              color = "ddddff" 
+            elseif math.fmod(colNum,2) == 0 then
+              color = "aaaaff"
+            else
+              color = "ddddff"
             end
             tooltip:SetCell( newLineNum, colNum, self:FormatCurrency(self:db_GetTotal(k, id), color), "RIGHT" )
             colNum = colNum + 1
@@ -651,8 +651,8 @@ function Currencyflow:drawTooltip()
 
   -- Add the header for the gold column(s)
   lineNum = tooltip:AddLine(" ")
-  tooltip:SetCell( lineNum, 2, "|TInterface\\Icons\\INV_Misc_Coin_01:16|t", "CENTER" )
-  if self.db.profile.showCashPerHour then tooltip:SetCell( lineNum, 3, "|TInterface\\Icons\\INV_Misc_Coin_01:16|t/Hr", "CENTER" ) end
+  tooltip:SetCell( lineNum, 2, "|TInterface\\Icons\\INV_Misc_Coin_01:16|t", "RIGHT" )
+  if self.db.profile.showCashPerHour then tooltip:SetCell( lineNum, 3, "|TInterface\\Icons\\INV_Misc_Coin_01:16|t/Hr", "RIGHT" ) end
 
   -- Add a header for each of the currencies we're showing
   local colNum = colsPerItem + 2
@@ -724,7 +724,7 @@ function Currencyflow:addNewCurrencySection(type, title)
     l1 = tooltip:AddLine(title)
   end
 
-  -- Get values for gold  
+  -- Get values for gold
   column = 2
   t,g,s = self:db_GetHistory(char, day, "gold")
   self:setCurrencyColumn(l1, column, t,g,s, true)
@@ -761,7 +761,7 @@ function Currencyflow:setCurrencyColumn( startRow, startCol, t,g,s, doPerHour )
     tooltip:SetCell( startRow, startCol, self:FormatGold(g-s, true), "RIGHT" )
   else
     tooltip:SetCell( startRow, startCol, self:FormatCurrency(g-s, ""), "RIGHT" )
-  end 
+  end
 
   if doPerHour and self.db.profile.showCashPerHour then
     if self.db.profile.showCashDetail then
@@ -790,7 +790,7 @@ local launcher = LDB:NewDataObject( MODNAME, {
   text = " ",
   label = FULLNAME,
   icon = "Interface\\Minimap\\Tracking\\Auctioneer",
-  
+
   OnClick = function(clickedframe, button)
     if button == "LeftButton" and IsShiftKeyDown() then
       -- Reset current session
@@ -806,12 +806,12 @@ local launcher = LDB:NewDataObject( MODNAME, {
         hideOnEscape = true,
       }
       StaticPopup_Show ("RESET_SESSION")
-      
-    elseif button == "RightButton" then 
+
+    elseif button == "RightButton" then
       Currencyflow:LoadCurrencies(); Settings.OpenToCategory(FULLNAME)
     end
   end,
-  
+
   OnEnter = function ( self )
     -- We need to calculate how many columns we meed up front
     local numcols = 2 -- title and gold
@@ -860,8 +860,8 @@ function Currencyflow:UpdateLabel()
       if segment == 9 then return self:FormatGold(g-s, false) else return self:FormatGold((g-s)/t*3600, false).."/Hr" end
     elseif tracking[segment] then
       -- Other currencies
-      if tracking[segment].type == TYPE_CURRENCY or tracking[segment].type == TYPE_FRAGMENT then 
-        if self.db.profile.colorMaxReached 
+      if tracking[segment].type == TYPE_CURRENCY or tracking[segment].type == TYPE_FRAGMENT then
+        if self.db.profile.colorMaxReached
           and self.db.factionrealm.chars[self.meidx]["maxReached"..segment] then
           color = COLOR_MAXREACHED
         else
@@ -931,7 +931,7 @@ function Currencyflow:OptionsMain()
     args = {
       header0 = {order = 0, name = L["CFGHDR_GENERAL"], type = "header"},
       colorMaxReached = {
-        order = 1, name = L["CFG_COLORMAXREACHED"], 
+        order = 1, name = L["CFG_COLORMAXREACHED"],
         type = "toggle", arg = "colorMaxReached",
         desc = L["CFGDESC_COLORMAXREACHED"],
       },
@@ -1275,7 +1275,7 @@ function Currencyflow:OnEnable()
 
         showCashPerHour = true,
         showCurrency392 = true, -- Honor points
-        showCurrency395 = true, -- Justice points 
+        showCurrency395 = true, -- Justice points
       }}, "Default")}
 
     -- Again, this is another addon, it's the original.
@@ -1302,7 +1302,7 @@ function Currencyflow:OnEnable()
 
   -- Make sure I'm in the character list, and remember my position
   self.meidx = -1
-  
+
   for k,v in pairs(self.db.factionrealm.chars) do
     if v.charname == UnitName("player") then self.meidx = k end
   end
@@ -1363,7 +1363,7 @@ end
 
 -- This will update the database format to the current version
 function Currencyflow:UpdateDatabase()
-  
+
   -- If version is not set, we're "upgrading" to version 1
   if not self.db.factionrealm.version then self.db.factionrealm.version = 1 end
 
@@ -1513,7 +1513,7 @@ function Currencyflow:UpdateDatabase()
 
   -- Version 9 -> 10:
   --   Add boolean value indicating wether a currency's max is reached.
-  if self.db.factionrealm.version == 9 then 
+  if self.db.factionrealm.version == 9 then
     Notice( "Updating database to version 10" )
     for index, charinfo in pairs(self.db.factionrealm.chars) do
       for id, currency in pairs(tracking) do
@@ -1525,14 +1525,14 @@ function Currencyflow:UpdateDatabase()
           end
           -- Since we can't get other character's weekly earnings, set default to false
           -- Max values are 0 if unlimited
-          if weeklyMax > 0 then 
-            charinfo["maxReached" .. id] = false 
+          if weeklyMax > 0 then
+            charinfo["maxReached" .. id] = false
             charinfo["lastWeekEarned" .. id] = nil -- Needed to get hold of weekly resets
-          elseif totalMax > 0 then charinfo["maxReached" .. id] = totalMax == charinfo[id] 
+          elseif totalMax > 0 then charinfo["maxReached" .. id] = totalMax == charinfo[id]
           end
         elseif charinfo[id] and currency.type == TYPE_FRAGMENT then
           -- Fragments can be collected up to 200
-          charinfo["maxReached" .. id] = charinfo[id] >= 200 
+          charinfo["maxReached" .. id] = charinfo[id] >= 200
         end
       end
     end
@@ -1542,9 +1542,9 @@ function Currencyflow:UpdateDatabase()
 end
 
 function Currencyflow:RemoveOldData()
-  
+
   local lastMonth = self.today - (HISTORY_DAYS - 1) -- Remove history over a month old
-  
+
   for day in pairs(self.db.factionrealm.chars[self.meidx].history) do
     if day < lastMonth then self.db.factionrealm.chars[self.meidx].history[day] = nil end
   end
