@@ -28,6 +28,7 @@ externals:
 
 ignore:
  - .github
+ - .editorconfig
  - Libs/LibStub/tests
  - Libs/LibStub/LibStub.toc
  - Libs/LibQTip-1.0/LibStub
