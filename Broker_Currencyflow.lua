@@ -35,6 +35,36 @@ local charToDelete      = nil
 local currencies        = {
   ["current"] = {
     ["pve"] = {
+      -- Evergreen
+      [2032] = { ["type"] = TYPE_CURRENCY, ["name"] = "Trader's Tender" },          -- Trader's Tender
+      [1166] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWARPED_BADGE"] }, -- Timewarped Badge
+
+      [3008] = { ["type"] = TYPE_CURRENCY, ["name"] = "Valorstones" },              -- TWW: Valorstones
+      [3056] = { ["type"] = TYPE_CURRENCY, ["name"] = "Kej" },                      -- TWW: Kej
+      [2815] = { ["type"] = TYPE_CURRENCY, ["name"] = "Resonance Crystals" },       -- TWW: Resonance Crystals
+      -- War Within (Season 3)
+      [2803] = { ["type"] = TYPE_CURRENCY, ["name"] = "Undercoin" },                -- TWW: Delves Undercoin (Warbound, doesn't show in addon)
+      [3028] = { ["type"] = TYPE_CURRENCY, ["name"] = "Restored Coffer Key" },      -- TWW: Delves Coffer Key
+      [3286] = { ["type"] = TYPE_CURRENCY, ["name"] = "Carved Ethereal Crest" },    -- TWW: Carved Crest S3
+      [3288] = { ["type"] = TYPE_CURRENCY, ["name"] = "Runed Ethereal Crest" },     -- TWW: Runed Crest S3
+      [3290] = { ["type"] = TYPE_CURRENCY, ["name"] = "Gilded Ethereal Crest" },    -- TWW: Gilded Crest S3
+    },
+    ["pvp"] = {
+      [1792] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"] },         -- Honor
+      [1602] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUEST"] },      -- Conquest
+      [2123] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODY_TOKENS"] }, -- Bloody Tokens (DF)
+    }
+  },
+  ["midnight"] = {
+    ["pve"] = {
+
+    }
+  },
+  ["warwithin"] = {
+    ["pve"] = {}
+  },
+  ["dragonflight"] = {
+    ["pve"] = {
       -- Dragonflight
       [2003] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DRAGON_ISLE_SUPPLIES"] }, -- Dragonflight: Dragon Isles Supplies
       [2118] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELEMENTAL_OVERFLOW"] },   -- Dragonflight: Elemental Overflow
@@ -47,15 +77,9 @@ local currencies        = {
       [2807] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DRAKE_AWAKE_CREST"] },    -- Dragonflight: Drake's Awakened Crest
       [2809] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WYRM_AWAKE_CREST"] },     -- Dragonflight: Wyrm's Awakened Crest
     },
-    ["pvp"] = {
-      [1792] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"] },         -- Honor
-      [1602] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CONQUEST"] },      -- Conquest
-      [2123] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_BLOODY_TOKENS"] }, -- Bloody Tokens (DF)
-    }
   },
-  ["legacy"] = {
+  ["shadowlands"] = {
     ["pve"] = {
-      [1191] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"] },
       -- Shadowlands
       [1754] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ARGENT_COMMENDATION"] },       -- Shadowlands Argent Commendation
       [1728] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PHANTASMA"] },                 -- Shadowlands Phantasma
@@ -87,55 +111,81 @@ local currencies        = {
       [1979] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CYPHERS_FIRST_ONES"] },        -- Shadowlands Cyphers of the First Ones
       [2000] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTES_OF_FATE"] },             -- Shadowlands Motes of Fate
       [2009] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_COSMIC_FLUX"] },               -- Shadowlands Cosmic Flux
+    }
+  },
+  ["bfa"] = {
+    ["pve"] = {
       -- BfA
-      [1560] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAR_RESOURCES"] },             -- BfA War Resources
-      [1580] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_WARTORN_FATE"] },      -- BfA Seal of Wartorn Fate
-      [1710] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAFARERS_DUBLOON"] },         -- BfA Seafarer's Dubloon
-      [1716] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORBOUND_SERVICE_MEDAL"] },  -- BfA Honorbound Service Medal
-      [1717] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_7TH_LEGION_SERVICE_MEDAL"] },  -- BfA 7th Legion Service Medal
-      [1718] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TITAN_RESIDUUM"] },            -- BfA Titan Residuum
-      [1721] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PRISMATIC_MANAPEARL"] },       -- BfA Prismatic Manapearl
-      [1755] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_COALESCING_VISIONS"] },        -- BfA Coalescing Visions
-      [1719] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CORRUPTED_MEMENTOS"] },        -- BfA Corrupted Mementos
-      [1803] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_NYALOTHA"] },        -- BfA Echoes of Ny'alotha
+      [1560] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAR_RESOURCES"] },            -- BfA War Resources
+      [1580] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_WARTORN_FATE"] },     -- BfA Seal of Wartorn Fate
+      [1710] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAFARERS_DUBLOON"] },        -- BfA Seafarer's Dubloon
+      [1716] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORBOUND_SERVICE_MEDAL"] }, -- BfA Honorbound Service Medal
+      [1717] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_7TH_LEGION_SERVICE_MEDAL"] }, -- BfA 7th Legion Service Medal
+      [1718] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TITAN_RESIDUUM"] },           -- BfA Titan Residuum
+      [1721] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_PRISMATIC_MANAPEARL"] },      -- BfA Prismatic Manapearl
+      [1755] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_COALESCING_VISIONS"] },       -- BfA Coalescing Visions
+      [1719] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CORRUPTED_MEMENTOS"] },       -- BfA Corrupted Mementos
+      [1803] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_NYALOTHA"] },       -- BfA Echoes of Ny'alotha
+    }
+  },
+  ["legion"] = {
+    ["pve"] = {
       -- Legion
-      [1220] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ORDER_RESOURCES"] },           -- Legion Order Resources
-      [1226] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_NETHERSHARD"] },               -- Legion Nethershard
-      [1268] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWORN_ARTIFACT"] },         -- Legion Timeworn Artifact
-      [1273] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_BROKEN_FATE"] },       -- Legion Seal of Broken Fate
-      [1275] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CURIOUS_COINS"] },             -- Legion Curious Coins
-      [1342] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LEGIONFALL_WAR_SUPPLIES"] },   -- Legion Legionfall War Supplies
-      [1501] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WRITHING_ESSENCE"] },          -- Legion Writhing Essence
-      [1508] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VEILED_ARGUNITE"] },           -- Legion Veiled Argunite
-      [1533] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAKENING_ESSENCE"] },          -- Legion Wakening Essence
-      [1149] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SIGHTLESS_EYE"] },             -- Legion Sightless Eye
-      [1154] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SHADOWY_COINS"] },             -- Legion Shadowy Coins
-      [1155] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ANCIENT_MANA"] },              -- Legion Ancient Mana
-      [1356] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_BATTLE"] },          -- Legion Echoes of Battle
-      [1357] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_DOMINATION"] },      -- Legion Echoes of Domination
+      [1220] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ORDER_RESOURCES"] },         -- Legion Order Resources
+      [1226] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_NETHERSHARD"] },             -- Legion Nethershard
+      [1268] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWORN_ARTIFACT"] },       -- Legion Timeworn Artifact
+      [1273] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_BROKEN_FATE"] },     -- Legion Seal of Broken Fate
+      [1275] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CURIOUS_COINS"] },           -- Legion Curious Coins
+      [1342] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LEGIONFALL_WAR_SUPPLIES"] }, -- Legion Legionfall War Supplies
+      [1501] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WRITHING_ESSENCE"] },        -- Legion Writhing Essence
+      [1508] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VEILED_ARGUNITE"] },         -- Legion Veiled Argunite
+      [1533] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WAKENING_ESSENCE"] },        -- Legion Wakening Essence
+      [1149] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SIGHTLESS_EYE"] },           -- Legion Sightless Eye
+      [1154] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SHADOWY_COINS"] },           -- Legion Shadowy Coins
+      [1155] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ANCIENT_MANA"] },            -- Legion Ancient Mana
+      [1356] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_BATTLE"] },        -- Legion Echoes of Battle
+      [1357] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ECHOES_OF_DOMINATION"] },    -- Legion Echoes of Domination
+    }
+  },
+  ["wod"] = {
+    ["pve"] = {
       -- WoD
-      [823] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_APEXIS_CRYSTAL"] },             -- WoD Apexis Crystal
-      [824] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_GARRISON_RESOURCES"] },         -- WoD Garrison Resources
-      [944] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ARTIFACT_FRAGMENT"] },          -- WoD Artifact Fragment
-      [980] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DINGY_IRON_COINS"] },           -- WoD Dingy Iron Coins
-      [994] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_TEMPERED_FATE"] },      -- WoD Seal of Tempered Fate
-      [1101] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_OIL"] },                       -- WoD Oil
-      [1129] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_INEVITABLE_FATE"] },   -- WoD Seal of Inevitable Fate
-      [1166] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWARPED_BADGE"] },          -- WoD Timewarped Badge
+      [823] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_APEXIS_CRYSTAL"] },           -- WoD Apexis Crystal
+      [824] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_GARRISON_RESOURCES"] },       -- WoD Garrison Resources
+      [944] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ARTIFACT_FRAGMENT"] },        -- WoD Artifact Fragment
+      [980] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DINGY_IRON_COINS"] },         -- WoD Dingy Iron Coins
+      [994] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_TEMPERED_FATE"] },    -- WoD Seal of Tempered Fate
+      [1101] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_OIL"] },                     -- WoD Oil
+      [1129] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_SEAL_OF_INEVITABLE_FATE"] }, -- WoD Seal of Inevitable Fate
+    }
+  },
+  ["mop"] = {
+    ["pve"] = {
       -- MoP
-      [697] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"] },    -- MoP  Elder Charm of Good Fortune
-      [738] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LESSERGOODFORTUNE"] },          -- MoP  Lesser Charm of Good Fortune
-      [752] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOGORUNEOFFATE"] },             -- MoP 5.2 Mogu Rune of Fate
-      [776] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WARFORGEDSEAL"] },              -- MoP 5.4 Warforged Seal
-      [777] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMELESSCOIN"] },               -- MoP 5.4 Timeless Coin
+      [697] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"] }, -- MoP  Elder Charm of Good Fortune
+      [738] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LESSERGOODFORTUNE"] },       -- MoP  Lesser Charm of Good Fortune
+      [752] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOGORUNEOFFATE"] },          -- MoP 5.2 Mogu Rune of Fate
+      [776] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_WARFORGEDSEAL"] },           -- MoP 5.4 Warforged Seal
+      [777] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMELESSCOIN"] },            -- MoP 5.4 Timeless Coin
+    }
+  },
+  ["cata"] = {
+    ["pve"] = {
       -- Cata
       [416] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MARKOFTHEWORLDTREE"] },
       [614] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTEDARKNESS"] },     -- T13 (Dragonsoul) currency
       [615] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"] }, -- T13 (Dragonsoul) currency
+    }
+  },
+  ["wrath"] = {
+    ["pve"] = {
       -- Wrath
       [241] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"] },
-      -- TBC
-      -- WoW
+    }
+  },
+  ["legacy"] = {
+    ["pve"] = {
+      [1191] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALOR"] },
     },
     ["pvp"] = {
       -- MoP
@@ -191,6 +241,16 @@ local tracking          = {
 for k, v in pairs(currencies["current"]["pve"]) do tracking[k] = v end
 for k, v in pairs(currencies["current"]["pvp"]) do tracking[k] = v end
 for k, v in pairs(currencies["legacy"]["pve"]) do tracking[k] = v end
+for k, v in pairs(currencies["midnight"]["pve"]) do tracking[k] = v end
+for k, v in pairs(currencies["warwithin"]["pve"]) do tracking[k] = v end
+for k, v in pairs(currencies["dragonflight"]["pve"]) do tracking[k] = v end
+for k, v in pairs(currencies["shadowlands"]["pve"]) do tracking[k] = v end
+for k, v in pairs(currencies["bfa"]["pve"]) do tracking[k] = v end
+for k, v in pairs(currencies["legion"]["pve"]) do tracking[k] = v end
+for k, v in pairs(currencies["wod"]["pve"]) do tracking[k] = v end
+for k, v in pairs(currencies["mop"]["pve"]) do tracking[k] = v end
+for k, v in pairs(currencies["cata"]["pve"]) do tracking[k] = v end
+for k, v in pairs(currencies["wrath"]["pve"]) do tracking[k] = v end
 for k, v in pairs(currencies["legacy"]["pvp"]) do tracking[k] = v end
 for k, v in pairs(currencies["events"]) do tracking[k] = v end
 for k, v in pairs(currencies["profession"]) do tracking[k] = v end
@@ -1165,22 +1225,79 @@ function Currencyflow:OptionsColumns()
   -- into sections (PvE, PvP, Fragments, etc.). So we do this the hacky way.
 
   -- Current Expansion PVE --
-  currencyColumns["header2"] = { name = "Current Expansion PvE", type = "header", order = 200 }
-  order = 201
+  currencyColumns["header2"] = { name = "Current Expansion PvE", type = "header", order = 2000 }
+  order = 2001
   for k, v in pairs(currencies["current"]["pve"]) do
     addColumn(k)
   end
 
   -- Current Expansion PVP
-  currencyColumns["header3"] = { name = "PvP", type = "header", order = 300 }
-  order = 301
+  currencyColumns["header3"] = { name = "PvP", type = "header", order = 4000 }
+  order = 4001
   for k, v in pairs(currencies["current"]["pvp"]) do
     addColumn(k)
   end
 
+  -- Dragonflight --
+  currencyColumns["dragonflight_header"] = { name = "Dragonflight", type = "header", order = 5000 }
+  order = 5001
+  for k, v in pairs(currencies["dragonflight"]["pve"]) do
+    addColumn(k)
+  end
+
+  -- Shadowlands --
+  currencyColumns["shadowlands_header"] = { name = "Shadowlands", type = "header", order = 6000 }
+  order = 6001
+  for k, v in pairs(currencies["shadowlands"]["pve"]) do
+    addColumn(k)
+  end
+
+  -- BFA --
+  currencyColumns["bfa_header"] = { name = "Battle for Azeroth", type = "header", order = 7000 }
+  order = 7001
+  for k, v in pairs(currencies["bfa"]["pve"]) do
+    addColumn(k)
+  end
+
+  -- Legion --
+  currencyColumns["Legion_header"] = { name = "Legion", type = "header", order = 8000 }
+  order = 8001
+  for k, v in pairs(currencies["legion"]["pve"]) do
+    addColumn(k)
+  end
+
+
+  -- WoD --
+  currencyColumns["wod_header"] = { name = "Warlords of Draenor", type = "header", order = 9000 }
+  order = 9001
+  for k, v in pairs(currencies["wod"]["pve"]) do
+    addColumn(k)
+  end
+
+  -- MoP --
+  currencyColumns["mop_header"] = { name = "Mists of Pandaria", type = "header", order = 10000 }
+  order = 10001
+  for k, v in pairs(currencies["mop"]["pve"]) do
+    addColumn(k)
+  end
+
+  -- Cata --
+  currencyColumns["cata_header"] = { name = "Cataclysm", type = "header", order = 11000 }
+  order = 11001
+  for k, v in pairs(currencies["cata"]["pve"]) do
+    addColumn(k)
+  end
+
+  -- Wrath --
+  currencyColumns["wrath_header"] = { name = "Wrath of the Lich King", type = "header", order = 12000 }
+  order = 12001
+  for k, v in pairs(currencies["wrath"]["pve"]) do
+    addColumn(k)
+  end
+
   -- Legacy --
-  currencyColumns["header4"] = { name = "Legacy", type = "header", order = 400 }
-  order = 401
+  currencyColumns["legacy"] = { name = "Legacy", type = "header", order = 13000 }
+  order = 11001
   for k, v in pairs(currencies["legacy"]["pve"]) do
     addColumn(k)
   end
@@ -1189,15 +1306,15 @@ function Currencyflow:OptionsColumns()
   end
 
   -- Archeology Fragment --
-  currencyColumns["header5"] = { name = L["CFGHDR_ARCHFRAGMENTS"], type = "header", order = 600 }
-  order = 601
+  currencyColumns["archaeology_header"] = { name = L["CFGHDR_ARCHFRAGMENTS"], type = "header", order = 20000 }
+  order = 20001
   for k, v in pairs(currencies["archaeology"]) do
     addColumn(k)
   end
 
   -- Profession --
-  currencyColumns["header6"] = { name = "Profession", type = "header", order = 700 }
-  order = 701
+  currencyColumns["professions_header"] = { name = "Profession", type = "header", order = 21000 }
+  order = 21001
   for k, v in pairs(currencies["profession"]) do
     addColumn(k)
   end
