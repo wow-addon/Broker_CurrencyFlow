@@ -39,15 +39,13 @@ local currencies        = {
       [2032] = { ["type"] = TYPE_CURRENCY, ["name"] = "Trader's Tender" },          -- Trader's Tender
       [1166] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_TIMEWARPED_BADGE"] }, -- Timewarped Badge
 
-      [3008] = { ["type"] = TYPE_CURRENCY, ["name"] = "Valorstones" },              -- TWW: Valorstones
-      [3056] = { ["type"] = TYPE_CURRENCY, ["name"] = "Kej" },                      -- TWW: Kej
-      [2815] = { ["type"] = TYPE_CURRENCY, ["name"] = "Resonance Crystals" },       -- TWW: Resonance Crystals
-      -- War Within (Season 3)
-      [2803] = { ["type"] = TYPE_CURRENCY, ["name"] = "Undercoin" },                -- TWW: Delves Undercoin (Warbound, doesn't show in addon)
-      [3028] = { ["type"] = TYPE_CURRENCY, ["name"] = "Restored Coffer Key" },      -- TWW: Delves Coffer Key
-      [3286] = { ["type"] = TYPE_CURRENCY, ["name"] = "Carved Ethereal Crest" },    -- TWW: Carved Crest S3
-      [3288] = { ["type"] = TYPE_CURRENCY, ["name"] = "Runed Ethereal Crest" },     -- TWW: Runed Crest S3
-      [3290] = { ["type"] = TYPE_CURRENCY, ["name"] = "Gilded Ethereal Crest" },    -- TWW: Gilded Crest S3
+      -- Delves
+      [3310] = { ["type"] = TYPE_CURRENCY, ["name"] = "Coffer Key Shards" },        -- Coffer Key Shards
+      [3028] = { ["type"] = TYPE_CURRENCY, ["name"] = "Restored Coffer Key" },      -- Restored Coffer Key
+      [2803] = { ["type"] = TYPE_CURRENCY, ["name"] = "Undercoin" },                -- Undercoin (Warbound, doesn't show in addon)
+
+      -- Housing
+      [3363] = { ["type"] = TYPE_CURRENCY, ["name"] = "Community Coupons" },        -- Community Coupons
     },
     ["pvp"] = {
       [1792] = { ["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONOR"] },         -- Honor
@@ -57,11 +55,25 @@ local currencies        = {
   },
   ["midnight"] = {
     ["pve"] = {
-
+      -- Season 1 Crests
+      [3343] = { ["type"] = TYPE_CURRENCY, ["name"] = "Champion Dawncrest" },              -- MN: Crests
+      [3345] = { ["type"] = TYPE_CURRENCY, ["name"] = "Hero Dawncrest" },              -- MN: Crests
+      [3347] = { ["type"] = TYPE_CURRENCY, ["name"] = "Champion Dawncrest" },              -- MN: Crests
+      [3383] = { ["type"] = TYPE_CURRENCY, ["name"] = "Adventurer Dawncrest" },              -- MN: Crests
+      -- 12.0.5
+      [3418] = { ["type"] = TYPE_CURRENCY, ["name"] = "Nebulous Voidcore" },          -- MN: Nebulous Voidcore (Bonus Rolls)
     }
   },
   ["warwithin"] = {
-    ["pve"] = {}
+    ["pve"] = {
+      [3008] = { ["type"] = TYPE_CURRENCY, ["name"] = "Valorstones" },              -- TWW: Valorstones
+      [3056] = { ["type"] = TYPE_CURRENCY, ["name"] = "Kej" },                      -- TWW: Kej
+      [2815] = { ["type"] = TYPE_CURRENCY, ["name"] = "Resonance Crystals" },       -- TWW: Resonance Crystals
+      -- War Within (Season 3)
+      [3286] = { ["type"] = TYPE_CURRENCY, ["name"] = "Carved Ethereal Crest" },    -- TWW: Carved Crest S3
+      [3288] = { ["type"] = TYPE_CURRENCY, ["name"] = "Runed Ethereal Crest" },     -- TWW: Runed Crest S3
+      [3290] = { ["type"] = TYPE_CURRENCY, ["name"] = "Gilded Ethereal Crest" },    -- TWW: Gilded Crest S3
+    }
   },
   ["dragonflight"] = {
     ["pve"] = {
@@ -1230,6 +1242,9 @@ function Currencyflow:OptionsColumns()
   for k, v in pairs(currencies["current"]["pve"]) do
     addColumn(k)
   end
+  for k, v in pairs(currencies["midnight"]["pve"]) do
+    addColumn(k)
+  end
 
   -- Current Expansion PVP
   currencyColumns["header3"] = { name = "PvP", type = "header", order = 4000 }
@@ -1238,66 +1253,73 @@ function Currencyflow:OptionsColumns()
     addColumn(k)
   end
 
-  -- Dragonflight --
-  currencyColumns["dragonflight_header"] = { name = "Dragonflight", type = "header", order = 5000 }
+  -- WarWithin --
+  currencyColumns["warwithin_header"] = { name = "War Within", type = "header", order = 5000 }
   order = 5001
+  for k, v in pairs(currencies["warwithin"]["pve"]) do
+    addColumn(k)
+  end
+
+  -- Dragonflight --
+  currencyColumns["dragonflight_header"] = { name = "Dragonflight", type = "header", order = 6000 }
+  order = 6001
   for k, v in pairs(currencies["dragonflight"]["pve"]) do
     addColumn(k)
   end
 
   -- Shadowlands --
-  currencyColumns["shadowlands_header"] = { name = "Shadowlands", type = "header", order = 6000 }
-  order = 6001
+  currencyColumns["shadowlands_header"] = { name = "Shadowlands", type = "header", order = 7000 }
+  order = 7001
   for k, v in pairs(currencies["shadowlands"]["pve"]) do
     addColumn(k)
   end
 
   -- BFA --
-  currencyColumns["bfa_header"] = { name = "Battle for Azeroth", type = "header", order = 7000 }
-  order = 7001
+  currencyColumns["bfa_header"] = { name = "Battle for Azeroth", type = "header", order = 8000 }
+  order = 8001
   for k, v in pairs(currencies["bfa"]["pve"]) do
     addColumn(k)
   end
 
   -- Legion --
-  currencyColumns["Legion_header"] = { name = "Legion", type = "header", order = 8000 }
-  order = 8001
+  currencyColumns["Legion_header"] = { name = "Legion", type = "header", order = 9000 }
+  order = 9001
   for k, v in pairs(currencies["legion"]["pve"]) do
     addColumn(k)
   end
 
 
   -- WoD --
-  currencyColumns["wod_header"] = { name = "Warlords of Draenor", type = "header", order = 9000 }
-  order = 9001
+  currencyColumns["wod_header"] = { name = "Warlords of Draenor", type = "header", order = 10000 }
+  order = 10001
   for k, v in pairs(currencies["wod"]["pve"]) do
     addColumn(k)
   end
 
   -- MoP --
-  currencyColumns["mop_header"] = { name = "Mists of Pandaria", type = "header", order = 10000 }
-  order = 10001
+  currencyColumns["mop_header"] = { name = "Mists of Pandaria", type = "header", order = 11000 }
+  order = 11001
   for k, v in pairs(currencies["mop"]["pve"]) do
     addColumn(k)
   end
 
   -- Cata --
-  currencyColumns["cata_header"] = { name = "Cataclysm", type = "header", order = 11000 }
-  order = 11001
+  currencyColumns["cata_header"] = { name = "Cataclysm", type = "header", order = 12000 }
+  order = 12001
   for k, v in pairs(currencies["cata"]["pve"]) do
     addColumn(k)
   end
 
   -- Wrath --
-  currencyColumns["wrath_header"] = { name = "Wrath of the Lich King", type = "header", order = 12000 }
-  order = 12001
+  currencyColumns["wrath_header"] = { name = "Wrath of the Lich King", type = "header", order = 13000 }
+  order = 13001
   for k, v in pairs(currencies["wrath"]["pve"]) do
     addColumn(k)
   end
 
   -- Legacy --
-  currencyColumns["legacy"] = { name = "Legacy", type = "header", order = 13000 }
-  order = 11001
+  currencyColumns["legacy"] = { name = "Legacy", type = "header", order = 14000 }
+  order = 14001
   for k, v in pairs(currencies["legacy"]["pve"]) do
     addColumn(k)
   end
